@@ -6,6 +6,7 @@ app.use(
     extended: false,
   })
 );
+app.use(express.json());
 app.use(express.static("public"));
 
 const port = 3000;
