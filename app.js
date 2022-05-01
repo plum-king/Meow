@@ -1,10 +1,17 @@
-const port = 3000,
-  http = require("http");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
+app.use(express.static("public"));
 
-app = http.createServer((req, res) => {
-  res.write(`<h1>Success</h1>`);
-  res.end();
-});
+const port = 3000;
+
+const mainRouter = require("./routes/main.js");
+app.use("/", mainRouter);
 
 app.listen(port);
 console.log(`app is listening port ${port}`);
