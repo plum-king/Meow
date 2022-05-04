@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const template = require("../lib/template.js");
 const db = require("../db.js");
+//bcrypt 추가로 비밀번호 암호화하기
 
 router.post("/signup_controller", (request, response) => {
   const post = request.body;
@@ -28,7 +29,7 @@ router.post("/signup_controller", (request, response) => {
           );
         } else {
           console.log("성공");
-          response.writeHead(302, {Location: "/"});
+          response.writeHead(302, {Location: "/login"});
           response.end();
         }
       }
