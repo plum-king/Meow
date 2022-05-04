@@ -9,7 +9,7 @@ router.get("/login", (request, response) => {
   const head = "";
   const body = `<form action="/login_controller" method="post" className="inputField">
     <p id="id_input">ID</p>
-    <input type="text" name="ID" placeholder="ID">
+    <input type="text" name="id" placeholder="ID">
     <br>
     <p id="pwpara">Password</p>
     <input type="password" name="password" class="input-type" placeholder="password">
