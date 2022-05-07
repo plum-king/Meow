@@ -23,7 +23,7 @@ const body = `<form action="/profile_controller" method="post" className="inputF
     <br>
     <p id="intro_input">자기소개
     <input type="text" name="introduction" id="introduction" placeholder="소개 입력"></p>
-    <br>
+    <br><br>
     <button type="submit" id="addProfile">완료</button>
     </form>
     <a href="/">뒤로가기</a>`;
