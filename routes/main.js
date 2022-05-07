@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const template = require("../lib/template.js");
+const db = require("../db.js");
 
 router.get("/", (request, response) => {
   const title = "Meow";
@@ -10,5 +11,6 @@ router.get("/", (request, response) => {
   var html = template.HTML(title, head, body);
   response.send(html);
 });
+
 
 module.exports = router;

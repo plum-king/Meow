@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+
+    <title><%= title %></title>
+
+  </head>
+
+  <body>
+
+    <h1><%= title %></h1>
+
+    <form action="/edit" method="post">
+
+    <table width="800" border="3">
+
+    <tr>
+
+    <th width="200">아이디</th>
+
+    <td><input type="text" name="userid" id="userid" size="12" maxlength="12" readonly="readonly" value="<%=row.user_id%>" ></td>
+
+    </tr>
+    
+    <tr>
+
+      <th>이름</th>
+  
+      <td><input type="text" name="name" id="name" size="10" maxlength="10" value="<%=row.name%>"></td>
+  
+      </tr>
+
+    <tr>
+
+      <th>닉네임</th>
+  
+      <td><input type="text" name="nickname" id="nickname" size="10" maxlength="10" value="<%=row.nickname%>"></td>
+  
+      </tr>
+
+    <tr>
+
+    <th>비밀번호</th>
+
+    <td><input type="password" name="password" id="password" size="12" maxlength="12" readonly="readonly" value="<%=row.password%>"></td>
+
+    </tr>
+    
+    <tr>
+
+      <th>비밀번호 확인</th>
+  
+      <td><input type="text" name="confirm_pwd" id="confirm_pwd" size="12" maxlength="12"></td>
+  
+      </tr>
+
+      <tr>
+
+        <th>새 비밀번호(작성하지 않으면 기존 비밀번호 사용)</th>
+    
+        <td><input type="text" name="new_pwd" id="new_pwd" size="12" maxlength="12"></td>
+    
+        </tr>
+  
+
+    <tr>
+
+      <th>나이대</th>
+  
+      <td>
+  
+      <input type="radio" name="age" id="age1" value="10" <%=(row.age == '10')? checked="checked" : ""%>>10대
+  
+      <input type="radio" name="age" id="age2" value="20" <%=(row.age == '20')? checked="checked" : ""%>>20대
+  
+      </td>
+  
+      </tr>
+
+    <tr>
+
+    <th>성별</th>
+
+    <td>
+
+    <input type="radio" name="gender" id="gender1" value="남" <%=(row.gender == '남')? checked="checked" : ""%>>남
+
+    <input type="radio" name="gender" id="gender2" value="여" <%=(row.gender == '여')? checked="checked" : ""%>>여
+
+    </td>
+
+    </tr>
+
+    <tr>
+
+      <th>직업</th>
+  
+      <td>
+  
+      <select name="job" id="job">
+  
+      <option value="학생" <%=(row.job == '학생' )? selected="selected" : "" %>>학생</option>
+  
+      <option value="생산직" <%=(row.job == '생산직' )? selected="selected" : "" %>>생산직</option>
+  
+      <option value="서비스직" <%=(row.job == '서비스직' )? selected="selected" : "" %>>서비스직</option>
+  
+      </select>
+  
+      </td>
+  
+    </tr>
+
+    <tr>
+
+      <th>거주지("시"까지 입력)</th>
+  
+      <td><input type="text" name="home" id="home" size="10" maxlength="10" value="<%=row.home%>"></td>
+  
+      </tr>
+
+    <tr>
+
+    <tr>
+
+      <th>자기소개</th>
+    
+      <td><input type="text" name="introduction" id="introduction" size="30" maxlength="10" value="<%=row.introduction%>"></td>
+    
+      </tr>  
+
+    <td colspan="2">
+
+<input type="submit" value="수정">
+
+<input type="reset" value="취소">
+
+    </td>
+
+    </tr>
+
+    </table>
+
+    </form>
+
+  </body>
+
+</html>
+
