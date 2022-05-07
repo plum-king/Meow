@@ -22,9 +22,14 @@ router.post("/login_controller", (request, response) => {
       //새로고침해도 로그아웃되지 않도록 세션 유지될 수 있게 하는 코드
       request.session.is_logined = true;
       request.session.nickname = res[0].nickname;
+      request.session.user_id = res[0].user_id;
       request.session.save(function () {
         response.redirect(`/`);
       });
+    } else {response.write(
+      `<script type="text/javascript">alert('Wrong user_id or password!')</script>`
+    );
+    response.write('<script>window.location="/login"</script>');
     }
   });
 });
