@@ -14,5 +14,7 @@ const port = 3000;
 const mainRouter = require("./routes/main.js");
 app.use("/", mainRouter);
 
+app.set("view engine", "ejs"); //ejs 추가
+
 app.listen(port);
 console.log(`app is listening port ${port}`);
