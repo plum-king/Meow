@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const template = require("../lib/template.js");
-const pool = require("../db.js");
+// const template = require("../lib/template.js");
+// const pool = require("../db.js");
 
 router.get("/", (req, res) => {
   const title = "Meow";
@@ -17,4 +17,3 @@ router.get("/", (req, res) => {
 });
 
 module.exports = router;
-

@@ -21,6 +21,11 @@ router.post("/login", (req, res, next) => {
         `<script type="text/javascript">alert('Error Occur! Please enter again!')</script>`
       );
       res.write('<script>window.location="/login"</script>');
+    } else if (row[0] == undefined || row[0].password == undefined) {
+      res.write(
+        `<script type="text/javascript">alert('Wrong user_id or password!')</script>`
+      );
+      res.write('<script>window.location="/login"</script>');
     } else if (bcrypt.compareSync(password, row[0].password)) {
       console.log("성공");
       //새로고침해도 로그아웃되지 않도록 세션 유지될 수 있게 nickname 저장하기
@@ -33,7 +38,6 @@ router.post("/login", (req, res, next) => {
       res.write('<script>window.location="/"</script>');
       res.end();
     } else {
-      console.log(bcrypt.compareSync(row[0].password, password));
       res.write(
         `<script type="text/javascript">alert('Wrong user_id or password!')</script>`
       );

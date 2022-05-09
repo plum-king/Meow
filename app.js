@@ -11,6 +11,8 @@ const main = require("./routes/main");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const signup = require("./routes/signup");
+const editUser = require("./controllers/editController");
+const deleteUser = require("./controllers/deleteController");
 
 app.set("view engine", "ejs");
 // app.set("views", path.join(__dirname, "views"));
@@ -41,16 +43,11 @@ app.get("/login", login);
 app.post("/login", login);
 app.get("/logout", logout);
 
-const editUser = require('./controllers/editController');
-const deleteUser = require('./controllers/deleteController');
 app.get("/edit/:userid", editUser.showEdit);
 app.post("/edit", editUser.updateEdit);
 
 app.get("/withdraw/:userid", deleteUser.showDelete);
 app.post("/withdraw", deleteUser.updateDelete);
-
-
-app.set("view engine", "ejs"); //ejs 추가
 
 app.listen(port);
 console.log(`app is listening port ${port}`);

@@ -23,7 +23,7 @@ router.post("/signup", (req, res, next) => {
   if (password == password_check) {
     //pw와 pw확인이 동일한지 확인
     const encrypted_pw = bcrypt.hashSync(password, 10);
-    console.log(encrypted_pw);
+    // console.log(encrypted_pw);
     pool.query(
       `INSERT INTO user(user_id, name, nickname, password, age, gender, job) VALUES (?, ?, ?, ?, ?, ?, ?)`, //동일하다면 제대로 된 입력이기 떄문에 db에 저장
       [user_id, name, nickname, encrypted_pw, age, gender, job],
