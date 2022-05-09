@@ -3,13 +3,17 @@ const router = express.Router();
 const template = require("../lib/template.js");
 const pool = require("../db.js");
 
-router.get("/", (request, response) => {
+router.get("/", (req, res) => {
   const title = "Meow";
-  const head = "<p></p>";
-  let body = `<h1>Meow</h1>`;
-
-  var html = template.HTML(title, head, body);
-  response.send(html);
+  // const head = "<p></p>";
+  // let body;
+  if (req.session.user) {
+    const nickname = req.session.user["nickname"];
+    console.log(nickname);
+    res.render("main", {title: title, nickname: nickname});
+  } else {
+    res.render("loginMain", {title: title});
+  }
 });
 
 module.exports = router;
