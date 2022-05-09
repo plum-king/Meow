@@ -12,6 +12,8 @@ router.get("/", (request, response) => {
     <p>
     ${nickname}
     <a href="/logout_controller">로그아웃</a>
+    <a href="/profile">프로필 추가</a>
+    <a href="/board">게시글 작성</a>
     </p>
     `;
   } else {
