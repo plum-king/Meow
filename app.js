@@ -2,6 +2,20 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
+// const layouts = require("express-ejs-layouts");
+const ejs = require("ejs");
+// const path = require("path");
+
+const port = 3000;
+const main = require("./routes/main");
+const login = require("./routes/login");
+const logout = require("./routes/logout");
+const signup = require("./routes/signup");
+
+app.set("view engine", "ejs");
+// app.set("views", path.join(__dirname, "views"));
+// app.use(layouts);
+// app.set("layout", "layout");
 
 app.use(
   bodyParser.urlencoded({
@@ -20,25 +34,12 @@ app.use(
   })
 );
 
-const port = 3000;
-
-const mainRouter = require("./routes/main.js");
-const loginRouter = require("./routes/login.js");
-const signupRouter = require("./routes/signup.js");
-const profileRouter = require("./routes/profile.js");
-const loginControllerRouter = require("./controllers/login_controller.js");
-const logoutControllerRouter = require("./controllers/logout_controller.js");
-const signupControllerRouter = require("./controllers/signup_controller.js");
-const profileControllerRouter = require("./controllers/profile_controller.js");
-
-app.use("/", mainRouter);
-app.get("/signup", signupRouter);
-app.get("/login", loginRouter);
-app.get("/profile", profileRouter);
-app.post("/signup_controller", signupControllerRouter);
-app.post("/login_controller", loginControllerRouter);
-app.get("/logout_controller", logoutControllerRouter);
-app.post("/profile_controller", profileControllerRouter);
+app.use("/", main);
+app.get("/signup", signup);
+app.post("/signup", signup);
+app.get("/login", login);
+app.post("/login", login);
+app.get("/logout", logout);
 
 app.listen(port);
 console.log(`app is listening port ${port}`);
