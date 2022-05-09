@@ -41,5 +41,16 @@ app.get("/login", login);
 app.post("/login", login);
 app.get("/logout", logout);
 
+const editUser = require('./controllers/editController');
+const deleteUser = require('./controllers/deleteController');
+app.get("/edit/:userid", editUser.showEdit);
+app.post("/edit", editUser.updateEdit);
+
+app.get("/withdraw/:userid", deleteUser.showDelete);
+app.post("/withdraw", deleteUser.updateDelete);
+
+
+app.set("view engine", "ejs"); //ejs 추가
+
 app.listen(port);
 console.log(`app is listening port ${port}`);
