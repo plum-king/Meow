@@ -27,6 +27,7 @@ router.post("/signup_controller", (request, response) => {
           response.write(
             `<script type="text/javascript">alert('This ID is already exist!')</script>`
           );
+          response.write('<script>window.location="/signup"</script>');
         } else {
           console.log("성공");
           response.writeHead(302, {Location: "/login"});
