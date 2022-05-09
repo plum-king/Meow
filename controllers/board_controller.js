@@ -37,7 +37,6 @@ router.post("/board_controller", (request, response) => {
         console.log("성공1");
         resId = res.insertId;
         console.log(resId);
-        console.log("hi");
 
         db.query(
           `INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
