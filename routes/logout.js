@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const template = require("../lib/template.js");
+// const template = require("../lib/template.js");
 
-router.get("/logout_controller", function (req, res) {
-  if (req.session.is_logined) {
-    req.session.destroy(function (err) {
+router.get("/logout", (req, res, next) => {
+  if (req.session.user) {
+    req.session.destroy((err) => {
       if (err) throw err;
       res.redirect("/");
     });
