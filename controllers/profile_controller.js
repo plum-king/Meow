@@ -6,19 +6,22 @@ const db = require("../db.js");
 
 router.post("/profile_controller", (request, response) => {
     const post = request.body;
+    const user_id = request.session.user_id;
     const home = post.home;
     const introduction = post.introduction;
-    const user_id = request.session.user_id;
-
+    const age = post.age;
+    const gender = post.gender;
+    const job = post.job;
+    
     db.query(
-      `UPDATE user SET home=?, introduction=? WHERE user_id=?`, [home, introduction, user_id], (err, res) => {
+      `UPDATE user SET home=?, introduction=? WHERE user_id="${user_id}"`, [home, introduction], (err, res) => {
         if (err) {
             console.error(err);
             response.writeHead(200, {Location: "/profile"});
             response.write(
                 `<script type="text/javascript">alert('Error Occur! Please rewrite the form!')</script>`
               );
-              response.write('<script>window.location="/profile"</script>');
+            response.write('<script>window.location="/profile"</script>');
         } else {
             console.log("성공");
             response.writeHead(302, {Location: "/"});

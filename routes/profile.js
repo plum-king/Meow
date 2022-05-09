@@ -6,8 +6,8 @@ const template = require("../lib/template.js");
 
 router.get("/profile", (request, response) => {
 const title = "프로필 추가";
-const head = "";
-const body = `<form action="/profile_controller" method="post" className="inputField">
+const head = ``;
+const body = `<form action="/profile_controller" method="post" className="inputField" id="searchForm">
     <div>
     <span id="user_id">아이디</span>
     <br>
@@ -23,10 +23,23 @@ const body = `<form action="/profile_controller" method="post" className="inputF
     <br>
     <p id="intro_input">자기소개
     <input type="text" name="introduction" id="introduction" placeholder="소개 입력"></p>
-    <br><br>
+    <br>
     <button type="submit" id="addProfile">완료</button>
     </form>
-    <a href="/">뒤로가기</a>`;
+
+    <script>
+    let sf=document.getElementById("searchForm");
+    sf.addEventListener("submit", function(e) {
+        let homeEle = document.getElementById("home");
+        let introEle = document.getElementById("introduction");
+        if(homeEle.value.length==0 && introEle.value.length==0) {
+            alert('Please fill out the form!');
+            e.preventDefault();
+        }
+    });
+    </script>
+
+    <a href="/profileView">뒤로가기</a>`;
     var html = template.HTML(title, head, body);
     response.send(html);
 });

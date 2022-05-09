@@ -12,7 +12,7 @@ router.get("/", (request, response) => {
     <p>
     ${nickname}
     <a href="/logout_controller">로그아웃</a>
-    <a href="/profile">프로필 추가</a>
+    <a href="/profileView">프로필</a>
     </p>
     `;
   } else {
