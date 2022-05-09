@@ -1,50 +1,71 @@
 const express = require("express");
 // const router = express.Router();
 const pool = require("../db.js");
+const bcrypt = require("bcrypt");
 
 //회원 정보 변경
 exports.showEdit = (req, res, next) => {
-    const userid = req.params.userid;
+  const userid = req.session.user["userid"];
 
-    pool.getConnection((err, connection) => {
-      if(err)
-          throw err  
-      connection.query('SELECT user_id, name, nickname, password, age, gender, job, home, introduction FROM User WHERE user_id = ?', [userid], (err, row) => {
-              if (err)
-                throw err;
-              console.log(row[0]);
-              res.render('updateform', { title : "회원 정보 수정", row : row[0]});
-          });
-      connection.release();
-    });
-  };
-  
+  pool.query(
+    "SELECT user_id, name, nickname, password, age, gender, job, home, introduction FROM User WHERE user_id = ?",
+    [userid],
+    (err, row) => {
+      if (err) throw err;
+      console.log(row[0]);
+      res.render("updateform", {title: "회원 정보 수정", row: row[0]});
+    }
+  );
+  // connection.release();
+};
+
 exports.updateEdit = (req, res, next) => {
-    const {userid, name, nickname, confirm_pwd, new_pwd, age, gender, job, home, introduction} = req.body;
-    let password = req.body.password;
-    // console.log(userid, name, nickname, password, age, gender, job);
+  const {
+    userid,
+    name,
+    nickname,
+    confirm_pwd,
+    new_pwd,
+    age,
+    gender,
+    job,
+    home,
+    introduction,
+  } = req.body;
+  let password = req.body.password;
+  // console.log(userid, name, nickname, password, age, gender, job);
 
-    if(password != confirm_pwd){
-      res.send("잘못된 비밀번호를 입력하였습니다.");
-    } else{
-    if(password != new_pwd){
+  if (!bcrypt.compareSync(confirm_pwd, password)) {
+    res.write(
+      `<script type="text/javascript">alert('Wrong password! Please rewrite the form')</script>`
+    );
+    res.write('<script>window.location="/edit/:userid"</script>');
+  } else {
+    if (password != new_pwd) {
       password = new_pwd;
     }
-    pool.getConnection((err, connection) => {
-      if(err)
-          throw err;
-      connection.query('UPDATE User SET name = ?, nickname = ?, password = ?, age = ?, gender = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?',
-      [name, nickname, password, age, gender, job, home, introduction, userid], (err, row) => {
-            if (err)
-                throw err;
-            if(row.affectedRows==1){
-              res.send("회원 정보 수정 완료");
-            }else{
-              res.send("회원 정보 수정 실패");
-            }    
-        });   
-      connection.release();
-    });
+    password = bcrypt.hashSync(password, 10);
+    pool.query(
+      "UPDATE User SET name = ?, nickname = ?, password = ?, age = ?, gender = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?",
+      [name, nickname, password, age, gender, job, home, introduction, userid],
+      (err, row) => {
+        if (err) throw err;
+        if (row.affectedRows == 1) {
+          req.session.user["userid"] = userid;
+          req.session.user["nickname"] = nickname;
+          req.session.save();
+          res.write(
+            `<script type="text/javascript">alert('Modify Success!')</script>`
+          );
+          res.write('<script>window.location="/"</script>');
+        } else {
+          res.write(
+            `<script type="text/javascript">alert('Please rewrite the form!')</script>`
+          );
+          res.write('<script>window.location="/"</script>');
+        }
+      }
+    );
+    // connection.release();
   }
-  };
-
+};
