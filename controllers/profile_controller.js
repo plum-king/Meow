@@ -9,9 +9,6 @@ router.post("/profile_controller", (request, response) => {
     const user_id = request.session.user_id;
     const home = post.home;
     const introduction = post.introduction;
-    const age = post.age;
-    const gender = post.gender;
-    const job = post.job;
     
     db.query(
       `UPDATE user SET home=?, introduction=? WHERE user_id="${user_id}"`, [home, introduction], (err, res) => {
