@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+    </head>
+
+    <body>
+        <div style="width: 250px; height: 150px; border: 1px solid; border-radius: 2em; display: table-cell; vertical-align: middle; padding-left: 10px;">
+            <span id="user_id">아이디 : <%=row.user_id%></span>
+            <br>
+            <span id="age">연령대 : <%=row.age%></span>
+            <br>
+            <span id="gender">성별 : <%=row.gender%></span>
+            <br>
+            <span id="job">직업 : <%=row.job%></span>
+            <br>
+            <% if (row.home != null) { %>
+                <span id="home">거주지 : <%=row.home%></span>
+            <% } else { %>
+                <br>
+            <% } %>
+        </div>
+        <br>
+        <p id="intro" style="border: 1px solid;">
+            <% if (row.introduction != null) { %>
+                <span id="intro">자기소개 : <%=row.introduction%></span>
+            <% } else { %>
+                <span>(자기소개)</span>
+            <% } %>
+        </p>
+        <br>
+        <span style="width: 25%; display: inline-block; text-align: right;">My 게시물</span>
+        <span style="width: 25%; display: inline-block; text-align: right;">구독 유저</span>
+        <span style="width: 25%; display: inline-block; text-align: right;">스크랩 게시물</span>
+        <br>
+        <% if (row.home == null && row.introduction == null) { %>
+            <button onclick="location.href='/addProfile'">프로필 추가</button>
+        <% } else { %>
+            <button onclick="location.href='/editProfile'">프로필 수정</button>
+        <% } %>
+        <a href="/">뒤로가기</a>
+    </body>
+</html>
+
