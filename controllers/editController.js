@@ -1,25 +1,22 @@
 const express = require("express");
-// const router = express.Router();
 const pool = require("../db.js");
 const bcrypt = require("bcrypt");
 
 //회원 정보 변경
-exports.showEdit = (req, res, next) => {
+exports.showEdit = async (req, res, next) => {
   const userid = req.session.user["userid"];
-
-  pool.query(
-    "SELECT user_id, name, nickname, password, age, gender, job, home, introduction FROM User WHERE user_id = ?",
-    [userid],
-    (err, row) => {
-      if (err) throw err;
-      console.log(row[0]);
-      res.render("updateform", {title: "회원 정보 수정", row: row[0]});
-    }
-  );
-  // connection.release();
+  try {
+    const data = await pool.query(
+      "SELECT user_id, name, nickname, password, age, gender, job, home, introduction FROM User WHERE user_id = ?",
+      [userid]
+    );
+    res.render("updateform", {title: "회원 정보 수정", row: data[0][0]});
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-exports.updateEdit = (req, res, next) => {
+exports.updateEdit = async (req, res, next) => {
   const {
     userid,
     name,
@@ -41,31 +38,32 @@ exports.updateEdit = (req, res, next) => {
     );
     res.write('<script>window.location="/edit/:userid"</script>');
   } else {
-    if (password != new_pwd) {
-      password = new_pwd;
+    if (new_pwd == "") {
+      password = password;
+    } else if (confirm_pwd != new_pwd) {
+      password = bcrypt.hashSync(new_pwd, 10);
     }
-    password = bcrypt.hashSync(password, 10);
-    pool.query(
-      "UPDATE User SET name = ?, nickname = ?, password = ?, age = ?, gender = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?",
-      [name, nickname, password, age, gender, job, home, introduction, userid],
-      (err, row) => {
-        if (err) throw err;
-        if (row.affectedRows == 1) {
-          req.session.user["userid"] = userid;
-          req.session.user["nickname"] = nickname;
-          req.session.save();
-          res.write(
-            `<script type="text/javascript">alert('Modify Success!')</script>`
-          );
-          res.write('<script>window.location="/"</script>');
-        } else {
-          res.write(
-            `<script type="text/javascript">alert('Please rewrite the form!')</script>`
-          );
-          res.write('<script>window.location="/"</script>');
-        }
+    try {
+      const data = await pool.query(
+        "UPDATE User SET name = ?, nickname = ?, password = ?, age = ?, gender = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?",
+        [name, nickname, password, age, gender, job, home, introduction, userid]
+      );
+      if (data[0].affectedRows == 1) {
+        req.session.user["userid"] = userid;
+        req.session.user["nickname"] = nickname;
+        req.session.save();
+        res.write(
+          `<script type="text/javascript">alert('Modify Success!')</script>`
+        );
+        res.write('<script>window.location="/"</script>');
+      } else {
+        res.write(
+          `<script type="text/javascript">alert('Please rewrite the form!')</script>`
+        );
+        res.write('<script>window.location="/"</script>');
       }
-    );
-    // connection.release();
+    } catch (err) {
+      console.error(err);
+    }
   }
 };

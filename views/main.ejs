@@ -5,16 +5,15 @@
     <meta charset="utf-8" />
     <title><%= title %></title>
     <!--css 들어갈 부분-->
+    <%- include('./partials/head') %>
   </head>
 
   <body>
+    <%- include('./partials/nav') %>
     <h1>Meow</h1>
     <p>
       <%= nickname %>
-      <a href="/logout">로그아웃</a>
-      <a href="/withdraw/:userid">회원정보 삭제하기</a>
-      <a href="/edit/:userid">회원정보 수정하기</a>
-      <a href="/profile">프로필</a>
+      <a href="/addTag" class="nav-link">태그 추가하기</a>
     </p>
   </body>
 </html>
