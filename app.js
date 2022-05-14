@@ -9,6 +9,9 @@ const main = require("./routes/main");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const signup = require("./routes/signup");
+const profile = require("./routes/profile");
+const addProfile = require("./routes/addProfile");
+const editProfile = require("./routes/editProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
 const addTag = require("./routes/tag");
@@ -46,6 +49,12 @@ app.post("/edit", editUser.updateEdit);
 
 app.get("/withdraw/:userid", deleteUser.showDelete);
 app.post("/withdraw", deleteUser.updateDelete);
+
+app.get("/profile", profile);
+app.get("/addProfile", addProfile);
+app.post("/addProfile", addProfile);
+app.get("/editProfile", editProfile);
+app.post("/editProfile", editProfile);
 
 app.listen(port);
 console.log(`app is listening port ${port}`);
