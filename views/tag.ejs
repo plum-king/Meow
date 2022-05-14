@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= title %></title>
+    <!--css 들어갈 부분-->
+    <%- include('./partials/head') %>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      div.tag_box {
+        width: 100%;
+        height: 500px;
+      }
+      div.left {
+        height: 500px;
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        border: 1px solid #000;
+      }
+      div.right {
+        height: 500px;
+        width: 50%;
+        float: right;
+        box-sizing: border-box;
+        border: 1px solid #000;
+      }
+      .tag_list {
+        text-align: center;
+      }
+      .tag_add {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('./partials/nav') %>
+    <h1>태그추가</h1>
+    <div class="tag_box">
+      <div class="left">
+        <h3 class="tag_list">태그 목록</h3>
+        <br />
+        <p style="text-align: center"><%= tag_list %></p>
+        <!--여기서 for문으로 가운데 정렬해서 돌리기-->
+      </div>
+      <div class="right">
+        <h3 class="tag_add">태그 추가</h3>
+        <br />
+        <form action="/addTag" method="post" className="tagInput">
+          <input
+            type="text"
+            name="tag"
+            placeholder="TAG"
+            class="tag_input"
+          /><br /><br />
+          <button type="submit" id="tagAddBtn">태그 추가</button>
+        </form>
+        <br />
+        <a href="/">뒤로가기</a>
+      </div>
+    </div>
+  </body>
+</html>
