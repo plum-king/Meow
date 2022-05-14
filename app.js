@@ -2,9 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
-// const layouts = require("express-ejs-layouts");
 const ejs = require("ejs");
-// const path = require("path");
 
 const port = 3000;
 const main = require("./routes/main");
@@ -13,11 +11,9 @@ const logout = require("./routes/logout");
 const signup = require("./routes/signup");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
+const addTag = require("./routes/tag");
 
 app.set("view engine", "ejs");
-// app.set("views", path.join(__dirname, "views"));
-// app.use(layouts);
-// app.set("layout", "layout");
 
 app.use(
   bodyParser.urlencoded({
@@ -42,6 +38,8 @@ app.post("/signup", signup);
 app.get("/login", login);
 app.post("/login", login);
 app.get("/logout", logout);
+app.get("/addTag", addTag);
+app.post("/addTag", addTag);
 
 app.get("/edit/:userid", editUser.showEdit);
 app.post("/edit", editUser.updateEdit);

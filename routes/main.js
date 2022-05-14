@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
-// const template = require("../lib/template.js");
-// const pool = require("../db.js");
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   const title = "Meow";
-  // const head = "<p></p>";
-  // let body;
+
   if (req.session.user) {
     const nickname = req.session.user["nickname"];
     console.log(nickname);
