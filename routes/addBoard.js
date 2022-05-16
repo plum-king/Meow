@@ -32,7 +32,6 @@ router.post("/addBoard", (req, res, next) => {
     (err, row) => {
       if (err) {
         console.error(err);
-        //res.writeHead(200, {Location: "/board"});
         res.write('<script>window.location="/addBoard"</script>');
         res.write(
           `<script type="text/javascript">alert('This place already exist!')</script>`
@@ -48,12 +47,10 @@ router.post("/addBoard", (req, res, next) => {
             (err, row) => {
               if (err) {
                 console.error(err);
-                //res.writeHead(200, {Location: "/board"});
-                //res.write('<script>window.location="/addBoard"</script>');
                 res.write(
                   `<script type="text/javascript">alert('This menu already exist!')</script>`
                 );
-                //res.write('<script>window.location="/addBoard"</script>');
+                
               } else { 
                 console.log(resId);
                 console.log("성공2");
@@ -70,7 +67,6 @@ router.post("/addBoard", (req, res, next) => {
             (err, row) => {
               if (err) {
                   console.error(err);
-                  //res.writeHead(200, {Location: "/board"});
                   res.write('<script>window.location="/addBoard"</script>');
                   res.write(
                     `<script type="text/javascript">alert('This board already exist!')</script>`
@@ -86,7 +82,6 @@ router.post("/addBoard", (req, res, next) => {
                       (err, row) => {
                         if (err) {
                           console.error(err);
-                          //res.writeHead(200, {Location: "/board"});
                           res.write('<script>window.location="/addBoard"</script>');
                           res.write(
                             `<script type="text/javascript">alert('This review already exist!')</script>`
@@ -94,7 +89,6 @@ router.post("/addBoard", (req, res, next) => {
                         } else { 
                           console.log(resPostId);
                           console.log("성공4");
-                          //res.writeHead(302, {Location: "/board"});
                           res.write('<script>window.location="/addBoard"</script>');
                           res.end();
                         }
