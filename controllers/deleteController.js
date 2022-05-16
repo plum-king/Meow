@@ -12,26 +12,29 @@ exports.showDelete = async (req, res, next) => {
 exports.updateDelete = async (req, res, next) => {
   const userid = req.session.user["userid"];
   const password = req.body.password;
-  const encrypted_pw = bcrypt.hashSync(password, 10);
   try {
-    const data = await pool.query("DELETE FROM user WHERE user_id = ?", [
-      userid,
-    ]);
-    if (bcrypt.compareSync(password, encrypted_pw)) {
-      req.session.destroy((err) => {
-        if (err) throw err;
-        else {
-          res.write(
-            `<script type="text/javascript">alert('Complete to delete your info!')</script>`
-          );
-          res.write('<script>window.location="/"</script>');
-        }
-      });
-    } else {
+    const connection = await pool.getConnection(async (conn) => conn);
+    const pwd = await connection.query('SELECT password FROM User WHERE user_id = ?', [userid]);
+    console.log(pwd[0][0].password);
+    if(bcrypt.compareSync(password, pwd[0][0].password)){
+      const result = await connection.query('DELETE FROM User WHERE user_id = ?', [userid]);
+      console.log(result[0].affectedRows);
+      if(result[0].affectedRows==1){
+          req.session.destroy((err) => {
+            if (err) throw err;
+            else {
+              res.write(
+                `<script type="text/javascript">alert('Complete to delete your info!')</script>`
+              );
+              res.write('<script>window.location="/"</script>');
+            }
+          });
+        } 
+      } else {
       res.write(
         `<script type="text/javascript">alert('Fail to delete: please enter again!')</script>`
       );
-      res.write('<script>window.location="/withdraw/:userid"</script>');
+      res.write('<script>window.location="/withdraw"</script>');
     }
   } catch (err) {
     console.error(err);
