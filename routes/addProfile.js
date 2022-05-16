@@ -23,11 +23,12 @@ router.post("/addProfile", async (req, res, next) => {
   const introduction = post.introduction;
   const userid = req.session.user["userid"];
 
-  const data = await pool.query(
-    "UPDATE user SET home=?, introduction=? WHERE user_id=?",
-    [home, introduction, userid]
-  );
   try {
+    const data = await pool.query(
+      "UPDATE user SET home=?, introduction=? WHERE user_id=?",
+      [home, introduction, userid]
+    );
+
     console.log("성공");
     res.write('<script>window.location="/profile"</script>');
     res.end();
