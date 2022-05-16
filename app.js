@@ -2,6 +2,19 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const ejs = require("ejs");
+
+const port = 3000;
+const main = require("./routes/main");
+const login = require("./routes/login");
+const logout = require("./routes/logout");
+const signup = require("./routes/signup");
+const addBoard = require("./routes/addBoard");
+const editUser = require("./controllers/editController");
+const deleteUser = require("./controllers/deleteController");
+const addTag = require("./routes/tag");
+
+app.set("view engine", "ejs");
 
 app.use(
   bodyParser.urlencoded({
@@ -19,7 +32,7 @@ app.use(
     saveUninitialize: true,
   })
 );
-
+/*
 const port = 3000;
 
 const mainRouter = require("./routes/main.js");
@@ -43,6 +56,27 @@ app.post("/login_controller", loginControllerRouter);
 app.get("/logout_controller", logoutControllerRouter);
 app.post("/board_controller", boardControllerRouter);
 app.post("/profile_controller", profileControllerRouter);
+*/
+
+app.use("/", main);
+app.get("/signup", signup);
+app.post("/signup", signup);
+app.get("/login", login);
+app.post("/login", login);
+app.get("/logout", logout);
+app.get("/addTag", addTag);
+app.post("/addTag", addTag);
+
+app.get("/addBoard", addBoard);
+app.post("/addBoard", addBoard);
+app.get("/editBoard", editBoard);
+app.post("/editBoard", editBoard);
+
+app.get("/edit/:userid", editUser.showEdit);
+app.post("/edit", editUser.updateEdit);
+
+app.get("/withdraw/:userid", deleteUser.showDelete);
+app.post("/withdraw", deleteUser.updateDelete);
 
 app.listen(port);
 console.log(`app is listening port ${port}`);
