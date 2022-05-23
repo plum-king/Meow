@@ -5,13 +5,12 @@
     <meta charset="utf-8" />
     <title><%= title %></title>
     <!--css 들어갈 부분-->
+    <%- include('./partials/head') %>
   </head>
 
   <body>
+    <%- include('./partials/loginNav') %>
     <h1>Meow</h1>
-    <p>
-      <a href="/signup">회원가입</a>
-      <a href="/login">로그인</a>
-    </p>
+    <p>메인 화면이 뜰 부분</p>
   </body>
 </html>
