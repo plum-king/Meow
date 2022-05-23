@@ -9,12 +9,14 @@ const main = require("./routes/main");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const signup = require("./routes/signup");
+const addBoard = require("./routes/addBoard");
 const profile = require("./routes/profile");
 const addProfile = require("./routes/addProfile");
 const editProfile = require("./routes/editProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
 const addTag = require("./routes/tag");
+const editBoard = require("./controllers/editBoard");
 
 app.set("view engine", "ejs");
 
@@ -43,6 +45,11 @@ app.post("/login", login);
 app.get("/logout", logout);
 app.get("/addTag", addTag);
 app.post("/addTag", addTag);
+
+app.get("/addBoard", addBoard);
+app.post("/addBoard", addBoard);
+app.get("/editBoard", editBoard);
+app.post("/editBoard", editBoard);
 
 app.get("/edit/:userid", editUser.showEdit);
 app.post("/edit", editUser.updateEdit);
