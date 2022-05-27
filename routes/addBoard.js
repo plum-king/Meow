@@ -8,9 +8,30 @@ const session = require("express-session");
 router.get("/addBoard", async (req, res, next) => {
   const data = await pool.query(`SELECT * from tag`);
   res.render("addBoard", {title: "게시글 작성", tags: data[0]});
+  /*
+  if (req.query.edit) { // query가 edit으로 들어왔을 때
+    res.render("/editBoard", { post }); // 아까 상세 페이지에서 찾았던 post값 넘겨주기
+  }
+  */
 });
+//이미지 업로드
+/*const multer = require("multer");
 
-router.post("/addBoard", async (req, res, next) => {
+var storage = multer.diskStorage({
+  destination: function (req, file, cb){
+    cb(null, "public/images/");
+  },
+  filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname);
+    cb(null, path.basename(file.originalname, ext) + "-" + Date.now() + ext);
+  },
+})
+*/
+
+//이미지 업로드 끝
+
+//router.post("/addBoard", async (req, res, next) => {
+  router.post("/addBoard", async (req, res, next) => {
   const post = req.body;
   const place_name = post.place_name;
   const place_loc = post.place_loc;
@@ -23,12 +44,14 @@ router.post("/addBoard", async (req, res, next) => {
   const review_cont2 = post.review_cont2;
   const review_cont3 = post.review_cont3;
   const place_photo = post.place_photo;
+  //let place_photo = '/image/' + req.file.filename;
   const receipt_photo = post.receipt_photo;
 
   const title = "Meow";
   const nickname = req.session.user["nickname"];
 
   var resPostId;
+  var resRevID;
   // var resId;
   let placeId; //place_num
   try {
@@ -62,6 +85,9 @@ router.post("/addBoard", async (req, res, next) => {
       `INSERT INTO shortreview(post_num, review_cont1, review_cont2, review_cont3) VALUES (?, ?, ?, ?)`,
       [resPostId, review_cont1, review_cont2, review_cont3]
     );
+
+    resRevID = data4[0].insertId;
+
     res.write('<script>window.location="/"</script>');
     res.end();
   } catch (err) {

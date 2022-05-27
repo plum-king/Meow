@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const ejs = require("ejs");
+//
+const multer = require('multer');
+const upload = multer({dest: './upload'});
 
 const port = 3000;
 const main = require("./routes/main");
@@ -62,6 +65,8 @@ app.get("/addProfile", addProfile);
 app.post("/addProfile", addProfile);
 app.get("/editProfile", editProfile);
 app.post("/editProfile", editProfile);
+
+app.use('/image', express.static('./upload'));
 
 app.listen(port);
 console.log(`app is listening port ${port}`);

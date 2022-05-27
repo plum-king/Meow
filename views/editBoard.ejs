@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+
+    <title><%= title %></title>
+
+  </head>
+
+  <body>
+
+    <h1><%= title %></h1>
+
+    <form action="/editBoard" method="post">
+    
+
+    <table width="800" border="3">
+
+    <tr>
+
+      <th>Place Name</th>
+  
+      <td><input type="text" name="place_name" id="placeName" size="10" maxlength="10" value="<%=row.place_name%>"></td>
+  
+      </tr>
+
+    <tr>
+
+      <th>Place Location</th>
+  
+      <td><input type="text" name="place_loc" id="placeLoc" size="10" maxlength="10" value="<%=row.place_loc%>"></td>
+  
+      </tr>
+
+    <tr>
+
+    <th>Menu Name</th>
+
+    <td><input type="text" name="menu_name" id="menuName" size="12" maxlength="12" readonly="readonly" value="<%=row.menu_name%>"></td>
+
+    </tr>
+    
+    <tr>
+
+      <th>Price</th>
+  
+      <td><input type="number" name="price" id="price" size="12" maxlength="12" readonly="readonly" value="<%=row.price%>"></td>
+  
+      </tr>
+
+      <tr>
+
+        <th>Place Satisfaction</th>
+    
+        <td><input type="number" name="place_satisfy" id="placeSatisfy" size="12" maxlength="12" readonly="readonly" value="<%=row.place_satisfy%>"></td>
+    
+        </tr>
+  
+
+    <tr>
+
+      <th>Tag Selection</th>
+  
+      <td><input type="text" name="tag_num" id="tagNum" size="12" maxlength="12"></td>
+  
+      </tr>
+
+    <tr>
+
+        <th>Short Review 1</th>
+
+        <td><input type="text" name="review_cont1" id="shortReview1" size="12" maxlength="12" readonly="readonly" value="<%=review_cont1%>"></td>
+
+    </tr>
+    <tr>
+
+        <th>Short Review 2</th>
+    
+        <td><input type="text" name="review_cont2" id="shortReview2" size="12" maxlength="12" readonly="readonly" value="<%=review_cont2%>"></td>
+    
+    </tr>
+    <tr>
+
+        <th>Short Review 3</th>
+        
+        <td><input type="text" name="review_cont3" id="shortReview3" size="12" maxlength="12" readonly="readonly" value="<%=review_cont3%>"></td>
+        
+    </tr>
+    <tr>
+
+      <th>Place Photo</th>
+  
+      <td><input type="file" name="place_photo" class="real-upload" accept="image/*" required multiple size="12" maxlength="12"></td>
+  
+    </tr>
+
+    <tr>
+
+        <th>Receipt Photo</th>
+    
+        <td><input type="file" name="receipt_photo" class="real-upload" accept="image/*" required multiple size="12" maxlength="12"></td>
+    
+    </tr>  
+
+    <td colspan="2">
+
+<input type="submit" value="수정">
+
+<input type="reset" value="취소">
+
+    </td>
+
+    </tr>
+
+    </table>
+
+    </form>
+
+  </body>
+
+</html>
