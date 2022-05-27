@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const ejs = require("ejs");
+const multer = require('multer');
+const upload = multer({dest: './upload'});
 
 const port = 3000;
 const main = require("./routes/main");
@@ -14,7 +16,10 @@ const addProfile = require("./routes/addProfile");
 const editProfile = require("./routes/editProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
-// const writeQnA = require('./controllers/qnaController');
+const addBoard = require("./routes/addBoard");
+const editBoard = require("./controllers/editBoard");
+const showBoard = require("./controllers/showBoardController");
+const writeQnA = require('./controllers/qnaController');
 const addTag = require("./routes/tag");
 
 app.set("view engine", "ejs");
@@ -51,16 +56,30 @@ app.post("/edit", editUser.updateEdit);
 app.get("/withdraw", deleteUser.showDelete);
 app.post("/withdraw", deleteUser.updateDelete);
 
-// app.get("/:post_num", writeQnA.showQnA);
-// app.post("/qna/Q", writeQnA.updateQuestion);
-// app.post("/qna/A", writeQnA.updateAnswer);
-// app.post("/qna/delete", writeQnA.deleteQuestion);
+app.post("/qna/Q", writeQnA.updateQuestion);
+app.post("/qna/A", writeQnA.updateAnswer);
+app.post("/qna/delete", writeQnA.deleteQuestion);
 
 app.get("/profile", profile);
 app.get("/addProfile", addProfile);
 app.post("/addProfile", addProfile);
 app.get("/editProfile", editProfile);
 app.post("/editProfile", editProfile);
+
+app.get("/addBoard", addBoard);
+app.post("/addBoard", addBoard);
+app.get("/editBoard", editBoard);
+app.post("/editBoard", editBoard);
+app.get("/MyBoardList", showBoard.showMyBoardList);
+app.get("/MyBoard/:post_num", showBoard.showMyBoard);
+app.post("/MyBoard/:post_num", showBoard.showMyBoard);
+app.get("/OtherBoardList", showBoard.showOtherBoardList);
+app.get("/OtherBoard/:post_num", showBoard.showOtherBoard);
+app.post("/OtherBoard/:post_num", showBoard.showOtherBoard);
+app.post("/satisfaction", showBoard.addSatisfaction);
+
+app.use('/image', express.static('./upload'));
+
 
 app.listen(port);
 console.log(`app is listening port ${port}`);
