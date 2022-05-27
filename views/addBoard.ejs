@@ -9,7 +9,7 @@
 
   <body>
     <div class="addBoard_con">
-      <form action="/addBoard" method="post">
+      <form action="/addBoard" method="post" enctype="multipart/form-data">
         <p id="placeName_input">Place Name</p>
         <input
           type="text"
@@ -99,6 +99,10 @@
           required
           multiple
         />
+        <input
+        type="submit"
+        value="전송"
+        />
         <br />
 
         <p id="receiptPhoto_input">Receipt Photo</p>
@@ -109,6 +113,10 @@
           accept="image/*"
           required
           multiple
+        />
+        <input
+        type="submit"
+        value="전송"
         />
         <br />
         <br />
