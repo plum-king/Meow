@@ -8,9 +8,34 @@ const session = require("express-session");
 router.get("/addBoard", async (req, res, next) => {
   const data = await pool.query(`SELECT * from tag`);
   res.render("addBoard", {title: "게시글 작성", tags: data[0]});
+  /*
+  if (req.query.edit) { // query가 edit으로 들어왔을 때
+    res.render("/editBoard", { post }); // 아까 상세 페이지에서 찾았던 post값 넘겨주기
+  }
+  */
+});
+//이미지 업로드
+const multer = require("multer");
+const path = require("path");
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb){
+    cb(null, "./public/images/");
+  },
+  filename(req, file, cb) {
+    const ext = path.extname(file.originalname);   // 파일 확장자
+    const timestamp = new Date().getTime().valueOf();   // 현재 시간
+    // 새 파일명(기존파일명 + 시간 + 확장자)
+    const filename = path.basename(file.originalname, ext) + timestamp + ext;
+    cb(null, filename);
+  },
 });
 
-router.post("/addBoard", async (req, res, next) => {
+var upload = multer({ storage: storage });
+
+//이미지 업로드 끝
+
+router.post("/addBoard", upload.fields([{ name: 'place_photo' }, { name: 'receipt_photo' }]), async (req, res, next) => {
   const post = req.body;
   const place_name = post.place_name;
   const place_loc = post.place_loc;
@@ -22,13 +47,16 @@ router.post("/addBoard", async (req, res, next) => {
   const review_cont1 = post.review_cont1;
   const review_cont2 = post.review_cont2;
   const review_cont3 = post.review_cont3;
-  const place_photo = post.place_photo;
-  const receipt_photo = post.receipt_photo;
+  //const place_photo = post.place_photo;
+  console.log(req.files.place_photo[0].filename);
+  const place_photo = `/images/${req.files.place_photo[0].filename}`;
+  const receipt_photo = `/images/${req.files.receipt_photo[0].filename}`;
 
   const title = "Meow";
   const nickname = req.session.user["nickname"];
 
   var resPostId;
+  var resRevID;
   // var resId;
   let placeId; //place_num
   try {
@@ -62,6 +90,9 @@ router.post("/addBoard", async (req, res, next) => {
       `INSERT INTO shortreview(post_num, review_cont1, review_cont2, review_cont3) VALUES (?, ?, ?, ?)`,
       [resPostId, review_cont1, review_cont2, review_cont3]
     );
+
+    resRevID = data4[0].insertId;
+
     res.write('<script>window.location="/"</script>');
     res.end();
   } catch (err) {

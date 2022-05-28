@@ -1,120 +1,103 @@
-//프로필 수정 백
 const express = require("express");
 const router = express.Router();
 const pool = require("../db.js");
-/*
-router.get("/editBoard", (req, res, next) => {
-    const userid = req.session.user["userid"];
+const bcrypt = require("bcrypt");
 
-    pool.query(
-        "SELECT post_num, place_photo, receipt_photo, place_satisfy, place_num, user_id FROM User WHERE post_num = ?",
-        [post_num], (err, row) => {
-          if (err) throw err;
-          console.log(row[0]);
-          res.render("editBoard", {title: "게시글 수정", row: row[0]});
-        }
-    );
+//게시글 작성 수정
+
+router.get("/editBoard", async (req, res, next) => {
+  //exports.show = async (req, res, next) => {
+  const userid = req.session.user["userid"];
+  //const {editBoard} = req.params
+  var postID; //선택 받은 게시글 번호 지정
+  var placeID;
+  var revID;
+    try {
+      const data = await pool.query(
+        "SELECT review_cont1, review_cont2, review_cont3 FROM shortreview WHERE post_num = ?",
+        [postID] //선택 받은 게시글 번호 불러오기
+      );
+  
+      const data2 = await pool.query(
+        "SELECT receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num FROM post WHERE user_id = ?",
+        [postID]
+      );
+
+      //resPostId = data1[0].insertId; //삽입한 데이터의 id 받아오기
+
+      //placeId = data2[0].insertId; //삽입한 데이터의 id 받아오기
+
+      const data3 = await pool.query(
+        "SELECT place_name, place_loc FROM place WHERE place_num = ?",
+        [placeID]
+      );
+
+      const data4 = await pool.query(
+        "SELECT menu_name, price FROM menu WHERE place_num = ?",
+        [placeID]
+      );
+
+    res.render("editBoard", {title: "게시글 수정", row: data[0][0]});
+  } catch (err) {
+    console.error(err);
+  }
 });
-*/
-router.post("/editBoard", (req, res, next) => {
-    const post = req.body;
+  //};
+
+router.post("/editBoard", async (req, res, next) => {
+  //exports.update = async (req, res, next) => {
+  const post = req.body;
   const place_name = post.place_name;
   const place_loc = post.place_loc;
   const menu_name = post.menu_name;
   const price = post.price;
 
   const place_satisfy = post.place_satisfy;
+  const tag_num = post.tag_num;
   const review_cont1 = post.review_cont1;
   const review_cont2 = post.review_cont2;
   const review_cont3 = post.review_cont3;
   const place_photo = post.place_photo;
   const receipt_photo = post.receipt_photo;
-    const userid = req.session.user["userid"];
-    /*
-    "UPDATE user SET home=?, introduction=? WHERE user_id=?",
-    [home, introduction, userid], (err, row) => {
-        */
-    pool.query(
-        `UPDATE place SET place_name=?, place_loc=? WHERE place_num=?`,
-        [place_name, place_loc, resId],
-        (err, row) => {
-          if (err) {
-            console.error(err);
-            //res.writeHead(200, {Location: "/board"});
-            res.write(
-                `<script type="text/javascript">alert('Error Occur! Please rewrite the form!')</script>`
-              );
-            res.write('<script>window.location="/editBoard"</script>');
-          } else { 
-            console.log("성공1");
-            resId = row.insertId;
-            console.log(resId);
-    
-            pool.query(
-                `UPDATE menu SET menu_name=?, price=? WHERE place_num=?`,
-              //`INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
-              [menu_name, price, resId],
-                (err, row) => {
-                  if (err) {
-                    console.error(err);
-                    //res.writeHead(200, {Location: "/board"});
-                    //res.write('<script>window.location="/addBoard"</script>');
-                    res.write(
-                        `<script type="text/javascript">alert('Error Occur! Please rewrite the form!')</script>`
-                      );
-                    res.write('<script>window.location="/editBoard"</script>');
-                    //res.write('<script>window.location="/addBoard"</script>');
-                  } else { 
-                    console.log(resId);
-                    console.log("성공2");
-                    res.write('<script>window.location="/addBoard"</script>');
-                    res.end();
-                  }
-                });
-                  
-                console.log(req.session.user["userid"]); //user_id 제대로 불러왔는지 확인하기 위한 콘솔 창
-            
-            pool.query(
-            `UPDATE post SET receipt_photo=?, place_photo=?, place_satisfy=?, place_num=? WHERE post_num=?`,
-              //`INSERT INTO post(receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num) VALUES (?, ?, ?, ?, 0, ?, 1)`,
-              [receipt_photo, place_photo, place_satisfy, resId, resPostId],
-                (err, row) => {
-                  if (err) {
-                    console.error(err);
-                    res.write(
-                        `<script type="text/javascript">alert('Error Occur! Please rewrite the form!')</script>`
-                      );
-                    res.write('<script>window.location="/editBoard"</script>');
-                    } else { 
-                      console.log("성공3");
-                      resPostId = row.insertId;
-                      console.log(resPostId);
-    
-                      pool.query(
-                        `UPDATE shortreview SET review_cont1=?, review_cont2=?, review_cont3=? WHERE post_num=?`,
-                        //`INSERT INTO shortreview(post_num, review_cont1, review_cont2, review_cont3) VALUES (?, ?, ?, ?)`,
-                        [review_cont1, review_cont2, review_cont3, resPostId],
-                          (err, row) => {
-                            if (err) {
-                              console.error(err);
-                              res.write(
-                                `<script type="text/javascript">alert('Error Occur! Please rewrite the form!')</script>`
-                              );
-                            res.write('<script>window.location="/editBoard"</script>');
-                            } else { 
-                              console.log(resPostId);
-                              console.log("성공4");
-                              //res.writeHead(302, {Location: "/board"});
-                              res.write('<script>window.location="/addBoard"</script>');
-                              res.end();
-                            }
-                          });
-    
-                    }
-                  });
-    
-                }
-              });
-        });
+
+  const userid = req.session.user["userid"];
+
+  try {
+    const data = await pool.query(
+      "UPDATE place SET place_name=?, place_loc=? WHERE place_num=?",
+      [place_name, place_loc, placeID]
+    );
+
+    //placeId = data[0].insertId; //삽입한 데이터의 id 받아오기
+
+    const data2 = await pool.query(
+      "UPDATE menu SET menu_name=?, price=? WHERE place_num=?",
+      [menu_name, price, placeID]
+    );
+
+    const data3 = await pool.query(
+      "UPDATE post SET receipt_photo=?, place_photo=?, place_satisfy=?, place_num=?, user_id=?, tag_num=? WHERE post_num=?",
+      [receipt_photo, place_photo, place_satisfy, placeId, req.session.user["userid"], tag_num, postID]
+    );
+
+    //resPostId = data3[0].insertId; //삽입한 데이터의 id 받아오기
+
+    const data4 = await pool.query(
+      "UPDATE shortreview SET review_cont1=?, review_cont2=?, review_cont3=? WHERE review_num=?",
+      [resPostId, review_cont1, review_cont2, review_cont3, revID]
+    );
+
+    console.log("성공");
+    res.write('<script>window.location="/"</script>');
+    res.end();
+  } catch (err) {
+    console.error(err);
+    res.write(
+      `<script type="text/javascript">alert('Error Occur! Please rewrite the form!')</script>`
+    );
+    res.write('<script>window.location="/editBoard"</script>');
+  }
+});
+  //};
 
 module.exports = router;

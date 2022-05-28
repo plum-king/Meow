@@ -28,7 +28,6 @@ router.post("/addProfile", async (req, res, next) => {
       "UPDATE user SET home=?, introduction=? WHERE user_id=?",
       [home, introduction, userid]
     );
-
     console.log("성공");
     res.write('<script>window.location="/profile"</script>');
     res.end();

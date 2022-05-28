@@ -12,8 +12,10 @@ router.post("/login", async (req, res, next) => {
   const post = req.body;
   const user_id = post.id;
   const password = post.password;
-
-  const data = await pool.query(`SELECT * FROM user where user_id= ?`, [user_id]);
+  
+  const data = await pool.query(`SELECT * FROM user where user_id= ?`, [
+    user_id,
+  ]);
 
   if (data[0][0] == undefined || data[0][0].password == undefined) {
     res.write(

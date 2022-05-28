@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+ 
+body {
+    margin: 0px; 
+    font-size: 18px;
+    color: #FFF;
+}
+#box {
+    position: relative;
+    height: auto;
+    margin: auto; 
+    background-color: #F90;
+}
+#top {
+    background-color: #333;
+    height: 100px;
+    position: relative;
+}
+#left {
+    background-color: #09C;
+    float: left;
+    height: 500px;
+    width: 15%;
+    position: relative;
+}
+#main {
+    background-color: #3C0;
+    float: left;
+    height: 500px;
+    width: 85%;
+    position: relative;
+}
+#bottom {
+    background-color: #C0F;
+    height: 70px;
+    position: relative;
+    clear: both; 
+    float: left; 
+}

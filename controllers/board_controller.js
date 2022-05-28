@@ -1,4 +1,5 @@
-//게시글 작성 백
+//게시글 작성 백 (전 버전 -> addBoard로)
+
 const express = require("express");
 const router = express.Router();
 const template = require("../lib/template.js");

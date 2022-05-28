@@ -9,10 +9,9 @@
 
   <body>
     <div class="addBoard_con">
-      <form action="/addBoard" method="post">
+      <form action="/addBoard" method="post" enctype="multipart/form-data">
         <p id="placeName_input">Place Name</p>
-        <input
-          type="text"
+        <input type="text"
           name="place_name"
           id="placeName"
           placeholder="맛집 이름"
@@ -95,9 +94,13 @@
           type="file"
           name="place_photo"
           class="real-upload"
-          accept="image/*"
+          accept="images/*"
           required
           multiple
+        />
+        <input
+        type="submit"
+        value="전송"
         />
         <br />
 
@@ -106,10 +109,15 @@
           type="file"
           name="receipt_photo"
           class="real-upload"
-          accept="image/*"
+          accept="images/*"
           required
           multiple
         />
+        <input
+        type="submit"
+        value="전송"
+        />
+
         <br />
         <br />
         <button type="submit" id="boardSubBtn">게시글 등록</button>
