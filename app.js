@@ -11,16 +11,20 @@ const main = require("./routes/main");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const signup = require("./routes/signup");
+
 const profile = require("./routes/profile");
 const addProfile = require("./routes/addProfile");
 const editProfile = require("./routes/editProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
+
 const addBoard = require("./routes/addBoard");
 const editBoard = require("./controllers/editBoard");
 const showBoard = require("./controllers/showBoardController");
 const writeQnA = require('./controllers/qnaController');
+
 const addTag = require("./routes/tag");
+
 
 app.set("view engine", "ejs");
 
@@ -51,6 +55,12 @@ app.get("/addTag", addTag);
 app.post("/addTag", addTag);
 
 app.get("/edit", editUser.showEdit);
+
+app.get("/addBoard", addBoard);
+app.post("/addBoard", addBoard);
+app.get("/editBoard", editBoard);
+app.post("/editBoard", editBoard);
+
 app.post("/edit", editUser.updateEdit);
 
 app.get("/withdraw", deleteUser.showDelete);
@@ -66,10 +76,6 @@ app.post("/addProfile", addProfile);
 app.get("/editProfile", editProfile);
 app.post("/editProfile", editProfile);
 
-app.get("/addBoard", addBoard);
-app.post("/addBoard", addBoard);
-app.get("/editBoard", editBoard);
-app.post("/editBoard", editBoard);
 app.get("/MyBoardList", showBoard.showMyBoardList);
 app.get("/MyBoard/:post_num", showBoard.showMyBoard);
 app.post("/MyBoard/:post_num", showBoard.showMyBoard);
@@ -79,7 +85,6 @@ app.post("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/satisfaction", showBoard.addSatisfaction);
 
 app.use('/image', express.static('./upload'));
-
 
 app.listen(port);
 console.log(`app is listening port ${port}`);

@@ -23,8 +23,8 @@ var storage = multer.diskStorage({
     cb(null, "./public/images/");
   },
   filename(req, file, cb) {
-    const ext = path.extname(file.originalname);	// 파일 확장자
-    const timestamp = new Date().getTime().valueOf();	// 현재 시간
+    const ext = path.extname(file.originalname);   // 파일 확장자
+    const timestamp = new Date().getTime().valueOf();   // 현재 시간
     // 새 파일명(기존파일명 + 시간 + 확장자)
     const filename = path.basename(file.originalname, ext) + timestamp + ext;
     cb(null, filename);

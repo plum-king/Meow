@@ -1,4 +1,5 @@
 //게시글 작성 백 (전 버전 -> addBoard로)
+
 const express = require("express");
 const router = express.Router();
 const template = require("../lib/template.js");
@@ -19,8 +20,6 @@ router.post("/board_controller", async (request, response, next) => {
   const review_cont3 = post.review_cont3;
   const place_photo = post.place_photo;
   const receipt_photo = post.receipt_photo;
-
-  console.log(place_name);
 
   var resPostId;
   var resId;
