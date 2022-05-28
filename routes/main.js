@@ -6,8 +6,9 @@ router.get("/", async (req, res) => {
 
   if (req.session.user) {
     const nickname = req.session.user["nickname"];
+    const userid = req.session.user["userid"];
     console.log(nickname);
-    res.render("main", {title: title, nickname: nickname});
+    res.render("main", {title: title, nickname: nickname, userid: userid});
   } else {
     res.render("loginMain", {title: title});
   }

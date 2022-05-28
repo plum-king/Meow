@@ -12,9 +12,11 @@ const signup = require("./routes/signup");
 const profile = require("./routes/profile");
 const addProfile = require("./routes/addProfile");
 const editProfile = require("./routes/editProfile");
+const allProfile = require("./routes/allProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
 const addTag = require("./routes/tag");
+const addBoard = require("./routes/addBoard");
 
 app.set("view engine", "ejs");
 
@@ -50,11 +52,17 @@ app.post("/edit", editUser.updateEdit);
 app.get("/withdraw/:userid", deleteUser.showDelete);
 app.post("/withdraw", deleteUser.updateDelete);
 
-app.get("/profile", profile);
+app.get("/profile/:userid", profile);
 app.get("/addProfile", addProfile);
 app.post("/addProfile", addProfile);
 app.get("/editProfile", editProfile);
 app.post("/editProfile", editProfile);
+app.get("/allProfile", allProfile);
+
+app.get("/addBoard", addBoard);
+app.post("/addBoard", addBoard);
+// app.get("/editBoard", editBoard);
+// app.post("/editBoard", editBoard);
 
 app.listen(port);
 console.log(`app is listening port ${port}`);
