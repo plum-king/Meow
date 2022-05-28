@@ -3,7 +3,7 @@ const pool = require("../db.js");
 
 exports.updateQuestion = async (req, res) => {
   const {post_num, user_id, qna_cont} = req.body;
-  console.log(post_num, user_id, qna_cont);
+  // console.log(post_num, user_id, qna_cont);
 
   const connection = await pool.getConnection(async (conn) => conn);
   const result = await connection.query(
@@ -38,7 +38,7 @@ exports.updateAnswer = async (req, res) => {
       `UPDATE qna set qna_ans = ? WHERE qna_num = ?`,
       [qna_ans, qna_num]
     );
-    console.log(result);
+    // console.log(result);
   }
   if (result[0].affectedRows == 1) {
     res.write(
@@ -58,7 +58,7 @@ exports.deleteQuestion = async (req, res) => {
   const qna_num = req.body.qna_num;
   const post_num = req.body.post_num;
   const connection = await pool.getConnection(async (conn) => conn);
-  console.log(qna_num);
+  // console.log(qna_num);
   const result = await connection.query(
     "DELETE FROM qna WHERE qna_num = ?",
     qna_num

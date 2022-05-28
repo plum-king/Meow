@@ -27,7 +27,7 @@ router.post("/signup", async (req, res, next) => {
         `INSERT INTO user(user_id, name, nickname, password, age, gender, job) VALUES (?, ?, ?, ?, ?, ?, ?)`, //동일하다면 제대로 된 입력이기 떄문에 db에 저장
         [user_id, name, nickname, encrypted_pw, age, gender, job]
       );
-      console.log("성공");
+      // console.log("성공");
       res.write(`<script>window.location="/login"</script>`);
       res.end();
     } catch (err) {

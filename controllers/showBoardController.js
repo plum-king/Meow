@@ -16,7 +16,7 @@ exports.showMyBoardList = async (req, res) => {
     `SELECT nickname FROM user WHERE user_id = ?`,
     userid
   );
-  console.log(nickName[0][0].nickName);
+  // console.log(nickName[0][0].nickName);
   var postNum = [];
   var placeName = [];
   var placePhoto = [];
@@ -27,7 +27,7 @@ exports.showMyBoardList = async (req, res) => {
     placeName.push(data.place_name);
   }
 
-  console.log(postNum);
+  // console.log(postNum);
 
   res.render("board/showMyBoardList", {
     title: "나의 게시글 목록",
@@ -42,7 +42,7 @@ exports.showMyBoardList = async (req, res) => {
 exports.showMyBoard = async (req, res) => {
   const userid = req.session.user["userid"];
   const post_num = req.params.post_num;
-  console.log(userid, post_num);
+  // console.log(userid, post_num);
   const connection = await pool.getConnection(async (conn) => conn);
   const result = await connection.query(
     `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
@@ -160,7 +160,7 @@ exports.showOtherBoardList = async (req, res) => {
     postUser.push(data.user_id);
   }
 
-  console.log(postNum);
+  // console.log(postNum);
 
   res.render("board/showOtherBoardList", {
     title: "모든 게시글 목록",
@@ -177,7 +177,7 @@ exports.showOtherBoard = async (req, res, next) => {
   const userid = req.session.user["userid"];
   //const post_userid = req.body.post_userid;
   const post_num = req.params.post_num;
-  console.log(userid, post_num);
+  // console.log(userid, post_num);
 
   const connection = await pool.getConnection(async (conn) => conn);
 
@@ -200,7 +200,7 @@ WHERE po.post_num = ?`,
     [post_userid]
   );
 
-  console.log(2, mynickName[0][0].nickname);
+  // console.log(2, mynickName[0][0].nickname);
 
   const result2 = await connection.query(
     `SELECT * FROM shortReview as sr 
@@ -229,13 +229,13 @@ WHERE sr.post_num = ?`,
     sum3 += pct3s[i];
   }
 
-  console.log(pct1s);
+  // console.log(pct1s);
 
   const pct1 = sum1 / pct1s.length;
   const pct2 = sum2 / pct2s.length;
   const pct3 = sum3 / pct3s.length;
 
-  console.log(pct1);
+  // console.log(pct1);
 
   const result3 = await connection.query(
     "SELECT qna_num, qna_cont, qna_ans, user_id FROM qna WHERE post_num = ?",
@@ -350,7 +350,7 @@ exports.addSatisfaction = async (req, res) => {
     [post_num, review_num, user_id]
   );
 
-  console.log(checkUsers[0]);
+  // console.log(checkUsers[0]);
 
   if (checkUsers[0].length > 0) {
     res.write(

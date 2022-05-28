@@ -17,12 +17,22 @@ router.get("/profile/:userid", async (req, res, next) => {
       "SELECT user_id, age, gender, job, home, introduction FROM User WHERE user_id = ?",
       [userid]
     );
-    console.log(data[0][0]);
+    let subscribe = await pool.query(
+      `SELECT * FROM subscribe WHERE user_id1 = ? and user_id2 = ?`,
+      [userid, myid]
+    );
+    if (subscribe[0][0] == undefined) {
+      subscribe = true;
+    } else {
+      subscribe = false;
+    }
+    // console.log(subscibe[0][0]);
     res.render("user/profile", {
       title: "프로필",
       user: isUser,
       nickname: nickname,
       row: data[0][0],
+      subscribe: subscribe,
     });
   } catch (err) {
     console.error(err);

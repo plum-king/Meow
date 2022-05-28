@@ -10,6 +10,7 @@
     <body>
         <%- include('../partials/nav') %>
         <h1>MEOW</h1>
+        <h4><a href="/otherBoardList" id="otherBList">다른 게시글 보기</a></h4>
         <div class="main">
             <span id="post_user_nickName"><%=pu_nickname%> 님</span><br><br>
         <div class="lefttop">
@@ -58,11 +59,11 @@
         <h1><%= title2 %></h1>
         <form action = "/qna/Q" method = "post">
             <div class="writeqna">
-                <input type="hidden" name="user_id"  value="<%=user_id%>">
+                <input type="hidden" name="user_id"  value="<%=userid%>">
                 <tr>
                 <td>
                     <input type="hidden" name="post_num"  value="<%=post_num%>">
-                    <span id="qna_user">ID : <%=user_id%></span><br>
+                    <span id="qna_user">ID : <%=userid%></span><br>
                 </td>
                 </tr>
                 <tr>
@@ -81,12 +82,12 @@
         <br><br>
         </form>
             <div class="qna">
-                <input type="hidden" name="user_id"  value="<%=user_id%>">
+                <input type="hidden" name="user_id"  value="<%=userid%>">
                 <% for(var i = 0; i<myqna_cont.length; i++) { %>
                     <form action = "/qna/delete" method = "post">
                         <input type="hidden" name="post_num"  value="<%=post_num%>">
                         <input type="hidden" name="qna_num" value="<%=myqna_num[i]%>">
-                        <span id="myqna_user">ID: <%=user_id%></span>
+                        <span id="myqna_user">ID: <%=userid%></span>
                         <br>
                         <span id="myqna_cont">Q: <%=myqna_cont[i]%></span>
                         <br>

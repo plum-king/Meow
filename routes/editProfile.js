@@ -11,8 +11,12 @@ router.get("/editProfile", async (req, res, next) => {
       "SELECT user_id, age, gender, job, home, introduction FROM User WHERE user_id = ?",
       [userid]
     );
-    console.log(data[0][0]);
-    res.render("user/editProfile", {title: "프로필 수정", nickname: nickname, row: data[0][0]});
+    // console.log(data[0][0]);
+    res.render("user/editProfile", {
+      title: "프로필 수정",
+      nickname: nickname,
+      row: data[0][0],
+    });
   } catch (err) {
     console.error(err);
   }
@@ -28,7 +32,7 @@ router.post("/editProfile", async (req, res, next) => {
       "UPDATE user SET home=?, introduction=? WHERE user_id=?",
       [home, introduction, userid]
     );
-    console.log("성공");
+    // console.log("성공");
     res.write(`<script>window.location="/profile/${userid}"</script>`);
     res.end();
   } catch (err) {
