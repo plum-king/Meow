@@ -13,7 +13,7 @@ exports.showMyBoardList = async (req, res) => {
   );
 
   const nickName = await connection.query(
-    `SELECT nickname FROM User WHERE user_id = ?`,
+    `SELECT nickname FROM user WHERE user_id = ?`,
     userid
   );
   console.log(nickName[0][0].nickName);
@@ -29,7 +29,7 @@ exports.showMyBoardList = async (req, res) => {
 
   console.log(postNum);
 
-  res.render("showMyBoardList", {
+  res.render("board/showMyBoardList", {
     title: "나의 게시글 목록",
     userid: userid,
     nickname: nickName[0][0].nickname,
@@ -48,19 +48,19 @@ exports.showMyBoard = async (req, res) => {
     `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
   JOIN place as pl ON po.place_num = pl.place_num 
   JOIN tag as t ON po.tag_num = t.tag_num 
-  JOIN Menu as m ON pl.place_num = m.place_num
+  JOIN menu as m ON pl.place_num = m.place_num
   WHERE po.post_num = ?`,
     [post_num]
   );
 
   const nickName = await connection.query(
-    `SELECT nickname FROM User WHERE user_id = ?`,
+    `SELECT nickname FROM user WHERE user_id = ?`,
     userid
   );
 
   const result2 = await connection.query(
     `SELECT * FROM shortReview as sr 
-  JOIN Satisfy as st ON sr.review_num = st.review_num
+  JOIN satisfy as st ON sr.review_num = st.review_num
   WHERE sr.post_num = ?`,
     [post_num]
   );
@@ -105,9 +105,9 @@ exports.showMyBoard = async (req, res) => {
     ansList.push(data.qna_ans);
     userList.push(data.user_id);
   }
-  console.log(result[0][0].receipt_photo);
+  // console.log(result[0][0].receipt_photo);
 
-  res.render("showMyBoard", {
+  res.render("board/showMyBoard", {
     title: "나의 게시글",
     title2: "Q&A",
     nickname: nickName[0][0].nickname,
@@ -144,7 +144,7 @@ exports.showOtherBoardList = async (req, res) => {
   );
 
   const nickName = await connection.query(
-    `SELECT nickname FROM User WHERE user_id = ?`,
+    `SELECT nickname FROM user WHERE user_id = ?`,
     userid
   );
 
@@ -162,7 +162,7 @@ exports.showOtherBoardList = async (req, res) => {
 
   console.log(postNum);
 
-  res.render("showOtherBoardList", {
+  res.render("board/showOtherBoardList", {
     title: "모든 게시글 목록",
     userid: userid,
     nickname: nickName[0][0].nickname,
@@ -185,18 +185,18 @@ exports.showOtherBoard = async (req, res, next) => {
     `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
 JOIN place as pl ON po.place_num = pl.place_num 
 JOIN tag as t ON po.tag_num = t.tag_num 
-JOIN Menu as m ON pl.place_num = m.place_num
+JOIN menu as m ON pl.place_num = m.place_num
 WHERE po.post_num = ?`,
     [post_num]
   );
 
   const post_userid = result[0][0].user_id;
   const mynickName = await connection.query(
-    `SELECT nickname FROM User WHERE user_id = ?`,
+    `SELECT nickname FROM user WHERE user_id = ?`,
     [userid]
   );
   const post_user_nickName = await connection.query(
-    `SELECT nickname FROM User WHERE user_id = ?`,
+    `SELECT nickname FROM user WHERE user_id = ?`,
     [post_userid]
   );
 
@@ -204,7 +204,7 @@ WHERE po.post_num = ?`,
 
   const result2 = await connection.query(
     `SELECT * FROM shortReview as sr 
-JOIN Satisfy as st ON sr.review_num = st.review_num
+JOIN satisfy as st ON sr.review_num = st.review_num
 WHERE sr.post_num = ?`,
     [post_num]
   );
@@ -254,7 +254,7 @@ WHERE sr.post_num = ?`,
       userList.push(data.user_id);
     }
 
-    res.render("showMyBoard", {
+    res.render("board/showMyBoard", {
       title: "나의 게시글",
       title2: "Q&A",
       nickname: mynickName[0][0].nickname,
@@ -301,7 +301,7 @@ WHERE sr.post_num = ?`,
       }
     }
 
-    res.render("showOtherBoard", {
+    res.render("board/showOtherBoard", {
       title: "게시글",
       title2: "Q&A",
       nickname: mynickName[0][0].nickname,

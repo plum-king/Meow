@@ -12,7 +12,11 @@ router.get("/addProfile", async (req, res, next) => {
       [userid]
     );
     console.log(data[0][0]);
-    res.render("addProfile", {title: "프로필 추가", nickname: nickname, row: data[0][0]});
+    res.render("user/addProfile", {
+      title: "프로필 추가",
+      nickname: nickname,
+      row: data[0][0],
+    });
   } catch (err) {
     console.error(err);
   }

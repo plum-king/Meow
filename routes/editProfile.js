@@ -12,7 +12,7 @@ router.get("/editProfile", async (req, res, next) => {
       [userid]
     );
     console.log(data[0][0]);
-    res.render("editProfile", {title: "프로필 수정", nickname: nickname, row: data[0][0]});
+    res.render("user/editProfile", {title: "프로필 수정", nickname: nickname, row: data[0][0]});
   } catch (err) {
     console.error(err);
   }

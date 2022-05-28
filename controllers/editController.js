@@ -10,7 +10,7 @@ exports.showEdit = async (req, res, next) => {
       "SELECT user_id, name, nickname, password, age, gender, job, home, introduction FROM User WHERE user_id = ?",
       [userid]
     );
-    res.render("updateform", {title: "회원 정보 수정", row: data[0][0]});
+    res.render("user/updateform", {title: "회원 정보 수정", row: data[0][0]});
   } catch (err) {
     console.error(err);
   }

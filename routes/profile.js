@@ -9,7 +9,7 @@ router.get("/profile/:userid", async (req, res, next) => {
   const userid = req.params.userid;
 
   let isUser;
-  if (userid==myid) isUser = true;
+  if (userid == myid) isUser = true;
   else isUser = false;
 
   try {
@@ -18,9 +18,14 @@ router.get("/profile/:userid", async (req, res, next) => {
       [userid]
     );
     console.log(data[0][0]);
-    res.render("profile", {title: "프로필", user: isUser, nickname: nickname, row: data[0][0]});
+    res.render("user/profile", {
+      title: "프로필",
+      user: isUser,
+      nickname: nickname,
+      row: data[0][0],
+    });
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 });
 

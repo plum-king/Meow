@@ -8,7 +8,7 @@ router.get("/allProfile", async (req, res, next) => {
     try {
         const data = await pool.query("SELECT user_id, nickname, age, gender, job FROM User");
         console.log("성공");
-        res.render("allProfile", {title: "전체 프로필", userid: userid, nickname: nickname, data: data[0]});
+        res.render("user/allProfile", {title: "전체 프로필", userid: userid, nickname: nickname, data: data[0]});
     } catch (err) {
         console.err(err);
     }

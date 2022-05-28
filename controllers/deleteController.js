@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 //회원 탈퇴
 exports.showDelete = async (req, res, next) => {
   const userid = req.params.user_id;
-  res.render("withdrawform", {title: "회원 탈퇴", userid: userid});
+  res.render("user/withdrawform", {title: "회원 탈퇴", userid: userid});
 };
 
 exports.updateDelete = async (req, res, next) => {

@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require("../db.js");
 
 router.get("/addTag", async (req, res, next) => {
+  const userid = req.session.user["userid"];
   let tag_list = new Array();
   const nickname = req.session.user["nickname"];
   try {
@@ -27,12 +28,14 @@ router.get("/addTag", async (req, res, next) => {
     title: "태그추가",
     nickname: nickname,
     tag_list: tag_list,
+    userid: userid,
   });
 });
 
 router.post("/addTag", async (req, res, next) => {
   const post = req.body;
   const tag_cont = post.tag;
+
   try {
     const data = await pool.query(`SELECT * FROM tag where tag_cont=?;`, [
       tag_cont,

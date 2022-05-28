@@ -5,12 +5,12 @@
         <meta charset="UTF-8" />
         <link href="/css/Board.css" rel="stylesheet"/>
         <title><%= title %></title>
-        <%- include('./partials/head') %>
+        <%- include('../partials/head') %>
     </head>
 
     <body>
         <title><%= title %></title>
-        <%- include('./partials/nav') %>
+        <%- include('../partials/nav') %>
         <div class="wrap">
             <% for(var i = 0; i<postNum.length; i++) { %>
                 <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
