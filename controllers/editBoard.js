@@ -6,46 +6,38 @@ const bcrypt = require("bcrypt");
 //게시글 작성 수정
 
 router.get("/editBoard", async (req, res, next) => {
-  //exports.show = async (req, res, next) => {
   const userid = req.session.user["userid"];
-  //const {editBoard} = req.params
   var postID; //선택 받은 게시글 번호 지정
   var placeID;
   var revID;
-    try {
-      const data = await pool.query(
-        "SELECT review_cont1, review_cont2, review_cont3 FROM shortreview WHERE post_num = ?",
-        [postID] //선택 받은 게시글 번호 불러오기
-      );
-  
-      const data2 = await pool.query(
-        "SELECT receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num FROM post WHERE user_id = ?",
-        [postID]
-      );
+  try {
+    const data = await pool.query(
+      "SELECT review_cont1, review_cont2, review_cont3 FROM shortreview WHERE post_num = ?",
+      [postID] //선택 받은 게시글 번호 불러오기
+    );
 
-      //resPostId = data1[0].insertId; //삽입한 데이터의 id 받아오기
+    const data2 = await pool.query(
+      "SELECT receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num FROM post WHERE user_id = ?",
+      [postID]
+    );
 
-      //placeId = data2[0].insertId; //삽입한 데이터의 id 받아오기
+    const data3 = await pool.query(
+      "SELECT place_name, place_loc FROM place WHERE place_num = ?",
+      [placeID]
+    );
 
-      const data3 = await pool.query(
-        "SELECT place_name, place_loc FROM place WHERE place_num = ?",
-        [placeID]
-      );
-
-      const data4 = await pool.query(
-        "SELECT menu_name, price FROM menu WHERE place_num = ?",
-        [placeID]
-      );
+    const data4 = await pool.query(
+      "SELECT menu_name, price FROM menu WHERE place_num = ?",
+      [placeID]
+    );
 
     res.render("editBoard", {title: "게시글 수정", row: data[0][0]});
   } catch (err) {
     console.error(err);
   }
 });
-  //};
 
 router.post("/editBoard", async (req, res, next) => {
-  //exports.update = async (req, res, next) => {
   const post = req.body;
   const place_name = post.place_name;
   const place_loc = post.place_loc;
@@ -77,7 +69,15 @@ router.post("/editBoard", async (req, res, next) => {
 
     const data3 = await pool.query(
       "UPDATE post SET receipt_photo=?, place_photo=?, place_satisfy=?, place_num=?, user_id=?, tag_num=? WHERE post_num=?",
-      [receipt_photo, place_photo, place_satisfy, placeId, req.session.user["userid"], tag_num, postID]
+      [
+        receipt_photo,
+        place_photo,
+        place_satisfy,
+        placeId,
+        req.session.user["userid"],
+        tag_num,
+        postID,
+      ]
     );
 
     //resPostId = data3[0].insertId; //삽입한 데이터의 id 받아오기
@@ -98,6 +98,5 @@ router.post("/editBoard", async (req, res, next) => {
     res.write('<script>window.location="/editBoard"</script>');
   }
 });
-  //};
 
 module.exports = router;

@@ -25,8 +25,6 @@ const showBoard = require("./controllers/showBoardController");
 const writeQnA = require('./controllers/qnaController');
 
 const addTag = require("./routes/tag");
-const addBoard = require("./routes/addBoard");
-
 
 app.set("view engine", "ejs");
 
