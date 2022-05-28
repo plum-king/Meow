@@ -5,12 +5,14 @@ const pool = require("../db.js");
 
 router.get("/editProfile", async (req, res, next) => {
   const userid = req.session.user["userid"];
+  const nickname = req.session.user["nickname"];
   try {
     const data = await pool.query(
       "SELECT user_id, age, gender, job, home, introduction FROM User WHERE user_id = ?",
       [userid]
     );
-    res.render("editProfile", {title: "프로필 수정", row: data[0][0]});
+    console.log(data[0][0]);
+    res.render("editProfile", {title: "프로필 수정", nickname: nickname, row: data[0][0]});
   } catch (err) {
     console.error(err);
   }
@@ -27,7 +29,7 @@ router.post("/editProfile", async (req, res, next) => {
       [home, introduction, userid]
     );
     console.log("성공");
-    res.write('<script>window.location="/profile"</script>');
+    res.write(`<script>window.location="/profile/${userid}"</script>`);
     res.end();
   } catch (err) {
     console.error(err);

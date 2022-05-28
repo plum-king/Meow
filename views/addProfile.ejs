@@ -1,85 +1,73 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title><%= title %></title>
-  </head>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+        <%- include('./partials/head') %>
+        <style>
+          header {font-size: 32px; text-align: center;}
+          .top { height: 160px; margin: 10px 30px 10px 30px;}  
+          .profile {width: 160px; height: 160px; float: left; border: 1.5px solid; border-radius: 1em; text-align: center; line-height: 160px;}
+          .info {width: 420px; height: 130px; float: left; border: 1.5px solid; border-radius: 2em; margin: 15px 0 15px 30px; padding: 15px 0 0 15px;}
+          .question {width: 280px; height: 160px; float: left; border: 1.5px solid; border-radius: 2em; margin-left: 30px; text-align: center;}
+          .answer {width: 280px; height: 160px; float: left; border: 1.5px solid; border-radius: 2em; text-align: center;}
+          .intro {border: 1px solid; border-radius: 10px; margin: 0px 30px 0px 30px; padding: 5px 5px 5px 5px;}
+          .bottom {margin: 10px 30px 10px 30px;}
+          .post {width: 28%; height: 200px; float: left; margin-right: 3%; border: 1.5px solid; border-radius: 1em;}
+          .subscribe {width: 28%; height: 200px; float: left; margin-right: 3%; border: 1.5px solid; border-radius: 1em;}
+          .scrap {width: 28%; height: 200px; float: left; margin-right: 1%; border: 1.5px solid; border-radius: 1em;}
+      </style>
+    </head>
 
-  <body>
-    <form
-      action="/addProfile"
-      method="post"
-      className="inputField"
-      id="searchForm"
-    >
-      <div
-        style="
-          width: 250px;
-          height: 150px;
-          border: 1px solid;
-          border-radius: 2em;
-          display: table-cell;
-          vertical-align: middle;
-          padding-left: 10px;
-        "
-      >
-        <span id="user_id">아이디 : <%=row.user_id%></span>
-        <br />
-        <span id="age">연령대 : <%=row.age%></span>
-        <br />
-        <span id="gender">성별 : <%=row.gender%></span>
-        <br />
-        <span id="job">직업 : <%=row.job%></span>
-        <br />
-        <span id="home_input"
-          >거주지 :
-          <input
-            type="text"
-            name="home"
-            id="home"
-            placeholder="거주지(시) 입력"
-          />
-        </span>
-      </div>
-      <br />
-      <p id="intro_input" style="border: 1px solid">
-        자기소개 :
-        <input
-          type="text"
-          name="introduction"
-          id="introduction"
-          placeholder="소개 입력"
-        />
-      </p>
-      <br />
-      <span style="width: 25%; display: inline-block; text-align: right"
-        >My 게시물</span
-      >
-      <span style="width: 25%; display: inline-block; text-align: right"
-        >구독 유저</span
-      >
-      <span style="width: 25%; display: inline-block; text-align: right"
-        >스크랩 게시물</span
-      >
-      <br /><br />
-      <button type="submit" id="addProfile">완료</button>
-      <button type="reset">초기화</button>
-    </form>
+    <body>
+      <%- include('./partials/navProfile') %>
+      <header><a href="/">Meow</a></header>
+      <form action="/addProfile" method="post" className="inputField" id="searchForm">
+        <div class="top">
+          <div class="profile">프로필</div>
+          <div class="info">
+            <span id="user_id">아이디 : <%=row.user_id%></span><br>
+            <span id="age">연령대 : <%=row.age%></span><br>
+            <span id="gender">성별 : <%=row.gender%></span><br>
+            <span id="job">직업 : <%=row.job%></span><br>
+            <span id="home_input">거주지 :
+              <input type="text" name="home" id="home" placeholder="거주지(시) 입력"> 
+            </span>
+          </div>
+          <div class="question">&lt;질문내용&gt;</div>
+          <div class="answer">&lt;답변내용&gt;</div>
+        </div>
+        <br>
+        <p class="intro" id="intro_input">자기소개 :
+            <input type="text" name="introduction" id="introduction" placeholder="소개 입력">
+        </p>
+        <br>
+        <div class="bottom">
+          <div class="post">My 게시물</div>
+          <div class="subscribe">구독 유저</div>
+          <div class="scrap">스크랩 게시물</div>
+        </div>
+        <button type="submit" id="addProfile">완료</button>
+        <button type="reset">초기화</button>
+      </form>
 
-    <script>
-      // input없이 submit했을 때 오류 창
-      let sf = document.getElementById("searchForm");
-      sf.addEventListener("submit", function (e) {
-        let homeEle = document.getElementById("home");
-        let introEle = document.getElementById("introduction");
-        if (homeEle.value.length == 0 && introEle.value.length == 0) {
-          alert("Please fill out the form!");
-          e.preventDefault();
-        }
-      });
-    </script>
-
-    <a href="/profile">뒤로가기</a>
-  </body>
+      <script>
+        // input없이 submit했을 때 오류 창
+        let sf=document.getElementById("searchForm");
+        sf.addEventListener("submit", function(e) {
+            let homeEle = document.getElementById("home");
+            let introEle = document.getElementById("introduction");
+            if(homeEle.value.length==0 && introEle.value.length==0) {
+                alert('Please fill out the form!');
+                e.preventDefault();
+            }
+        });
+      </script>
+      <br>
+      <a href="/profile">뒤로가기</a>
+    </body>
 </html>
+
+
+

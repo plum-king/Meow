@@ -15,6 +15,7 @@ const signup = require("./routes/signup");
 const profile = require("./routes/profile");
 const addProfile = require("./routes/addProfile");
 const editProfile = require("./routes/editProfile");
+const allProfile = require("./routes/allProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
 
@@ -24,6 +25,7 @@ const showBoard = require("./controllers/showBoardController");
 const writeQnA = require('./controllers/qnaController');
 
 const addTag = require("./routes/tag");
+const addBoard = require("./routes/addBoard");
 
 
 app.set("view engine", "ejs");
@@ -65,16 +67,15 @@ app.post("/edit", editUser.updateEdit);
 
 app.get("/withdraw", deleteUser.showDelete);
 app.post("/withdraw", deleteUser.updateDelete);
-
+app.get("/profile/:userid", profile);
 app.post("/qna/Q", writeQnA.updateQuestion);
 app.post("/qna/A", writeQnA.updateAnswer);
 app.post("/qna/delete", writeQnA.deleteQuestion);
-
-app.get("/profile", profile);
 app.get("/addProfile", addProfile);
 app.post("/addProfile", addProfile);
 app.get("/editProfile", editProfile);
 app.post("/editProfile", editProfile);
+app.get("/allProfile", allProfile);
 
 app.get("/MyBoardList", showBoard.showMyBoardList);
 app.get("/MyBoard/:post_num", showBoard.showMyBoard);

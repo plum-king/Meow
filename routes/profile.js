@@ -3,17 +3,24 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db.js");
 
-router.get("/profile", async (req, res, next) => {
-  const userid = req.session.user["userid"];
+router.get("/profile/:userid", async (req, res, next) => {
+  const nickname = req.session.user["nickname"];
+  const myid = req.session.user["userid"];
+  const userid = req.params.userid;
+
+  let isUser;
+  if (userid==myid) isUser = true;
+  else isUser = false;
+
   try {
     const data = await pool.query(
       "SELECT user_id, age, gender, job, home, introduction FROM User WHERE user_id = ?",
       [userid]
     );
     console.log(data[0][0]);
-    res.render("profile", {title: "프로필", row: data[0][0]});
+    res.render("profile", {title: "프로필", user: isUser, nickname: nickname, row: data[0][0]});
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 });
 

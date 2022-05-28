@@ -36,7 +36,7 @@ exports.updateEdit = async (req, res, next) => {
     res.write(
       `<script type="text/javascript">alert('Wrong password! Please rewrite the form')</script>`
     );
-    res.write('<script>window.location="/edit/:userid"</script>');
+    res.write('<script>window.location="/edit"</script>');
   } else {
     if (new_pwd == "") {
       password = password;
