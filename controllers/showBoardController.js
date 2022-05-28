@@ -112,17 +112,7 @@ exports.showMyBoard = async (req, res) => {
     title2: "Q&A",
     nickname: nickName[0][0].nickname,
     post_num: post_num,
-    r_photo: result[0][0].receipt_photo,
-    p_photo: result[0][0].place_photo,
-    satisfy: result[0][0].place_satisfy,
-    placeName: result[0][0].place_name,
-    placeLoc: result[0][0].place_loc,
-    tagCont: result[0][0].tag_cont,
-    shortRCont1: result[0][0].review_cont1,
-    shortRCont2: result[0][0].review_cont2,
-    shortRCont3: result[0][0].review_cont3,
-    menu_name: result[0][0].menu_name,
-    price: result[0][0].price,
+    result: result[0][0],
     shortRSPct1: pct1.toFixed(1),
     shortRSPct2: pct2.toFixed(1),
     shortRSPct3: pct3.toFixed(1),
@@ -174,7 +164,10 @@ exports.showOtherBoardList = async (req, res) => {
 };
 
 exports.showOtherBoard = async (req, res, next) => {
-  const userid = req.session.user["userid"];
+  // try {
+  let userid = req.session.user["userid"];
+  // console.log(req.session.user["userid"]);
+
   //const post_userid = req.body.post_userid;
   const post_num = req.params.post_num;
   // console.log(userid, post_num);
@@ -242,6 +235,13 @@ WHERE sr.post_num = ?`,
     [post_num]
   );
   if (post_userid == userid) {
+    //login 전 화면에서 session 접근 시 undefined 오류
+
+    const mynickName = await connection.query(
+      `SELECT nickname FROM user WHERE user_id = ?`,
+      [userid]
+    );
+
     var numList = [];
     var contList = [];
     var ansList = [];
@@ -259,17 +259,7 @@ WHERE sr.post_num = ?`,
       title2: "Q&A",
       nickname: mynickName[0][0].nickname,
       post_num: post_num,
-      r_photo: result[0][0].receipt_photo,
-      p_photo: result[0][0].place_photo,
-      satisfy: result[0][0].place_satisfy,
-      placeName: result[0][0].place_name,
-      placeLoc: result[0][0].place_loc,
-      tagCont: result[0][0].tag_cont,
-      shortRCont1: result[0][0].review_cont1,
-      shortRCont2: result[0][0].review_cont2,
-      shortRCont3: result[0][0].review_cont3,
-      menu_name: result[0][0].menu_name,
-      price: result[0][0].price,
+      result: result[0][0],
       shortRSPct1: pct1.toFixed(1),
       shortRSPct2: pct2.toFixed(1),
       shortRSPct3: pct3.toFixed(1),
@@ -289,7 +279,7 @@ WHERE sr.post_num = ?`,
     var userList = [];
 
     for (var data of result3[0]) {
-      if (data.user_id == userid) {
+      if (data.user_id == req.session.user["userid"]) {
         mynumList.push(data.qna_num);
         mycontList.push(data.qna_cont);
         myansList.push(data.qna_ans);
@@ -306,18 +296,7 @@ WHERE sr.post_num = ?`,
       title2: "Q&A",
       nickname: mynickName[0][0].nickname,
       post_num: post_num,
-      r_photo: result[0][0].receipt_photo,
-      p_photo: result[0][0].place_photo,
-      satisfy: result[0][0].place_satisfy,
-      placeName: result[0][0].place_name,
-      placeLoc: result[0][0].place_loc,
-      tagCont: result[0][0].tag_cont,
-      shortRCont1: result[0][0].review_cont1,
-      shortRCont2: result[0][0].review_cont2,
-      shortRCont3: result[0][0].review_cont3,
-      reviewNum: result[0][0].review_num,
-      menu_name: result[0][0].menu_name,
-      price: result[0][0].price,
+      result: result[0][0],
       shortRSPct1: pct1.toFixed(1),
       shortRSPct2: pct2.toFixed(1),
       shortRSPct3: pct3.toFixed(1),
@@ -333,8 +312,11 @@ WHERE sr.post_num = ?`,
     });
   }
   connection.release();
-  //next()
 };
+//next()
+// } catch (err) {
+//   console.error(err);
+// }
 
 exports.addSatisfaction = async (req, res) => {
   const user_id = req.session.user["userid"];

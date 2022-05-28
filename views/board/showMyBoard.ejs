@@ -14,35 +14,35 @@
         <div class="main">
             <span id="nickName"><%=nickname%> 님</span><br><br>
         <div class="lefttop">
-            <span id="place"><%=placeName%> / <%=placeLoc%></span>
+            <span id="place"><%=result.place_name%> / <%=result.place_loc%></span>
             <div class="leftbottom">
                 <br><br>
-                <span id="photo"><img src="<%= r_photo%> " width="200" height = "200"/> 
-                <img src="<%= p_photo%> " width="200" height = "200"/></span>
+                <span id="photo"><img src="<%= result.receipt_photo%> " width="200" height = "200"/> 
+                <img src="<%= result.place_photo%> " width="200" height = "200"/></span>
                 <br><br>
-                <span id="tagCont">#<%=tagCont%></span>
+                <span id="tagCont">#<%=result.tag_cont%></span>
                 <br><br>
             </div>
             <div class="lefttop">
-            <span id="menu"><%=menu_name%> : <%=price%>원</span>
+            <span id="menu"><%=result.menu_name%> : <%=result.price%>원</span>
             </div>
         </div>
         <div class="righttop">
-            <span id="shortRCont1"></span>장소 만족도 <progress value="<%=satisfy%>" max="100"></progress> <%=satisfy%></span>
+            <span id="shortRCont1"></span>장소 만족도 <progress value="<%=result.place_satisfy%>" max="100"></progress> <%=result.place_satisfy%></span>
             <br><br><br><br>
             #1<br>
-            <span id="shortRCont1"><%=shortRCont1%></span><br>
+            <span id="shortRCont1"><%=result.short_cont1%></span><br>
             <span id="shortRSPct1"><progress value="<%=shortRSPct1%>" max="100"></progress>  <%=shortRSPct1%></span>
             <br><br>
-            <% if (shortRCont2 != '') { %>
+            <% if (result.short_cont2 != '') { %>
             #2<br>
-            <span id="shortRCont2"><%=shortRCont2%></span><br>
+            <span id="shortRCont2"><%=result.short_cont2%></span><br>
             <span id="shortRSPct2"><progress value="<%=shortRSPct2%>" max="100"></progress>  <%=shortRSPct2%></span>
             <% } %>
             <br><br>
-            <% if (shortRCont3 != '') { %>
+            <% if (result.short_cont3 != '') { %>
             #3<br>
-            <span id="shortRCont3"><%=shortRCont3%></span><br>
+            <span id="shortRCont3"><%=result.short_cont3%></span><br>
             <span id="shortRSPct3"><progress value="<%=shortRSPct3%>" max="100"></progress>  <%=shortRSPct3%></span>
             <% } %>
         </div>
