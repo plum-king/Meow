@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link href="/css/Board.css" rel="stylesheet"/>
+        <title><%= title %></title>
+        <%- include('./partials/head') %>
+    </head>
+    <body>
+        <%- include('./partials/nav') %>
+        <h1>MEOW</h1>
+        <div class="main">
+            <span id="nickName"><%=nickname%> 님</span><br><br>
+        <div class="lefttop">
+            <span id="place"><%=placeName%> / <%=placeLoc%></span>
+            <div class="leftbottom">
+                <br><br>
+                <span id="photo"><img src="<%= r_photo%> " width="200" height = "200"/> 
+                <img src="<%= p_photo%> " width="200" height = "200"/></span>
+                <br><br>
+                <span id="tagCont">#<%=tagCont%></span>
+                <br><br>
+            </div>
+            <div class="lefttop">
+            <span id="menu"><%=menu_name%> : <%=price%>원</span>
+            </div>
+        </div>
+        <div class="righttop">
+            <span id="shortRCont1"></span>장소 만족도 <progress value="<%=satisfy%>" max="100"></progress> <%=satisfy%></span>
+            <br><br><br><br>
+            #1<br>
+            <span id="shortRCont1"><%=shortRCont1%></span><br>
+            <span id="shortRSPct1"><progress value="<%=shortRSPct1%>" max="100"></progress>  <%=shortRSPct1%></span>
+            <br><br>
+            <% if (shortRCont2 != '') { %>
+            #2<br>
+            <span id="shortRCont2"><%=shortRCont2%></span><br>
+            <span id="shortRSPct2"><progress value="<%=shortRSPct2%>" max="100"></progress>  <%=shortRSPct2%></span>
+            <% } %>
+            <br><br>
+            <% if (shortRCont3 != '') { %>
+            #3<br>
+            <span id="shortRCont3"><%=shortRCont3%></span><br>
+            <span id="shortRSPct3"><progress value="<%=shortRSPct3%>" max="100"></progress>  <%=shortRSPct3%></span>
+            <% } %>
+        </div>
+        <br><br><br>
+        </div>
+        <h1><%= title2 %></h1>
+            <div class="qna">
+                <% for(var i = 0; i<qna_cont.length; i++) { %>
+                <form action = "/qna/A" method = "post">
+                    <input type="hidden" name="post_num"  value="<%=post_num%>">
+                    <input type="hidden" name="qna_num" value="<%=qna_num[i]%>">
+                    <span id="qna_user">ID : <%=users_id[i]%></span>
+                    <br>
+                    <span id="qna_cont">Q: <%=qna_cont[i]%></span>
+                    <br>
+                    <tr height="100">
+                        A: <input type="text" name="qna_ans" maxlength=30 value="<%=qna_ans[i]%>">                     
+                    </tr>
+                    <br>
+                    <input type="submit" value="저장">
+                    <input type="submit" value="수정">
+                    <br><br>
+                </form>
+                <% } %>
+            </div>
+        <a href="/">뒤로가기</a>
+    </body>
+</html>
+

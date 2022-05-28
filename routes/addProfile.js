@@ -23,6 +23,7 @@ router.post("/addProfile", async (req, res, next) => {
   const home = post.home;
   const introduction = post.introduction;
   const userid = req.session.user["userid"];
+
   try {
     const data = await pool.query(
       "UPDATE user SET home=?, introduction=? WHERE user_id=?",
