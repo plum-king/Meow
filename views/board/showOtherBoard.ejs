@@ -13,44 +13,59 @@
         <div class="main">
             <span id="post_user_nickName"><%=pu_nickname%> 님</span><br><br>
         <div class="lefttop">
-            <span id="place"><%=placeName%> / <%=placeLoc%></span>
+            <span id="place"><%=result.place_name%> / <%=result.place_loc%></span>
             <div class="leftbottom">
                 <br><br>
-                <span id="photo"><img src="<%= r_photo%> " width="200" height = "200"/> 
-                <img src="<%= p_photo%> " width="200" height = "200"/></span>
+                <span id="photo"><img src="<%= result.receipt_photo%> " width="200" height = "200"/> 
+                <img src="<%= result.place_photo%> " width="200" height = "200"/></span>
                 <br><br>
-                <span id="tagCont">#<%=tagCont%></span>
+                <span id="tagCont">#<%=result.tag_cont%></span>
                 <br><br>
             </div>
             <div class="lefttop">
-            <span id="menu"><%=menu_name%> : <%=price%>원</span>
+            <span id="menu"><%=result.menu_name%> : <%=result.price%>원</span>
             </div>
         </div>
         <div class="righttop">
-            <span id="shortRCont1"></span>장소 만족도 <progress value="<%=satisfy%>" max="100"></progress> <%=satisfy%></span>
-            <br><br><br><br>
+            <span id="shortRCont1"></span>장소 만족도 <progress value="<%=result.place_satisfy%>" max="100"></progress> <%=result.place_satisfy%></span>
+            <br><br><br>
             <form action = "/satisfaction" method = "post">
-                <input type="hidden" name="review_num"  value="<%=reviewNum%>">
+                <input type="hidden" name="review_num"  value="<%=result.review_num%>">
                 <input type="hidden" name="post_num"  value="<%=post_num%>">
                 #1<br>
-                <span id="shortRCont1"><%=shortRCont1%></span><br>
-                <span id="shortRSPct1"><progress value="<%=shortRSPct1%>" max="100"></progress>  <%=shortRSPct1%></span><br>
-                <input type="text" name="mys_pct1" size="10"  maxlength="10">
-                <br><br>
-                <% if (shortRCont2 != '') { %>
-                #2<br>
-                <span id="shortRCont2"><%=shortRCont2%></span><br>
-                <span id="shortRSPct2"><progress value="<%=shortRSPct2%>" max="100"></progress>  <%=shortRSPct2%></span><br>
-                <input type="text" name="mys_pct2" size="10"  maxlength="10">
-                <br><br>
-                <% } %>
-                <% if (shortRCont3 != '') { %>
-                #3<br>
-                <span id="shortRCont3"><%=shortRCont3%></span><br>
-                <span id="shortRSPct3"><progress value="<%=shortRSPct3%>" max="100"></progress>  <%=shortRSPct3%></span><br>
-                <input type="text" name="mys_pct3" size="10"  maxlength="10"> 
-                <% } %>
+                <span id="shortRCont1"><%=result.review_cont1%></span><br>
+                <% if (shortRSPct1 > 0) { %>
+                    <span id="shortRSPct1"><progress value="<%=shortRSPct1%>" max="100"></progress>  <%=shortRSPct1%></span>
+                <% } else {%>
+                        <span id="shortRSPct1"><progress value="<%=shortRSPct1%>" max="100"></progress> 0</span>
+                    <% } %>
+                <br><input type="text" name="mys_pct1" size="10"  maxlength="15" placeholder="입력 예시) 80">
                 <input type="submit" value="저장">
+                <br><br>
+                <% if (result.review_cont != '') { %>
+                #2<br>
+                <span id="shortRCont2"><%=result.review_cont2%></span><br>
+                <% if (shortRSPct2 > 0) { %>
+                    <span id="shortRSPct2"><progress value="<%=shortRSPct2%>" max="100"></progress>  <%=shortRSPct2%></span>
+                <% } else {%>
+                        <span id="shortRSPct2"><progress value="<%=shortRSPct2%>" max="100"></progress> 0</span>
+                    <% } %>
+                <br><input type="text" name="mys_pct2" size="10"  maxlength="15" placeholder="입력 예시) 80">
+                <input type="submit" value="저장">
+                <% } %>
+                <br><br>
+                <% if (result.review_cont3 != '') { %>
+                #3<br>
+                <span id="shortRCont3"><%=result.review_cont3%></span><br>
+                <% if (shortRSPct3 > 0) { %>
+                    <span id="shortRSPct3"><progress value="<%shortRSPct3%>" max="100"></progress> <%=shortRSPct3%></span>
+               <% } else {%>
+                       <span id="shortRSPct3"><progress value="<%=shortRSPct3%>" max="100"></progress> 0</span>
+                   <% } %>
+                <br><input type="text" name="mys_pct3" size="10"  maxlength="15" placeholder="입력 예시) 80"> 
+                <input type="submit" value="저장">
+                <% } %>
+                
             </form>
         </div>
         </div>
@@ -58,11 +73,11 @@
         <h1><%= title2 %></h1>
         <form action = "/qna/Q" method = "post">
             <div class="writeqna">
-                <input type="hidden" name="user_id"  value="<%=user_id%>">
+                <input type="hidden" name="user_id"  value="<%=userid%>">
                 <tr>
                 <td>
                     <input type="hidden" name="post_num"  value="<%=post_num%>">
-                    <span id="qna_user">ID : <%=user_id%></span><br>
+                    <span id="qna_user">ID : <%=userid%></span><br>
                 </td>
                 </tr>
                 <tr>
@@ -81,12 +96,12 @@
         <br><br>
         </form>
             <div class="qna">
-                <input type="hidden" name="user_id"  value="<%=user_id%>">
+                <input type="hidden" name="user_id"  value="<%=userid%>">
                 <% for(var i = 0; i<myqna_cont.length; i++) { %>
                     <form action = "/qna/delete" method = "post">
                         <input type="hidden" name="post_num"  value="<%=post_num%>">
                         <input type="hidden" name="qna_num" value="<%=myqna_num[i]%>">
-                        <span id="myqna_user">ID: <%=user_id%></span>
+                        <span id="myqna_user">ID: <%=userid%></span>
                         <br>
                         <span id="myqna_cont">Q: <%=myqna_cont[i]%></span>
                         <br>

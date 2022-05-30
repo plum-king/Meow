@@ -48,8 +48,8 @@ exports.showMyBoard = async (req, res) => {
     `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
   JOIN place as pl ON po.place_num = pl.place_num 
   JOIN tag as t ON po.tag_num = t.tag_num 
-  JOIN menu as m ON pl.place_num = m.place_num
-  WHERE po.post_num = ?`,
+  JOIN menu as m ON pl.place_num = m.place_num and po.menu_name = m.menu_name
+  WHERE po.post_num = ? `,
     [post_num]
   );
 
@@ -112,17 +112,7 @@ exports.showMyBoard = async (req, res) => {
     title2: "Q&A",
     nickname: nickName[0][0].nickname,
     post_num: post_num,
-    r_photo: result[0][0].receipt_photo,
-    p_photo: result[0][0].place_photo,
-    satisfy: result[0][0].place_satisfy,
-    placeName: result[0][0].place_name,
-    placeLoc: result[0][0].place_loc,
-    tagCont: result[0][0].tag_cont,
-    shortRCont1: result[0][0].review_cont1,
-    shortRCont2: result[0][0].review_cont2,
-    shortRCont3: result[0][0].review_cont3,
-    menu_name: result[0][0].menu_name,
-    price: result[0][0].price,
+    result : result[0][0],
     shortRSPct1: pct1.toFixed(1),
     shortRSPct2: pct2.toFixed(1),
     shortRSPct3: pct3.toFixed(1),
@@ -175,9 +165,7 @@ exports.showOtherBoardList = async (req, res) => {
 
 exports.showOtherBoard = async (req, res, next) => {
   const userid = req.session.user["userid"];
-  //const post_userid = req.body.post_userid;
   const post_num = req.params.post_num;
-  console.log(userid, post_num);
 
   const connection = await pool.getConnection(async (conn) => conn);
 
@@ -185,7 +173,7 @@ exports.showOtherBoard = async (req, res, next) => {
     `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
 JOIN place as pl ON po.place_num = pl.place_num 
 JOIN tag as t ON po.tag_num = t.tag_num 
-JOIN menu as m ON pl.place_num = m.place_num
+JOIN menu as m ON pl.place_num = m.place_num and po.menu_name = m.menu_name
 WHERE po.post_num = ?`,
     [post_num]
   );
@@ -259,17 +247,7 @@ WHERE sr.post_num = ?`,
       title2: "Q&A",
       nickname: mynickName[0][0].nickname,
       post_num: post_num,
-      r_photo: result[0][0].receipt_photo,
-      p_photo: result[0][0].place_photo,
-      satisfy: result[0][0].place_satisfy,
-      placeName: result[0][0].place_name,
-      placeLoc: result[0][0].place_loc,
-      tagCont: result[0][0].tag_cont,
-      shortRCont1: result[0][0].review_cont1,
-      shortRCont2: result[0][0].review_cont2,
-      shortRCont3: result[0][0].review_cont3,
-      menu_name: result[0][0].menu_name,
-      price: result[0][0].price,
+      result : result[0][0],
       shortRSPct1: pct1.toFixed(1),
       shortRSPct2: pct2.toFixed(1),
       shortRSPct3: pct3.toFixed(1),
@@ -306,18 +284,7 @@ WHERE sr.post_num = ?`,
       title2: "Q&A",
       nickname: mynickName[0][0].nickname,
       post_num: post_num,
-      r_photo: result[0][0].receipt_photo,
-      p_photo: result[0][0].place_photo,
-      satisfy: result[0][0].place_satisfy,
-      placeName: result[0][0].place_name,
-      placeLoc: result[0][0].place_loc,
-      tagCont: result[0][0].tag_cont,
-      shortRCont1: result[0][0].review_cont1,
-      shortRCont2: result[0][0].review_cont2,
-      shortRCont3: result[0][0].review_cont3,
-      reviewNum: result[0][0].review_num,
-      menu_name: result[0][0].menu_name,
-      price: result[0][0].price,
+      result: result[0][0],
       shortRSPct1: pct1.toFixed(1),
       shortRSPct2: pct2.toFixed(1),
       shortRSPct3: pct3.toFixed(1),
@@ -333,35 +300,74 @@ WHERE sr.post_num = ?`,
     });
   }
   connection.release();
-  //next()
 };
 
 exports.addSatisfaction = async (req, res) => {
   const user_id = req.session.user["userid"];
   const review_num = req.body.review_num;
   const post_num = req.body.post_num;
-  const mys_pct1 = req.body.mys_pct1;
-  const mys_pct2 = req.body.mys_pct2;
-  const mys_pct3 = req.body.mys_pct3;
-
+  var pct = [];
+  pct.push(req.body.mys_pct1)
+  pct.push(req.body.mys_pct2)
+  pct.push(req.body.mys_pct3)
+  
   const connection = await pool.getConnection(async (conn) => conn);
-  const checkUsers = await connection.query(
-    `SELECT user_id FROM satisfy WHERE post_num = ? and review_num = ? and user_id = ?`,
+  const check = await connection.query(
+    `SELECT s_num, user_id, s_pct1, s_pct2, s_pct3 FROM satisfy WHERE post_num = ? and review_num = ? and user_id = ?`,
     [post_num, review_num, user_id]
   );
+  get_pct = [];
+  get_pct.push(check[0][0].s_pct1);
+  get_pct.push(check[0][0].s_pct2);
+  get_pct.push(check[0][0].s_pct3);
 
-  console.log(checkUsers[0]);
-
-  if (checkUsers[0].length > 0) {
-    res.write(
-      `<script type="text/javascript">alert('Already add satisfaction!')</script>`
-    );
-    res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+  if (check[0].length > 0) {
+    for(var i = 0; i < 3; i++){
+      if(pct[i] > 0){
+        if(get_pct[i] <= 0){
+          if(i == 0){
+          var change = await connection.query(
+            `UPDATE satisfy SET s_pct1 = ? where s_num = ?`,
+            [pct[0], check[0][0].s_num]
+          );
+          }
+          else if(i == 1){
+          var change =  await connection.query(
+              `UPDATE satisfy SET s_pct2 = ? where s_num = ?`,
+              [pct[1], check[0][0].s_num]
+            );
+          }
+          else {
+          var change = await connection.query(
+              `UPDATE satisfy SET s_pct3 = ? where s_num = ?`,
+              [pct[2], check[0][0].s_num]
+            );
+          }
+          if (change[0].affectedRows == 1) {
+            res.write(
+              `<script type="text/javascript">alert('Complete to add satisfaction!')</script>`
+            );
+            res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+          }
+        } 
+        else {
+          res.write(
+            `<script type="text/javascript">alert('Already add satisfaction!')</script>`
+          );
+          res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+          }
+      }
+    }
   } else {
+    for(var i = 0; i < 3; i++){
+      if(pct[i] == ''){
+        pct[i] = null;
+      }
+    }
     const result = await connection.query(
       `INSERT INTO satisfy(s_pct1, s_pct2, s_pct3, user_id, post_num, review_num)
       VALUES(?, ?, ?, ?, ?, ?)`,
-      [mys_pct1, mys_pct2, mys_pct3, user_id, post_num, review_num]
+      [pct[0],pct[1], pct[2], user_id, post_num, review_num]
     );
 
     if (result[0].affectedRows == 1) {
