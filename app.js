@@ -27,6 +27,7 @@ const writeQnA = require("./controllers/qnaController");
 const addTag = require("./routes/tag");
 
 const subscribeRouter = require("./routes/subscribe");
+const scrapRouter = require("./routes/scrap");
 
 app.set("view engine", "ejs");
 
@@ -86,6 +87,7 @@ app.post("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/satisfaction", showBoard.addSatisfaction);
 
 app.post("/subscribe", subscribeRouter);
+app.post("/scrap", scrapRouter);
 
 app.use("/image", express.static("./upload"));
 

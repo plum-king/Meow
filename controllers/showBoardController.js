@@ -278,6 +278,16 @@ WHERE sr.post_num = ?`,
     var ansList = [];
     var userList = [];
 
+    let scrap = await connection.query(
+      "SELECT * FROM Scrap WHERE user_id = ? AND post_num = ?",
+      [userid, post_num]
+    );
+    if (scrap[0][0] == undefined) {
+      scrap = true;
+    } else {
+      scrap = false;
+    }
+
     for (var data of result3[0]) {
       if (data.user_id == req.session.user["userid"]) {
         mynumList.push(data.qna_num);
@@ -309,6 +319,7 @@ WHERE sr.post_num = ?`,
       myqna_cont: mycontList,
       myqna_ans: myansList,
       pu_nickname: post_user_nickName[0][0].nickname,
+      scrap: scrap,
     });
   }
   connection.release();

@@ -82,3 +82,8 @@ div > article {
   margin-left: 10px;
   margin-bottom: 10px;
 }
+
+button.scrap {
+  margin-right: 50px;
+  float: right;
+}
