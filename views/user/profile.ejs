@@ -118,10 +118,10 @@
         <% } %> <% } else { %>
         <form action="/subscribe" method="post">
           <input type="hidden" name="userid" value="<%=row.user_id%>" />
-          <% if (subscribe) { %>
-          <button type="submit" id="subscribeBtn">구독</button>
+          <% if (canSubs) { %>
+          <button type="submit" id="subscribeBtn">구독취소</button>
           <% } else { %>
-          <button type="submit" id="subscribeCancelBtn">구독취소</button>
+          <button type="submit" id="subscribeCancelBtn">구독</button>
           <% } %>
         </form>
         <% } %>
@@ -137,8 +137,16 @@
     </p>
     <br />
     <div class="bottom">
-      <div class="post">My 게시물</div>
-      <div class="subscribe">구독 유저</div>
+      <div class="post"><p>My게시물</p></div>
+      <div class="subscribe">
+        <p>구독한 유저</p>
+        <% if (subscribe[0].user_id2 == null) { %>
+        <p>구독자가 없습니다.</p>
+        <% } else { %> <% subscribe.forEach(sub => { %> <%= sub.user_id2 %>
+        <br /><% }); %> <% } %>
+        <br />
+        <a href="/allProfile">유저 프로필 보러가기</a>
+      </div>
       <div class="scrap">스크랩 게시물</div>
     </div>
     <br />
