@@ -50,6 +50,7 @@ router.post(
     const review_cont1 = post.review_cont1;
     const review_cont2 = post.review_cont2;
     const review_cont3 = post.review_cont3;
+
     const place_photo = `/images/${req.files.place_photo[0].filename}`;
     const receipt_photo = `/images/${req.files.receipt_photo[0].filename}`;
 

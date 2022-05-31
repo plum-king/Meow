@@ -87,7 +87,7 @@ router.post("/editBoard", async (req, res, next) => {
       [resPostId, review_cont1, review_cont2, review_cont3, revID]
     );
 
-    console.log("성공");
+    // console.log("성공");
     res.write('<script>window.location="/"</script>');
     res.end();
   } catch (err) {

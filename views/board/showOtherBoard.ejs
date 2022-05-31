@@ -6,6 +6,9 @@
         <link href="/css/Board.css" rel="stylesheet"/>
         <title><%= title %></title>
         <%- include('../partials/head') %>
+        <script>
+            var divdiv = document.getElementById("qna"); divdiv.scrollTop = divdiv.scrollHeight;
+        </script>
     </head>
     <body>
         <%- include('../partials/nav') %>
@@ -27,43 +30,43 @@
             </div>
         </div>
         <div class="righttop">
-            <span id="shortRCont1"></span>장소 만족도 <progress value="<%=result.place_satisfy%>" max="100"></progress> <%=result.place_satisfy%></span>
+            <span id="shortRCont"></span>장소 만족도 <progress value="<%=result.place_satisfy%>" max="100"></progress> <%=result.place_satisfy%></span>
             <br><br><br>
             <form action = "/satisfaction" method = "post">
                 <input type="hidden" name="review_num"  value="<%=result.review_num%>">
                 <input type="hidden" name="post_num"  value="<%=post_num%>">
                 #1<br>
-                <span id="shortRCont1"><%=result.review_cont1%></span><br>
+                <span id="shortRCont"><%=result.review_cont1%></span><br>
                 <% if (shortRSPct1 > 0) { %>
-                    <span id="shortRSPct1"><progress value="<%=shortRSPct1%>" max="100"></progress>  <%=shortRSPct1%></span>
+                    <span id="shortRSPct"><progress value="<%=shortRSPct1%>" max="100"></progress>  <%=shortRSPct1%></span>
                 <% } else {%>
-                        <span id="shortRSPct1"><progress value="<%=shortRSPct1%>" max="100"></progress> 0</span>
+                        <span id="shortRSPct"><progress value="<%=shortRSPct1%>" max="100"></progress> 0</span>
                     <% } %>
                 <br><input type="text" name="mys_pct1" size="10"  maxlength="15" placeholder="입력 예시) 80">
-                <input type="submit" value="저장">
+                <input type="submit" id="button" value="저장">
                 <br><br>
                 <% if (result.review_cont != '') { %>
                 #2<br>
-                <span id="shortRCont2"><%=result.review_cont2%></span><br>
+                <span id="shortRCont"><%=result.review_cont2%></span><br>
                 <% if (shortRSPct2 > 0) { %>
-                    <span id="shortRSPct2"><progress value="<%=shortRSPct2%>" max="100"></progress>  <%=shortRSPct2%></span>
+                    <span id="shortRSPct"><progress value="<%=shortRSPct2%>" max="100"></progress>  <%=shortRSPct2%></span>
                 <% } else {%>
-                        <span id="shortRSPct2"><progress value="<%=shortRSPct2%>" max="100"></progress> 0</span>
+                        <span id="shortRSPct"><progress value="<%=shortRSPct2%>" max="100"></progress> 0</span>
                     <% } %>
                 <br><input type="text" name="mys_pct2" size="10"  maxlength="15" placeholder="입력 예시) 80">
-                <input type="submit" value="저장">
+                <input type="submit" id="button" value="저장">
                 <% } %>
                 <br><br>
                 <% if (result.review_cont3 != '') { %>
                 #3<br>
-                <span id="shortRCont3"><%=result.review_cont3%></span><br>
+                <span id="shortRCont"><%=result.review_cont3%></span><br>
                 <% if (shortRSPct3 > 0) { %>
-                    <span id="shortRSPct3"><progress value="<%shortRSPct3%>" max="100"></progress> <%=shortRSPct3%></span>
+                    <span id="shortRSPct"><progress value="<%shortRSPct3%>" max="100"></progress> <%=shortRSPct3%></span>
                <% } else {%>
-                       <span id="shortRSPct3"><progress value="<%=shortRSPct3%>" max="100"></progress> 0</span>
+                       <span id="shortRSPct"><progress value="<%=shortRSPct3%>" max="100"></progress> 0</span>
                    <% } %>
                 <br><input type="text" name="mys_pct3" size="10"  maxlength="15" placeholder="입력 예시) 80"> 
-                <input type="submit" value="저장">
+                <input type="submit" id="button" value="저장">
                 <% } %>
                 
             </form>
@@ -87,8 +90,8 @@
                 </tr>
                 <tr>
                 <td>
-                    <input type="submit" value="저장">
-                    <input type="reset" value="취소">
+                    <input type="submit" id="button" value="저장">
+                    <input type="reset" id="button" value="취소">
                 </td>
                 </tr>
             </div>
@@ -107,7 +110,7 @@
                         <br>
                         <span id="myqna_ans">A: <%=myqna_ans[i]%></span>
                         <br>
-                        <input type="submit" value="삭제">
+                        <input type="submit" id="button" value="삭제">
                         <br><br>
                      </form>
                 <% } %>

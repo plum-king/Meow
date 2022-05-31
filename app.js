@@ -3,8 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const ejs = require("ejs");
-const multer = require('multer');
-const upload = multer({dest: './upload'});
+const multer = require("multer");
+const upload = multer({dest: "./upload"});
 
 const port = 3000;
 const main = require("./routes/main");
@@ -22,9 +22,11 @@ const deleteUser = require("./controllers/deleteController");
 const addBoard = require("./routes/addBoard");
 const editBoard = require("./controllers/editBoard");
 const showBoard = require("./controllers/showBoardController");
-const writeQnA = require('./controllers/qnaController');
+const writeQnA = require("./controllers/qnaController");
 
 const addTag = require("./routes/tag");
+
+const subscribeRouter = require("./routes/subscribe");
 
 app.set("view engine", "ejs");
 
@@ -83,7 +85,9 @@ app.get("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/satisfaction", showBoard.addSatisfaction);
 
-app.use('/image', express.static('./upload'));
+app.post("/subscribe", subscribeRouter);
+
+app.use("/image", express.static("./upload"));
 
 app.listen(port);
 console.log(`app is listening port ${port}`);

@@ -11,7 +11,7 @@ router.get("/addProfile", async (req, res, next) => {
       "SELECT user_id, age, gender, job, home, introduction FROM User WHERE user_id = ?",
       [userid]
     );
-    console.log(data[0][0]);
+    // console.log(data[0][0]);
     res.render("user/addProfile", {
       title: "프로필 추가",
       nickname: nickname,
@@ -33,7 +33,7 @@ router.post("/addProfile", async (req, res, next) => {
       "UPDATE user SET home=?, introduction=? WHERE user_id=?",
       [home, introduction, userid]
     );
-    console.log("성공");
+    // console.log("성공");
     res.write(`<script>window.location="/profile/${userid}"</script>`);
     res.end();
   } catch (err) {
