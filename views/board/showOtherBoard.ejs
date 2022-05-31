@@ -13,6 +13,7 @@
     <body>
         <%- include('../partials/nav') %>
         <h1>MEOW</h1>
+        <h4><a href="/otherBoardList" id="otherBList">다른 게시글 보기</a></h4>
         <div class="main">
             <span id="post_user_nickName"><%=pu_nickname%> 님</span><br><br>
         <div class="lefttop">
@@ -32,6 +33,7 @@
         <div class="righttop">
             <span id="shortRCont"></span>장소 만족도 <progress value="<%=result.place_satisfy%>" max="100"></progress> <%=result.place_satisfy%></span>
             <br><br><br>
+
             <form action = "/satisfaction" method = "post">
                 <input type="hidden" name="review_num"  value="<%=result.review_num%>">
                 <input type="hidden" name="post_num"  value="<%=post_num%>">

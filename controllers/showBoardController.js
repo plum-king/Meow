@@ -333,6 +333,7 @@ exports.addSatisfaction = async (req, res) => {
     [post_num, review_num, user_id]
   );
 
+
   var get_pct = []; 
 
   if (check[0].length > 0) {
@@ -376,6 +377,7 @@ exports.addSatisfaction = async (req, res) => {
           }
       }
     }
+
 
   } else {
     for(var i = 0; i < 3; i++){
