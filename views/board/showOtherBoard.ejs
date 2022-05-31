@@ -15,7 +15,16 @@
         <h1>MEOW</h1>
         <h4><a href="/otherBoardList" id="otherBList">다른 게시글 보기</a></h4>
         <div class="main">
-            <span id="post_user_nickName"><%=pu_nickname%> 님</span><br><br>
+            <span id="post_user_nickName"><%=pu_nickname%> 님</span>
+            <form action="/scrap" method="post">
+                <input type="hidden" name="post_num"  value="<%=post_num%>">
+                <% if (scrap) { %>
+                    <button type="submit" class ="scrap" id="scrapBtn">스크랩</button>
+                <% } else { %>
+                    <button type="submit" class ="scrap" id="scrapCancelBtn">스크랩 취소</button>
+                <% } %>
+            </form>
+            <br><br>
         <div class="lefttop">
             <span id="place"><%=result.place_name%> / <%=result.place_loc%></span>
             <div class="leftbottom">
