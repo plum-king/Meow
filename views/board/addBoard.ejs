@@ -9,8 +9,15 @@
 
   <body>
     <div class="addBoard_con">
-      <form action="/addBoard" method="post" enctype="multipart/form-data">
+      <form action="/addBoard" method="post" enctype="multipart/form-data">        
         <p id="placeName_input">Place Name</p>
+        <select name="placename_select" >
+          <option value="0">선택하세요</option>
+          <% let j = 1; placenames.forEach( placename => { %>
+          <option value="<%= placename.place_name %>"><%= placename.place_name %></option>
+          <% j++; %> <% }); %>
+        </select>
+        <br />
         <input
           type="text"
           name="place_name"
@@ -19,15 +26,29 @@
         />
 
         <p id="placeLoc_input">Place Location</p>
+        <select name="placeloc_select" >
+          <option value="0">선택하세요</option>
+          <% let k = 1; placelocs.forEach( placeloc => { %>
+          <option value="<%= placeloc.place_loc %>"><%= placeloc.place_loc %></option>
+          <% k++; %> <% }); %>
+        </select>
+        <br />
         <input
           type="text"
           name="place_loc"
           id="placeLoc"
-          placeholder="맛집 위치"
+          placeholder="맛집 위치 (예)파주시"
         />
         <br />
 
         <p id="menuName_input">Menu Name</p>
+        <select name="menuname_select" >
+          <option value="0">선택하세요</option>
+          <% let l = 1; menus.forEach( menu => { %>
+          <option value="<%= menu.menu_name %>"><%= menu.menu_name %></option>
+          <% l++; %> <% }); %>
+        </select>
+        <br />
         <input
           type="text"
           name="menu_name"
@@ -41,7 +62,7 @@
           type="number"
           name="price"
           id="price"
-          placeholder="대표 메뉴 가격"
+          placeholder="대표 메뉴 가격 (예)4000"
         />
         <br />
 
@@ -99,7 +120,6 @@
           required
           multiple
         />
-        <input type="submit" value="전송" />
         <br />
 
         <p id="receiptPhoto_input">Receipt Photo</p>
@@ -111,8 +131,7 @@
           required
           multiple
         />
-        <input type="submit" value="전송" />
-        <br />
+
         <br />
         <button type="submit" id="boardSubBtn">게시글 등록</button>
       </form>

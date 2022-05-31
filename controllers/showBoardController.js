@@ -48,8 +48,8 @@ exports.showMyBoard = async (req, res) => {
     `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
   JOIN place as pl ON po.place_num = pl.place_num 
   JOIN tag as t ON po.tag_num = t.tag_num 
-  JOIN menu as m ON pl.place_num = m.place_num
-  WHERE po.post_num = ?`,
+  JOIN menu as m ON pl.place_num = m.place_num and po.menu_name = m.menu_name
+  WHERE po.post_num = ? `,
     [post_num]
   );
 
@@ -178,7 +178,7 @@ exports.showOtherBoard = async (req, res, next) => {
     `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
 JOIN place as pl ON po.place_num = pl.place_num 
 JOIN tag as t ON po.tag_num = t.tag_num 
-JOIN menu as m ON pl.place_num = m.place_num
+JOIN menu as m ON pl.place_num = m.place_num and po.menu_name = m.menu_name
 WHERE po.post_num = ?`,
     [post_num]
   );
@@ -322,28 +322,73 @@ exports.addSatisfaction = async (req, res) => {
   const user_id = req.session.user["userid"];
   const review_num = req.body.review_num;
   const post_num = req.body.post_num;
-  const mys_pct1 = req.body.mys_pct1;
-  const mys_pct2 = req.body.mys_pct2;
-  const mys_pct3 = req.body.mys_pct3;
-
+  var pct = [];
+  pct.push(req.body.mys_pct1)
+  pct.push(req.body.mys_pct2)
+  pct.push(req.body.mys_pct3)
+  
   const connection = await pool.getConnection(async (conn) => conn);
-  const checkUsers = await connection.query(
-    `SELECT user_id FROM satisfy WHERE post_num = ? and review_num = ? and user_id = ?`,
+  const check = await connection.query(
+    `SELECT s_num, user_id, s_pct1, s_pct2, s_pct3 FROM satisfy WHERE post_num = ? and review_num = ? and user_id = ?`,
     [post_num, review_num, user_id]
   );
 
-  // console.log(checkUsers[0]);
 
-  if (checkUsers[0].length > 0) {
-    res.write(
-      `<script type="text/javascript">alert('Already add satisfaction!')</script>`
-    );
-    res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+  var get_pct = []; 
+
+  if (check[0].length > 0) {
+    get_pct.push(check[0][0].s_pct1);
+    get_pct.push(check[0][0].s_pct2);
+    get_pct.push(check[0][0].s_pct3);
+
+    for(var i = 0; i < 3; i++){
+      if(pct[i] > 0){
+        if(get_pct[i] <= 0){
+          if(i == 0){
+          var change = await connection.query(
+            `UPDATE satisfy SET s_pct1 = ? where s_num = ?`,
+            [pct[0], check[0][0].s_num]
+          );
+          }
+          else if(i == 1){
+          var change =  await connection.query(
+              `UPDATE satisfy SET s_pct2 = ? where s_num = ?`,
+              [pct[1], check[0][0].s_num]
+            );
+          }
+          else {
+          var change = await connection.query(
+              `UPDATE satisfy SET s_pct3 = ? where s_num = ?`,
+              [pct[2], check[0][0].s_num]
+            );
+          }
+          if (change[0].affectedRows == 1) {
+            res.write(
+              `<script type="text/javascript">alert('Complete to add satisfaction!')</script>`
+            );
+            res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+          }
+        } 
+        else {
+          res.write(
+            `<script type="text/javascript">alert('Already add satisfaction!')</script>`
+          );
+          res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+          }
+      }
+    }
+
+
   } else {
+    for(var i = 0; i < 3; i++){
+      if(pct[i] == ''){
+        pct[i] = null;
+      }
+    }
     const result = await connection.query(
       `INSERT INTO satisfy(s_pct1, s_pct2, s_pct3, user_id, post_num, review_num)
       VALUES(?, ?, ?, ?, ?, ?)`,
-      [mys_pct1, mys_pct2, mys_pct3, user_id, post_num, review_num]
+      [pct[0],pct[1], pct[2], user_id, post_num, review_num]
     );
 
     if (result[0].affectedRows == 1) {
