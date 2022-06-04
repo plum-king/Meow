@@ -22,6 +22,11 @@ router.get("/profile/:userid", async (req, res, next) => {
       [userid]
     );
 
+    const data2 = await pool.query(
+      "SELECT * FROM Qna WHERE user_id = ?",
+      [userid]
+    );
+
     subscribe = await pool.query(`SELECT * FROM subscribe WHERE user_id1 = ?`, [
       userid,
     ]);
@@ -67,6 +72,7 @@ router.get("/profile/:userid", async (req, res, next) => {
       row: data[0][0],
       canSubs: canSubs,
       subscribe: subscribe,
+      qnas : data2
     });
   } catch (err) {
     console.error(err);

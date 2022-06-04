@@ -4,6 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <link href="/css/Board.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <title><%= title %></title>
         <%- include('../partials/head') %>
         <script>
@@ -13,11 +14,18 @@
     <body>
         <%- include('../partials/nav') %>
         <h1>MEOW</h1>
-        <h4><a href="/myBoardList" id="myBList">내 다른 게시글 보기</a></h4>
+        <div class="option">
+            <!--<a href="/" style="display: inline-block"><i class="bi bi-backspace fs-100"></i></a> &nbsp;&nbsp;-->
+            <form action="/MyBoardList" method="get" float="right" style="display: inline-block"> 
+                <input type="hidden" name="post_num" value="<%=post_num%>">
+                     <button type="submit" class ="myBList" id="button"><i class="bi bi-sticky-fill"> </i> 내 다른 게시글 보기</button>
+            </form>
+            <!--<a href="/myBoardList" id="myBList"><i class="bi bi-sticky-fill"> </i> 내 다른 게시글 보기</a>-->
+        </div>
         <div class="main">
             <span id="nickName"><%=nickname%> 님</span><br><br>
         <div class="lefttop">
-            <span id="place"><%=result.place_name%> / <%=result.place_loc%></span>
+            <span id="place"><i class="bi bi-shop-window"></i> <%=result.place_name%> / <%=result.place_loc%></span>
             <div class="leftbottom">
                 <br><br>
                 <span id="photo"><img src="<%= result.receipt_photo%> " width="200" height = "200"/> 
@@ -27,23 +35,23 @@
                 <br><br>
             </div>
             <div class="lefttop">
-            <span id="menu"><%=result.menu_name%> : <%=result.price%>원</span>
+            <span id="menu"><i class="bi bi-hand-thumbs-up"></i> <%=result.menu_name%> : <%=result.price%>원</span>
             </div>
         </div>
         <div class="righttop">
             <span id="shortRCont"></span>장소 만족도 <progress value="<%=result.place_satisfy%>" max="100"></progress> <%=result.place_satisfy%></span>
             <br><br>
             #1<br>
-            <span id="shortRCont"><%=result.review_cont1%></span><br>
+            <span id="shortRCont"><i class="bi bi-chat-left-heart"></i> <%=result.review_cont1%></span><br>
             <% if (shortRSPct1 > 0) { %>
                 <span id="shortRSPct"><progress value="<%=shortRSPct1%>" max="100"></progress>  <%=shortRSPct1%></span>
             <% } else {%>
                     <span id="shortRSPct"><progress value="<%=shortRSPct1%>" max="100"></progress> 0</span>
                 <% } %>
-            <br><br><br>
+            <br><br>
             <% if (result.review_cont2 != '') { %>
             #2<br>
-            <span id="shortRCont"><%=result.review_cont2%></span><br>
+            <span id="shortRCont"><i class="bi bi-chat-left-heart"></i> <%=result.review_cont2%></span><br>
                 <% if (shortRSPct2 > 0) { %>
                     <span id="shortRSPct"><progress value="<%=shortRSPct2%>" max="100"></progress>  <%=shortRSPct2%></span>
                 <% } else {%>
@@ -53,7 +61,7 @@
             <br><br>
             <% if (result.review_cont3 != '') { %>
             #3<br>
-            <span id="shortRCont"><%=result.review_cont3%></span><br>
+            <span id="shortRCont"><i class="bi bi-chat-left-heart"></i> <%=result.review_cont3%></span><br>
                 <% if (shortRSPct3 > 0) { %>
                      <span id="shortRSPct"><progress value="<%shortRSPct3%>" max="100"></progress>  <%=shortRSPct3%></span>
                 <% } else {%>
@@ -69,7 +77,7 @@
                 <form action = "/qna/A" method = "post">
                     <input type="hidden" name="post_num"  value="<%=post_num%>">
                     <input type="hidden" name="qna_num" value="<%=qna_num[i]%>">
-                    <span id="qna_user">ID : <%=users_id[i]%></span>
+                    <span id="qna_user"><i class="bi bi-person"></i> <%=users_id[i]%></span>
                     <br>
                     <span id="qna_cont">Q: <%=qna_cont[i]%></span>
                     <br>
@@ -77,13 +85,15 @@
                         A: <input type="text" name="qna_ans" maxlength=30 value="<%=qna_ans[i]%>">                     
                     </tr>
                     <br>
-                    <input type="submit" id="button" value="저장">
-                    <input type="submit" id="button" value="수정">
+                    <button type="submit" id="button" value="저장"><i class="bi bi-check-square-fill"> </i> 저장</button> &nbsp;
+                    <button type="submit" id="button" value="저장"><i class="bi bi-check-square"> </i> 수정</button>
+                    <!--<input type="submit" id="button" value="수정">-->
                     <br><br>
                 </form>
                 <% } %>
             </div>
-        <a href="/">뒤로가기</a>
+        <a href="/"><i class="bi bi-backspace fs-100"></i></a>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
     </body>
 </html>
 

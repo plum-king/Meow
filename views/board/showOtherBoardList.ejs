@@ -16,7 +16,11 @@
                 <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
                 <input type="hidden" name="post_userid"  value="<%=post_userid[i]%>">
                 <!-- <span id="placeName"><%=placeName[i]%></span> -->
-                <article><a href = "/Otherboard/<%=postNum[i]%>/" ><img src="<%=placePhoto[i]%>" width='100' height="100"/></a></article>
+                <%if(post_userid[i]==userid){%>
+                    <article><a href = "/Myboard/<%=postNum[i]%>/" ><img src="<%=placePhoto[i]%>" width='100' height="100"/></a></article>
+                <% } else { %>
+                    <article><a href = "/Otherboard/<%=postNum[i]%>/" ><img src="<%=placePhoto[i]%>" width='100' height="100"/></a></article>
+                <% } %>
             <% } %>
         </div>
         <a href="/">뒤로가기</a>
