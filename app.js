@@ -20,10 +20,11 @@ const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
 
 const addBoard = require("./routes/addBoard");
-const editBoard = require("./controllers/editBoard");
+// const editBoard = require("./controllers/editBoard");
 const showBoard = require("./controllers/showBoardController");
 const writeQnA = require("./controllers/qnaController");
-
+const writeBoard = require("./controllers/boardController");
+const deleteBoard = require("./controllers/deleteBoard");
 const addTag = require("./routes/tag");
 
 const subscribeRouter = require("./routes/subscribe");
@@ -61,8 +62,13 @@ app.get("/edit", editUser.showEdit);
 
 app.get("/addBoard", addBoard);
 app.post("/addBoard", addBoard);
-app.get("/editBoard", editBoard);
-app.post("/editBoard", editBoard);
+// app.get("/editBoard", editBoard);
+// app.post("/editBoard", editBoard);
+app.post("/MyBoard/:post_num/edit", writeBoard.getBoard);
+app.post("/MyBoard/:post_num/edit", writeBoard.updateBoard);
+app.get("/MyBoard/:post_num/delete", deleteBoard.showDeleteBoard);
+app.post("/MyBoard/:post_num/delete", deleteBoard.deleteBoard);
+app.post("/qna/delete", writeQnA.deleteQuestion);
 
 app.post("/edit", editUser.updateEdit);
 

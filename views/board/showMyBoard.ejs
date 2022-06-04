@@ -17,7 +17,7 @@
         <div class="main">
             <span id="nickName"><%=nickname%> 님</span><br><br>
         <div class="lefttop">
-            <span id="place"><%=result.place_name%> / <%=result.place_loc%></span>
+            
             <div class="leftbottom">
                 <br><br>
                 <span id="photo"><img src="<%= result.receipt_photo%> " width="200" height = "200"/> 
@@ -60,6 +60,17 @@
                         <span id="shortRSPct"><progress value="<%=shortRSPct3%>" max="100"></progress> 0</span>
                     <% } %>
             <% } %>
+            <br><br>
+            <form action = "/MyBoard/:post_num/edit" method = "post">
+                <input type="hidden" name="post_num"  value="<%=post_num%>">
+                <input type="submit" id="button" value="게시글 수정">
+            </form>
+            <br><br>
+            <form action = "/MyBoard/:post_num/delete" method = "post">
+                <input type="hidden" name="post_num"  value="<%=post_num%>">
+                <input type="submit" id="button" value="게시글 삭제">
+            </form>
+            <br>
         </div>
         <br><br><br>
         </div>

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../db.js");
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 
 //게시글 작성 수정
 
