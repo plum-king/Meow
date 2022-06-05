@@ -10,7 +10,11 @@
 
     <body>
         <title><%= title %></title>
-        <%- include('../partials/nav') %>
+        <% if (requestUser == undefined) { %>
+            <%- include('../partials/loginNav') %>
+            <% } else { %>
+            <%- include('../partials/nav') %>
+            <% } %>
         <div class="wrap">
             <% for(var i = 0; i<postNum.length; i++) { %>
                 <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
