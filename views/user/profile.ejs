@@ -32,7 +32,8 @@
         margin: 15px 0 15px 30px;
         padding: 15px 0 0 15px;
       }
-      .question {
+      .qna {
+        overflow-y: scroll;
         width: 280px;
         height: 160px;
         float: left;
@@ -41,14 +42,14 @@
         margin-left: 30px;
         text-align: center;
       }
-      .answer {
+      /* .answer {
         width: 280px;
         height: 160px;
         float: left;
         border: 1.5px solid;
         border-radius: 2em;
         text-align: center;
-      }
+      } */
       .intro {
         border: 1px solid;
         border-radius: 10px;
@@ -64,6 +65,7 @@
         margin: 10px 30px 10px 30px;
       }
       .post {
+        overflow-y: scroll;
         width: 28%;
         height: 200px;
         float: left;
@@ -72,6 +74,7 @@
         border-radius: 1em;
       }
       .subscribe {
+        overflow-y: scroll;
         width: 28%;
         height: 200px;
         float: left;
@@ -79,15 +82,23 @@
         border: 1.5px solid;
         border-radius: 1em;
       }
-      .scrap {
+      /* .scrap {
         width: 28%;
         height: 200px;
         float: left;
         margin-right: 3%;
         border: 1.5px solid;
         border-radius: 1em;
-      }
+      } */
+      .qna::-webkit-scrollbar { display: none; }
+      .post::-webkit-scrollbar { display: none; }
+      .subscribe::-webkit-scrollbar { display: none; }
     </style>
+    <script>
+      var divdiv = document.getElementById("qna"); divdiv.scrollTop = divdiv.scrollHeight;
+      var divdiv2 = document.getElementById("post"); divdiv2.scrollTop = divdiv2.scrollHeight;
+      var divdiv3 = document.getElementById("subscribe"); divdiv3.scrollTop = divdiv3.scrollHeight;
+  </script>
   </head>
 
   <body>
@@ -107,8 +118,22 @@
         <br />
         <% } %>
       </div>
-      <div class="question">&lt;질문내용&gt;</div>
-      <div class="answer">&lt;답변내용&gt;</div>
+      <div class="qna">
+        &lt;질문내용&gt;<br>
+        <% if(qnas[0].length > 0) { %>
+            <% let i = 1; qnas[0].forEach( qna => { %>
+                <a href = "/Otherboard/<%=qna.post_num%>" >Q : <%=qna.qna_cont%></a><br>
+            <% i++; %> <% }); %>
+        <% } %>
+    </div>
+    <div class="qna">
+        &lt;답변내용&gt;<br>
+        <% if(qnas[0].length > 0) { %>
+            <% let j = 1; qnas[0].forEach( qna => { %>
+                <a href = "/Otherboard/<%=qna.post_num%>" >A : <%=qna.qna_ans%></a><br>
+            <% j++; %> <% }); %>
+        <% } %>
+    </div>
       <div class="edit">
         <% if (user) { %> <% if (row.home == null && row.introduction == null) {
         %>
