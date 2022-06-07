@@ -268,6 +268,7 @@ WHERE sr.post_num = ?`,
       qna_num: numList,
       qna_cont: contList,
       qna_ans: ansList,
+      //수정을 위해 가져와야 할 데이터: post_num, review_num, place_satisfy, place_num, menu_num
     });
   } else {
     var mynumList = [];
@@ -334,41 +335,38 @@ exports.addSatisfaction = async (req, res) => {
   const review_num = req.body.review_num;
   const post_num = req.body.post_num;
   var pct = [];
-  pct.push(req.body.mys_pct1)
-  pct.push(req.body.mys_pct2)
-  pct.push(req.body.mys_pct3)
-  
+  pct.push(req.body.mys_pct1);
+  pct.push(req.body.mys_pct2);
+  pct.push(req.body.mys_pct3);
+
   const connection = await pool.getConnection(async (conn) => conn);
   const check = await connection.query(
     `SELECT s_num, user_id, s_pct1, s_pct2, s_pct3 FROM satisfy WHERE post_num = ? and review_num = ? and user_id = ?`,
     [post_num, review_num, user_id]
   );
 
-
-  var get_pct = []; 
+  var get_pct = [];
 
   if (check[0].length > 0) {
     get_pct.push(check[0][0].s_pct1);
     get_pct.push(check[0][0].s_pct2);
     get_pct.push(check[0][0].s_pct3);
 
-    for(var i = 0; i < 3; i++){
-      if(pct[i] > 0){
-        if(get_pct[i] <= 0){
-          if(i == 0){
-          var change = await connection.query(
-            `UPDATE satisfy SET s_pct1 = ? where s_num = ?`,
-            [pct[0], check[0][0].s_num]
-          );
-          }
-          else if(i == 1){
-          var change =  await connection.query(
+    for (var i = 0; i < 3; i++) {
+      if (pct[i] > 0) {
+        if (get_pct[i] <= 0) {
+          if (i == 0) {
+            var change = await connection.query(
+              `UPDATE satisfy SET s_pct1 = ? where s_num = ?`,
+              [pct[0], check[0][0].s_num]
+            );
+          } else if (i == 1) {
+            var change = await connection.query(
               `UPDATE satisfy SET s_pct2 = ? where s_num = ?`,
               [pct[1], check[0][0].s_num]
             );
-          }
-          else {
-          var change = await connection.query(
+          } else {
+            var change = await connection.query(
               `UPDATE satisfy SET s_pct3 = ? where s_num = ?`,
               [pct[2], check[0][0].s_num]
             );
@@ -377,29 +375,30 @@ exports.addSatisfaction = async (req, res) => {
             res.write(
               `<script type="text/javascript">alert('Complete to add satisfaction!')</script>`
             );
-            res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+            res.write(
+              `<script>location.href = '/OtherBoard/${post_num}'</script>`
+            );
           }
-        } 
-        else {
+        } else {
           res.write(
             `<script type="text/javascript">alert('Already add satisfaction!')</script>`
           );
-          res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
-          }
+          res.write(
+            `<script>location.href = '/OtherBoard/${post_num}'</script>`
+          );
+        }
       }
     }
-
-
   } else {
-    for(var i = 0; i < 3; i++){
-      if(pct[i] == ''){
+    for (var i = 0; i < 3; i++) {
+      if (pct[i] == "") {
         pct[i] = null;
       }
     }
     const result = await connection.query(
       `INSERT INTO satisfy(s_pct1, s_pct2, s_pct3, user_id, post_num, review_num)
       VALUES(?, ?, ?, ?, ?, ?)`,
-      [pct[0],pct[1], pct[2], user_id, post_num, review_num]
+      [pct[0], pct[1], pct[2], user_id, post_num, review_num]
     );
 
     if (result[0].affectedRows == 1) {

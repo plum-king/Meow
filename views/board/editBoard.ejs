@@ -16,7 +16,7 @@
       >
         <p id="placeName_input">Place Name</p>
         <select name="placename_select">
-          <option value="0">선택하세요</option>
+          <option value="0"><%=row.place_name%></option>
           <% let j = 1; placenames.forEach( placename => { %>
           <option value="<%= placename.place_name %>">
             <%= placename.place_name %>
@@ -33,7 +33,7 @@
 
         <p id="placeLoc_input">Place Location</p>
         <select name="placeloc_select">
-          <option value="0">선택하세요</option>
+          <option value="0"><%= row.place_loc%></option>
           <% let k = 1; placelocs.forEach( placeloc => { %>
           <option value="<%= placeloc.place_loc %>">
             <%= placeloc.place_loc %>
@@ -51,7 +51,7 @@
 
         <p id="menuName_input">Menu Name</p>
         <select name="menuname_select">
-          <option value="0">선택하세요</option>
+          <option value="0"><%=row.menu_name%></option>
           <% let l = 1; menus.forEach( menu => { %>
           <option value="<%= menu.menu_name %>"><%= menu.menu_name %></option>
           <% l++; %> <% }); %>
@@ -71,6 +71,7 @@
           name="price"
           id="price"
           placeholder="대표 메뉴 가격 (예)4000"
+          value="<%=row.price%>"
         />
         <br />
 
@@ -80,12 +81,13 @@
           name="place_satisfy"
           id="placeSatisfy"
           placeholder="맛집 만족도"
+          value="<%= row.place_satisfy%>"
         />
 
         <p id="tagNum_input">Tag Selection</p>
         <!-- <input type="text" name="tag_num" id="tagNum" placeholder="태그 선택" /> -->
         <select name="tag_num" id="">
-          <option value="0">선택하세요</option>
+          <option value="0"><%=row.tag_cont%></option>
           <% let i = 1; tags.forEach( tag => { %>
           <option value="<%= i %>"><%= tag.tag_cont %></option>
           <% i++; %> <% }); %>
@@ -98,6 +100,7 @@
           name="review_cont1"
           id="shortReview1"
           placeholder="짧은 글 후기 1"
+          value="<%=row.review_cont1%>"
         />
         <br />
 
@@ -107,6 +110,7 @@
           name="review_cont2"
           id="shortReview2"
           placeholder="짧은 글 후기 2"
+          value="<%=row.review_cont2%>"
         />
         <br />
 
@@ -116,6 +120,7 @@
           name="review_cont3"
           id="shortReview3"
           placeholder="짧은 글 후기 3"
+          value="<%=row.review_cont3%>"
         />
         <br />
 
@@ -127,6 +132,7 @@
           accept="images/*"
           required
           multiple
+          value="<%=row.place_photo%>"
         />
         <br />
 
@@ -138,10 +144,13 @@
           accept="images/*"
           required
           multiple
+          value="<%=row.receipt_photo%>"
         />
 
         <br />
-        <button type="submit" id="boardSubBtn">게시글 등록</button>
+        <input type="hidden" name="post_num" value="<%=post_num%>" />
+        <input type="hidden" name="review_num" value="<%=row.review_num%>" />
+        <button type="submit" id="boardSubBtn">게시글 수정</button>
       </form>
       <a href="/">뒤로가기</a>
     </div>

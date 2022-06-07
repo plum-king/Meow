@@ -22,8 +22,9 @@ const deleteUser = require("./controllers/deleteController");
 const addBoard = require("./routes/addBoard");
 // const editBoard = require("./controllers/editBoard");
 const showBoard = require("./controllers/showBoardController");
+const editBoard = require("./controllers/editBoard");
 const writeQnA = require("./controllers/qnaController");
-const writeBoard = require("./controllers/boardController");
+const writeBoard = require("./controllers/boardEditController");
 const deleteBoard = require("./controllers/deleteBoard");
 const addTag = require("./routes/tag");
 
@@ -37,6 +38,7 @@ app.use(
     extended: false,
   })
 );
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -62,9 +64,9 @@ app.get("/edit", editUser.showEdit);
 
 app.get("/addBoard", addBoard);
 app.post("/addBoard", addBoard);
-// app.get("/editBoard", editBoard);
-// app.post("/editBoard", editBoard);
-app.post("/MyBoard/:post_num/edit", writeBoard.getBoard);
+// app.get("/editBoard/:post_num", editBoard);
+// app.post("/editBoard/:post_num", editBoard);
+app.get("/MyBoard/:post_num/edit", writeBoard.getBoard);
 app.post("/MyBoard/:post_num/edit", writeBoard.updateBoard);
 app.get("/MyBoard/:post_num/delete", deleteBoard.showDeleteBoard);
 app.post("/MyBoard/:post_num/delete", deleteBoard.deleteBoard);
