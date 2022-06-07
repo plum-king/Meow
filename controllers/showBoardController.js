@@ -228,8 +228,8 @@ WHERE po.post_num = ?`,
 
   const result2 = await connection.query(
     `SELECT * FROM shortReview as sr 
-JOIN satisfy as st ON sr.review_num = st.review_num
-WHERE sr.post_num = ?`,
+    JOIN satisfy as st ON sr.review_num = st.review_num
+    WHERE sr.post_num = ?`,
     [post_num]
   );
 
