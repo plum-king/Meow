@@ -24,6 +24,10 @@
                 <input type="hidden" name="post_num" value="<%=post_num%>">
                      <button type="submit" class ="editB" id="button"><i class="bi bi-sticky-fill"> </i> 게시글 수정</button>
             </form>
+            <form action = "/MyBoard/:post_num/delete" method = "post">
+                <input type="hidden" name="post_num"  value="<%=post_num%>">
+                <button type="submit" class ="editB" id="button"><i class="bi bi-sticky-fill"> </i> 게시글 삭제</button>
+            </form>
             <!--<a href="/myBoardList" id="myBList"><i class="bi bi-sticky-fill"> </i> 내 다른 게시글 보기</a>-->
         </div>
         <div class="main">

@@ -9,9 +9,15 @@ router.get("/addBoard", async (req, res, next) => {
   const data = await pool.query(`SELECT * from tag ORDER BY tag_cont`);
   // const data2 = await pool.query(`SELECT DISTINCT place_name from place ORDER BY place_name`);
   // const data3 = await pool.query(`SELECT DISTINCT place_loc from place ORDER BY place_loc`);
-  const data4 = await pool.query(`SELECT DISTINCT menu_name from menu ORDER BY menu_name`);
+  const data4 = await pool.query(
+    `SELECT DISTINCT menu_name from menu ORDER BY menu_name`
+  );
 
-  res.render("board/addBoard", {title: "게시글 작성", tags: data[0], menus : data4[0]});
+  res.render("board/addBoard", {
+    title: "게시글 작성",
+    tags: data[0],
+    menus: data4[0],
+  });
 });
 //이미지 업로드
 const multer = require("multer");
@@ -35,7 +41,8 @@ var upload = multer({storage: storage});
 //이미지 업로드 끝
 
 router.post(
-  "/addBoard", upload.fields([{name: "place_photo"}, {name: "receipt_photo"}]),
+  "/addBoard",
+  upload.fields([{name: "place_photo"}, {name: "receipt_photo"}]),
   async (req, res, next) => {
     const post = req.body;
     const place_name = post.placeName;
@@ -56,7 +63,6 @@ router.post(
     const title = "Meow";
     const nickname = req.session.user["nickname"];
 
-
     console.log(place_loc);
     console.log(place_name);
 
@@ -69,18 +75,17 @@ router.post(
       let check;
 
       check = await pool.query(
-            `SELECT * FROM place WHERE place_name = ? and place_loc=?`, //이미 저장된 장소인지 확인
-            [place_name, place_loc]
-          );
-        console.log(check[0]);
-
-      if(check[0][0] == undefined){
-      data = await pool.query(
-        `INSERT INTO place(place_name, place_loc) VALUES (?, ?)`, 
+        `SELECT * FROM place WHERE place_name = ? and place_loc=?`, //이미 저장된 장소인지 확인
         [place_name, place_loc]
       );
-      placeId = data[0].insertId;
+      console.log(check[0]);
 
+      if (check[0][0] == undefined) {
+        data = await pool.query(
+          `INSERT INTO place(place_name, place_loc) VALUES (?, ?)`,
+          [place_name, place_loc]
+        );
+        placeId = data[0].insertId;
       } else {
         placeId = check[0][0].place_num;
       }
@@ -88,52 +93,54 @@ router.post(
       let data2;
       let check2;
       //메뉴 옵션에서 메뉴 이름 선택했을 때
-      if(menuname_select != 0){
-      check2 = await pool.query(
-        `SELECT menu_name FROM menu WHERE place_num = ? and menu_name = ?`, //동일한 장소의 동일한 메뉴 이름이 이미 존재하는지 확인
-        [placeId, menuname_select]
-      );
-      
-      //동일 장소의 동일 메뉴가 없다면 새로 저장
-      if(check2[0].length <= 0){
-      data2 = await pool.query(
-        `INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
-        [menuname_select, price, placeId]
-      );
-      }} else{ //메뉴 이름을 직접 입력했을 때
+      if (menuname_select != 0) {
+        check2 = await pool.query(
+          `SELECT menu_name FROM menu WHERE place_num = ? and menu_name = ?`, //동일한 장소의 동일한 메뉴 이름이 이미 존재하는지 확인
+          [placeId, menuname_select]
+        );
+
+        //동일 장소의 동일 메뉴가 없다면 새로 저장
+        if (check2[0].length <= 0) {
+          data2 = await pool.query(
+            `INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
+            [menuname_select, price, placeId]
+          );
+        }
+      } else {
+        //메뉴 이름을 직접 입력했을 때
         check2 = await pool.query(
           `SELECT menu_name FROM menu WHERE place_num = ? and menu_name = ?`, //동일한 장소의 동일한 메뉴 이름이 이미 존재하는지 확인
           [placeId, menu_name]
         );
-         //동일 장소의 동일 메뉴가 없다면 새로 저장
-        if(check2[0].length <= 0)
-        data2 = await pool.query(
-          `INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
-          [menu_name, price, placeId]
-        );
-      };
+        //동일 장소의 동일 메뉴가 없다면 새로 저장
+        if (check2[0].length <= 0)
+          data2 = await pool.query(
+            `INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
+            [menu_name, price, placeId]
+          );
+      }
 
-      if(menuname_select != 0) {menu_name = menuname_select};
+      if (menuname_select != 0) {
+        menu_name = menuname_select;
+      }
 
       let data3;
       let check3;
 
-      check3 = await pool.query(
-        `SELECT * FROM tag WHERE tag_cont = ?`,
-        [tag_cont]
-      );
+      check3 = await pool.query(`SELECT * FROM tag WHERE tag_cont = ?`, [
+        tag_cont,
+      ]);
 
-      if(tag_cont.length > 0){
-        if(check3[0][0] == undefined){
-        data3 = await pool.query(
-          `INSERT INTO tag(tag_cont) VALUES (?)`,
-          [tag_cont]
-        );
-        tag_num = data3[0].insertId;
-      } else {
-        tag_num = check3[0][0].tag_num;
+      if (tag_cont.length > 0) {
+        if (check3[0][0] == undefined) {
+          data3 = await pool.query(`INSERT INTO tag(tag_cont) VALUES (?)`, [
+            tag_cont,
+          ]);
+          tag_num = data3[0].insertId;
+        } else {
+          tag_num = check3[0][0].tag_num;
+        }
       }
-    }  
 
       const data4 = await pool.query(
         `INSERT INTO post(receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num, menu_name) VALUES (?, ?, ?, ?, 0, ?, ?, ?)`,
@@ -144,7 +151,7 @@ router.post(
           placeId,
           req.session.user["userid"],
           tag_num,
-          menu_name
+          menu_name,
         ]
       );
 
@@ -167,6 +174,7 @@ router.post(
       res.write('<script>window.location="/addBoard"</script>');
       res.end();
     }
-  });
+  }
+);
 
 module.exports = router;
