@@ -31,6 +31,10 @@ const addTag = require("./routes/tag");
 const subscribeRouter = require("./routes/subscribe");
 const scrapRouter = require("./routes/scrap");
 
+const category1 = require("./routes/category1");
+const category2 = require("./routes/category2");
+// const category3 = require("./routes/category3");
+
 app.set("view engine", "ejs");
 
 app.use(
@@ -96,6 +100,10 @@ app.post("/findThroughPlace", findBoard.showBoardsOfPlace);
 
 app.post("/subscribe", subscribeRouter);
 app.post("/scrap", scrapRouter);
+
+app.get("/category1", category1);
+app.get("/category2", category2);
+// app.get("/category3", category3);
 
 app.use("/image", express.static("./upload"));
 
