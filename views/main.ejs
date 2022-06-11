@@ -31,9 +31,27 @@
       <a href="/findThroughPlace">장소로 찾는 게시글 목록</a>
       <br />
     </p>
-
-      <p style ="font-weight: 600; text-align:center;">인기 프로필 랭킹</p><br>
-      
+      <div class="wrap" style="text-align: center">
+        <h4 style="font-weight: 600; text-align: center">인기 프로필 랭킹</h4>
+        <br />
+        <% for (let i = 0; i < rank3.length; i++) { %>
+        <a
+          href="/profile/<%= rank3[i].user_id%>"
+          style="text-decoration: none; color: black"
+          ><div
+            class="top_profile"
+            style="padding: 10px; display: inline-block; border: 3px solid black"
+          >
+            #<%= i+1 %><br /><br />
+            <!--img 기본 경로가 public이라서 /images로 들어가야돼-->
+            <img src="../images/user.png" width="100" height="100" /><br /><br />
+            <b>닉네임:</b> <%= rank3[i].nickname %> <br />
+            <b>이름:</b> <%= rank3[i].name %> <br />
+            <b>나이:</b> <%= rank3[i].age %>대 <br />
+            <b>직업:</b> <%= rank3[i].job %> <br /></div
+        ></a>
+        &emsp;&emsp; <% } %>
+      </div>
       <div class = "wrap">
       <p style ="font-weight: 600; text-align:center;">인기 게시글 랭킹</p>
       <% for (let i = 0; i < rank5.length; i++) { %>

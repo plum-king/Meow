@@ -9,7 +9,7 @@ router.get("/editBoard", async (req, res, next) => {
   const userid = req.session.user["userid"];
   var postID = req.query.post_num; //선택 받은 게시글 번호 지정
 
-  console.log(postID);
+  // console.log(postID);
   try {
     const data = await pool.query(
       `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
@@ -20,7 +20,7 @@ router.get("/editBoard", async (req, res, next) => {
       [postID]
     );
 
-    console.log(data[0][0]);
+    // console.log(data[0][0]);
 
     const data2 = await pool.query(`SELECT * from tag ORDER BY tag_cont`);
 
