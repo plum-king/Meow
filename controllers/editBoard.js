@@ -22,7 +22,7 @@ router.get("/editBoard", async (req, res, next) => {
 
     // console.log(data[0][0]);
 
-    const data2 = await pool.query(`SELECT * from tag ORDER BY tag_cont`);
+    const data2 = await pool.query(`SELECT * from tag`);
 
     const data3 = await pool.query(
       `SELECT DISTINCT menu_name from menu WHERE place_num = ? ORDER BY menu_name`,
@@ -74,8 +74,9 @@ router.post(
     const place_num = post.place_num;
 
     const place_satisfy = post.place_satisfy;
-    var tag_num = parseInt(post.tag_num) + 1;
+    var tag_num = post.tag_num;
     const tag_cont = post.tag_cont;
+    const post_tag_cont = post.post_tag_cont;
     const review_num = post.review_num;
     const review_cont1 = post.review_cont1;
     const review_cont2 = post.review_cont2;
@@ -122,34 +123,37 @@ router.post(
         ); //이미 태그에 있다는 건 존재한다는 거 아님?
         // }
       } else {
-        // const existMenu = await pool.query(
-        //   // 만약에 수정한 메뉴 이름이 이미 존재한다면 냅두고
-        //   `SELECT menu_name, price FROM menu WHERE place_num=? and menu_name=?`,
-        //   [place_num, menu_name]
-        // );
-        // //placeId = data[0].insertId; //삽입한 데이터의 id 받아오기
+        const existMenu = await pool.query(
+          // 만약에 수정한 메뉴 이름이 이미 존재한다면 냅두고
+          `SELECT menu_name, price FROM menu WHERE place_num=? and menu_name=?`,
+          [place_num, menu_name]
+        );
+        //placeId = data[0].insertId; //삽입한 데이터의 id 받아오기
 
-        // if (existMenu[0][0] == undefined) {
-        //수정한 메뉴 이름이 없다면
-        const data2 = await pool.query(`INSERT INTO menu VALUES(?, ?, ?)`, [
-          menu_name,
-          price,
-          place_num,
-        ]);
+        if (existMenu[0][0] == undefined) {
+          // 수정한 메뉴 이름이 없다면
+          const data2 = await pool.query(`INSERT INTO menu VALUES(?, ?, ?)`, [
+            menu_name,
+            price,
+            place_num,
+          ]);
+        }
       }
-      // }
 
-      if (tag_num == 0) {
+      console.log(tag_num[0]);
+      if (tag_num[0] == 0) {
         const existTag = await pool.query(
           `SELECT tag_num FROM tag WHERE tag_cont = ?`,
-          [tag_cont]
+          [post_tag_cont]
         );
-        tag_num = existTag[0][0];
+        tag_num = existTag[0][0].tag_num;
         // console.log(existTag[0]);
-        // console.log(existTag[0][0]);
+        // console.log(tag_num);
+      } else {
+        tag_num = parseInt(post.tag_num[0]) + 1;
       }
 
-      // console.log(tag_num);
+      console.log(tag_num);
 
       const data3 = await pool.query(
         "UPDATE post SET receipt_photo=?, place_photo=?, place_satisfy=?, place_num=?, user_id=?, menu_name=?, tag_num=? WHERE post_num=?",
