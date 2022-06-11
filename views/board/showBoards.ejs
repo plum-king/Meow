@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <link href="/css/Board.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <title><%= title %></title>
         <%- include('../partials/head') %>
     </head>
@@ -11,10 +12,13 @@
     <body>
         <title><%= title %></title>
         <%- include('../partials/nav') %>
+        <span id="place" style="padding-left: 20px; font-weight: 600; font-size: 1.5rem;">
+            <i class="bi bi-shop-window"></i> <%=place_name%> / <%=place_loc%>
+        </span><br><br>
         <div class="wrap">
             <% for(var i = 0; i<postNum.length; i++) { %>
                 <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
-                    <article><a href = "/Myboard/<%=postNum[i]%>" ><img src="<%=placePhoto[i]%>" width='100' height="100"/></a></article>
+                    <article><a href = "/Myboard/<%=postNum[i]%>" ><img src="<%=placePhoto[i]%>" width='150' height="150"/></a></article>
             <% } %>
         </div>
         <a href="/">뒤로가기</a>

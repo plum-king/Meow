@@ -22,9 +22,9 @@
                 <input type="hidden" name="post_userid"  value="<%=post_userid[i]%>">
                 <!-- <span id="placeName"><%=placeName[i]%></span> -->
                 <%if(post_userid[i]==userid){%>
-                    <article><a href = "/Myboard/<%=postNum[i]%>/" ><img src="<%=placePhoto[i]%>" width='100' height="100"/></a></article>
+                    <article><a href = "/Myboard/<%=postNum[i]%>/" ><img src="<%=placePhoto[i]%>" width='150' height="150"/></a></article>
                 <% } else { %>
-                    <article><a href = "/Otherboard/<%=postNum[i]%>/" ><img src="<%=placePhoto[i]%>" width='100' height="100"/></a></article>
+                    <article><a href = "/Otherboard/<%=postNum[i]%>/" ><img src="<%=placePhoto[i]%>" width='150' height="150"/></a></article>
                 <% } %>
             <% } %>
         </div>

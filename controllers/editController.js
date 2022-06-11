@@ -24,7 +24,6 @@ exports.updateEdit = async (req, res, next) => {
     confirm_pwd,
     new_pwd,
     age,
-    gender,
     job,
     home,
     introduction,
@@ -45,8 +44,8 @@ exports.updateEdit = async (req, res, next) => {
     }
     try {
       const data = await pool.query(
-        "UPDATE User SET name = ?, nickname = ?, password = ?, age = ?, gender = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?",
-        [name, nickname, password, age, gender, job, home, introduction, userid]
+        "UPDATE User SET name = ?, nickname = ?, password = ?, age = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?",
+        [name, nickname, password, age, job, home, introduction, userid]
       );
       if (data[0].affectedRows == 1) {
         req.session.user["userid"] = userid;

@@ -25,7 +25,8 @@ router.get("/editBoard", async (req, res, next) => {
     const data2 = await pool.query(`SELECT * from tag ORDER BY tag_cont`);
 
     const data3 = await pool.query(
-      `SELECT DISTINCT menu_name from menu ORDER BY menu_name`
+      `SELECT DISTINCT menu_name from menu WHERE place_num = ? ORDER BY menu_name`,
+      [data[0][0].place_num]
     );
 
     res.render("board/updateBoardform", {
