@@ -21,10 +21,38 @@
                 <input type="hidden" name="post_num" value="<%=post_num%>">
                      <button type="submit" class ="myBList" id="button"><i class="bi bi-sticky-fill"> </i> 내 다른 게시글 보기</button>
             </form>
-            <form action="/editBoard" method="get" float="right" style="display: inline-block"> 
-                <input type="hidden" name="post_num" value="<%=post_num%>">
-                     <button type="submit" class ="editB" id="button"><i class="bi bi-pencil-square"></i> 게시글 수정</button>
-            </form>
+            <a href="#pop_info_1" style="text-decoration:none;" class="btn_open"><i class="bi bi-sticky-fill"> </i>게시글 수정</a>
+            <!-- 수정팝업 -->
+            <div id="pop_info_1" class="pop_wrap" style="display:none;">
+                <div class="pop_inner">
+                    <p class="dsc">게시글을 수정하면 사진 파일을 다시 올려야합니다</p><br>
+                    <p class="dsc">게시글을 수정하시겠습니까?</p>
+                    <form action = "/editBoard" method = "get">
+                        <input type="hidden" name="post_num" value="<%=post_num%>">
+                        <input type="submit" id="button" value="수정">
+                    </form>
+                    <button type="button" class="btn_close">닫기</button>
+                    </div>
+                </div>
+            <script>
+                var target = document.querySelectorAll('.btn_open');
+                var btnPopClose = document.querySelectorAll('.pop_wrap .btn_close');
+                var targetID;  // 버튼 클릭시 버튼에 해당하는 팝업의 id값 담는 변수
+  
+                // 팝업 열기
+                for(var i = 0; i < target.length; i++){
+                    target[i].addEventListener('click', function(){
+                    targetID = this.getAttribute('href');
+                    document.querySelector(targetID).style.display = 'block';
+                    });
+                }
+                // 팝업 닫기
+                for(var j = 0; j < target.length; j++){
+                    btnPopClose[j].addEventListener('click', function(){
+                    this.parentNode.parentNode.style.display = 'none';
+                    });
+                }
+            </script>
             <form action = "/MyBoard/:post_num/delete" method = "post">
                 <input type="hidden" name="post_num"  value="<%=post_num%>">
                 <button type="submit" class ="editB" id="button"><i class="bi bi-sticky-fill"> </i> 게시글 삭제</button>

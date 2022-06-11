@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <link href="/css/Board.css" rel="stylesheet"/>
     <title><%= title %></title>
+    <!-- jquery 작동 -->
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
     <%- include('../partials/head') %>
   </head>
   <body>
@@ -44,9 +46,12 @@
         <br /><br />
 
         <p id="menuName_input">Menu Name</p>
-        <p id="tag_notice">원하는 메뉴가 옵션에 없을 시에만 새롭게 작성해주세요 ! 둘 다 작성할 경우 옵션에서 선택한 메뉴가 반영됩니다.</p>
-        <select name="menuname_select" >
-          <option value="0">선택하세요</option>
+        <p id="menu_notice">원하는 메뉴가 옵션에 없을 시에 새롭게 작성해주세요 !</p>
+        <select 
+          name="menuname_select"
+          id="menuname_select"
+          onChange="selectMenu(this)" >
+          <option value="0">직접입력</option>
           <% let l = 1; menus.forEach( menu => { %>
           <option value="<%= menu.menu_name %>"><%= menu.menu_name %></option>
           <% l++; %> <% }); %>
@@ -56,8 +61,25 @@
           type="text"
           name="menu_name"
           id="menuName"
+          class="menu_name"
           placeholder="대표 메뉴 이름 추가"
+          value=""
         />
+        <script>
+          function selectMenu(menu) {
+            var $menu = $(menu);
+            var $menuSel = $("input[name=menu_name]");
+  
+            // 0인 경우 직접입력
+            if ($menu.val() == "0") {
+              $menuSel.attr("readonly", false);
+              $menuSel.val("");
+            } else {
+              $menuSel.attr("readonly", true);
+              $menuSel.val($menu.val());
+            }
+          }
+        </script>
         <br /><br />
 
         <p id="price_input">Price</p>
@@ -79,7 +101,7 @@
         <br /><br />
 
         <p id="tagNum_input">Tag Selection</p>
-        <p id="tag_notice">원하는 태그가 옵션에 없을 시에만 새롭게 작성해주세요 ! 둘 다 작성할 경우 옵션에서 선택한 태그가 반영됩니다.</p>
+        <!-- <p id="tag_notice">원하는 태그가 옵션에 없을 시에만 새롭게 작성해주세요 ! 둘 다 작성할 경우 옵션에서 선택한 태그가 반영됩니다.</p> -->
         <select name="tag_num" id="">
           <option value="0">선택하세요</option>
           <% let i = 1; tags.forEach( tag => { %>
@@ -87,7 +109,7 @@
           <% i++; %> <% }); %>
         </select>
         <br />
-        <input type="text" name="tag_cont" id="tagNum" placeholder="태그 추가" />
+        <!-- <input type="text" name="tag_cont" id="tagNum" placeholder="태그 추가" /> -->
         <br /><br />
 
         <p id="reviewCont1_input">Short Review 1</p>
@@ -141,7 +163,7 @@
         <button type="submit" id="boardSubBtn">게시글 등록</button>
       </form>
 
-      <!-- 지도 관련 코드-->
+      <!-- 지도 관련 코드
       <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7f2d2251aaf2d9c9004cdec4a4488ddc&libraries=services"></script>
 
       <script>
@@ -181,9 +203,9 @@
       <p id="tagNum_input">Tag Selection</p>
       <select name="tag_num" id="">
         <option value="0">선택하세요</option>
-        <% let i = 1; tags.forEach( tag => { %>
-        <option value="<%= i %>"><%= tag.tag_cont %></option>
-        <% i++; %> <% }); %>
+        <% let q = 1; tags.forEach( tag => { %>
+        <option value="<%= q %>"><%= tag.tag_cont %></option>
+        <% q++; %> <% }); %>
       </select>
       <br />
       <input type="text" name="tag_cont" id="tagNum" placeholder="태그 선택" />
@@ -238,7 +260,7 @@
       />
       <br />
       <button type="submit" id="boardSubBtn">게시글 등록</button>
-    </form>
+    </form> -->
 
     <!-- 지도 관련 코드-->
     <script

@@ -9,14 +9,17 @@ router.get("/addBoard", async (req, res, next) => {
   const userid = req.session.user["userid"];
   const nickname = req.session.user["nickname"];
   const data = await pool.query(`SELECT * from tag ORDER BY tag_cont`);
-  const data4 = await pool.query(`SELECT DISTINCT menu_name from menu ORDER BY menu_name`);
+  const data4 = await pool.query(
+    `SELECT DISTINCT menu_name from menu ORDER BY menu_name`
+  );
 
-  res.render("board/addBoard", {title: "게시글 작성", 
-  userid : userid, 
-  nickname : nickname,
-  tags: data[0], 
-  menus : data4[0]});
-
+  res.render("board/addBoard", {
+    title: "게시글 작성",
+    userid: userid,
+    nickname: nickname,
+    tags: data[0],
+    menus: data4[0],
+  });
 });
 
 //이미지 업로드
@@ -131,16 +134,16 @@ router.post(
         tag_cont,
       ]);
 
-      if (tag_cont.length > 0) {
-        if (check3[0][0] == undefined) {
-          data3 = await pool.query(`INSERT INTO tag(tag_cont) VALUES (?)`, [
-            tag_cont,
-          ]);
-          tag_num = data3[0].insertId;
-        } else {
-          tag_num = check3[0][0].tag_num;
-        }
-      }
+      // if (tag_cont.length > 0) {
+      //   if (check3[0][0] == undefined) {
+      //     data3 = await pool.query(`INSERT INTO tag(tag_cont) VALUES (?)`, [
+      //       tag_cont,
+      //     ]);
+      //     tag_num = data3[0].insertId;
+      //   } else {
+      //     tag_num = check3[0][0].tag_num;
+      //   }
+      // }
 
       const data4 = await pool.query(
         `INSERT INTO post(receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num, menu_name) VALUES (?, ?, ?, ?, 0, ?, ?, ?)`,
