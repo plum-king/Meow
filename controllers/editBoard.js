@@ -90,6 +90,8 @@ router.post(
       let data;
       let check;
       let placeID;
+      let check2;
+      let data2;
 
       check = await pool.query(
         `SELECT * FROM place WHERE place_name = ? and place_loc=?`, //이미 저장된 장소인지 확인
@@ -100,47 +102,46 @@ router.post(
 
       if (check[0][0] == undefined) {
         data = await pool.query(
-          `UPDATE place SET place_name =?, place_loc=? WHERE place_num =?`,
-          [place_name, place_loc, place_num]
+          `INSERT INTO place(place_name, place_loc) VALUES (?, ?)`,
+          [place_name, place_loc]
         );
         placeID = data[0].insertId;
       } else {
         placeID = check[0][0].place_num;
       }
 
-      if (menuname_select != 0) {
-        // const existMenu = await pool.query(
-        //   // 만약에 수정한 메뉴 이름이 이미 존재한다면 냅두고
-        //   `SELECT * FROM menu WHERE place_num=? and menu_name =? `,
-        //   [place_num, menuname_select]
-        // );
-        // //placeId = data[0].insertId; //삽입한 데이터의 id 받아오기
+      console.log(placeID);
 
-        // if (existMenu[0][0] == undefined) {
-        const data2 = await pool.query(
-          "UPDATE menu SET menu_name=?, price=? WHERE place_num=? and menu_name=?",
-          [menuname_select, price, place_num, menuname_select] //선택된 메뉴랑 장소번호에 해당하는 데이터를 업데이트
-        ); //이미 태그에 있다는 건 존재한다는 거 아님?
-        // }
-      } else {
+      if (menuname_select != 0) {
         const existMenu = await pool.query(
           // 만약에 수정한 메뉴 이름이 이미 존재한다면 냅두고
-          `SELECT menu_name, price FROM menu WHERE place_num=? and menu_name=?`,
-          [place_num, menu_name]
+          `SELECT * FROM menu WHERE place_num=? and menu_name =? `,
+          [place_num, menuname_select]
         );
-        //placeId = data[0].insertId; //삽입한 데이터의 id 받아오기
 
         if (existMenu[0][0] == undefined) {
-          // 수정한 메뉴 이름이 없다면
-          const data2 = await pool.query(`INSERT INTO menu VALUES(?, ?, ?)`, [
-            menu_name,
-            price,
-            place_num,
-          ]);
+          const data2 = await pool.query(
+            `INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
+            [menuname_select, price, placeID] //선택된 메뉴랑 장소번호에 해당하는 데이터를 업데이트
+          );
         }
+      } else {
+        check2 = await pool.query(
+          `SELECT * FROM menu WHERE place_num = ? and menu_name = ?`, //동일한 장소의 동일한 메뉴 이름이 이미 존재하는지 확인
+          [placeID, menu_name]
+        );
+        //동일 장소의 동일 메뉴가 없다면 새로 저장
+        if (check2[0][0] == undefined)
+          data2 = await pool.query(
+            `INSERT INTO menu(menu_name, price, place_num) VALUES (?, ?, ?)`,
+            [menu_name, price, placeID]
+          );
       }
 
-      console.log(tag_num[0]);
+      if (menuname_select != 0) {
+        menu_name = menuname_select;
+      }
+
       if (tag_num[0] == 0) {
         const existTag = await pool.query(
           `SELECT tag_num FROM tag WHERE tag_cont = ?`,
@@ -153,7 +154,7 @@ router.post(
         tag_num = parseInt(post.tag_num[0]) + 1;
       }
 
-      console.log(tag_num);
+      // console.log(tag_num);
 
       const data3 = await pool.query(
         "UPDATE post SET receipt_photo=?, place_photo=?, place_satisfy=?, place_num=?, user_id=?, menu_name=?, tag_num=? WHERE post_num=?",
@@ -161,7 +162,7 @@ router.post(
           receipt_photo,
           place_photo,
           place_satisfy,
-          place_num,
+          placeID,
           req.session.user["userid"],
           menu_name,
           tag_num,

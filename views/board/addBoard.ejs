@@ -107,6 +107,7 @@
           <% let i = 1; tags.forEach( tag => { %>
           <option value="<%= i %>"><%= tag.tag_cont %></option>
           <% i++; %> <% }); %>
+          <input type="hidden" name="tag_num" value="<%= i %>" />
         </select>
         <br />
         <!-- <input type="text" name="tag_cont" id="tagNum" placeholder="태그 추가" /> -->
