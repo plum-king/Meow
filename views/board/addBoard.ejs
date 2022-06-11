@@ -102,9 +102,10 @@
 
         <p id="tagNum_input">Tag Selection</p>
         <!-- <p id="tag_notice">원하는 태그가 옵션에 없을 시에만 새롭게 작성해주세요 ! 둘 다 작성할 경우 옵션에서 선택한 태그가 반영됩니다.</p> -->
+        <% let i = 0; %>
         <select name="tag_num" id="">
           <option value="0">선택하세요</option>
-          <% let i = 1; tags.forEach( tag => { %>
+          <% tags.forEach( tag => { %>
           <option value="<%= i %>"><%= tag.tag_cont %></option>
           <% i++; %> <% }); %>
           <input type="hidden" name="tag_num" value="<%= i %>" />

@@ -8,7 +8,7 @@ const session = require("express-session");
 router.get("/addBoard", async (req, res, next) => {
   const userid = req.session.user["userid"];
   const nickname = req.session.user["nickname"];
-  const data = await pool.query(`SELECT * from tag ORDER BY tag_cont`);
+  const data = await pool.query(`SELECT * from tag`);
   const data4 = await pool.query(
     `SELECT DISTINCT menu_name from menu ORDER BY menu_name`
   );
@@ -25,6 +25,7 @@ router.get("/addBoard", async (req, res, next) => {
 //이미지 업로드
 const multer = require("multer");
 const path = require("path");
+const e = require("express");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -55,7 +56,7 @@ router.post(
     const price = post.price;
 
     const place_satisfy = post.place_satisfy;
-    var tag_num = parseInt(post.tag_num[0]) + 1;
+    var tag_num = post.tag_num;
     const tag_cont = post.tag_cont;
     const review_cont1 = post.review_cont1;
     const review_cont2 = post.review_cont2;
@@ -66,8 +67,8 @@ router.post(
     const title = "Meow";
     const nickname = req.session.user["nickname"];
 
-    console.log(place_loc);
-    console.log(place_name);
+    // console.log(place_loc);
+    // console.log(place_name);
 
     var resPostId;
     var resRevID;
@@ -81,7 +82,7 @@ router.post(
         `SELECT * FROM place WHERE place_name = ? and place_loc=?`, //이미 저장된 장소인지 확인
         [place_name, place_loc]
       );
-      console.log(check[0]);
+      // console.log(check[0]);
 
       if (check[0][0] == undefined) {
         data = await pool.query(
@@ -144,6 +145,9 @@ router.post(
       //     tag_num = check3[0][0].tag_num;
       //   }
       // }
+
+      // console.log(tag_num);
+      tag_num = parseInt(tag_num[0]) + 1;
 
       const data4 = await pool.query(
         `INSERT INTO post(receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num, menu_name) VALUES (?, ?, ?, ?, 0, ?, ?, ?)`,
