@@ -11,6 +11,17 @@
   <body>
     <%- include('./partials/loginNav') %>
     <h1>Meow</h1>
-    <p>메인 화면이 뜰 부분</p>
+    <div class="wrap">
+      <p style="font-weight: 600; text-align: center">인기 게시글 랭킹</p>
+      <% for (let i = 0; i < rank5.length; i++) { %>
+      <input type="hidden" name="userid" value="<%=rank5[i].user_id%>" />
+      <article>
+        #<%= i+1 %>&emsp;&emsp;<a href="/Otherboard/<%=rank5[i].post_num%>/"
+          ><img src="..<%=rank5[i].place_photo%>" width="100" height="100"
+        /></a>
+      </article>
+      <br /><% } %>
+    </div>
+    <a href="/otherBoardList">모든 게시글 목록</a>
   </body>
 </html>

@@ -22,6 +22,8 @@ const deleteUser = require("./controllers/deleteController");
 const addBoard = require("./routes/addBoard");
 const editBoard = require("./controllers/editBoard");
 const showBoard = require("./controllers/showBoardController");
+const findBoard = require("./controllers/findBoardController");
+const deleteBoard = require("./routes/deleteBoard");
 const writeQnA = require("./controllers/qnaController");
 
 const addTag = require("./routes/tag");
@@ -76,6 +78,7 @@ app.get("/profile/:userid", profile);
 app.post("/qna/Q", writeQnA.updateQuestion);
 app.post("/qna/A", writeQnA.updateAnswer);
 app.post("/qna/delete", writeQnA.deleteQuestion);
+
 app.get("/addProfile", addProfile);
 app.post("/addProfile", addProfile);
 app.get("/editProfile", editProfile);
@@ -85,10 +88,15 @@ app.get("/allProfile", allProfile);
 app.get("/MyBoardList", showBoard.showMyBoardList);
 app.get("/MyBoard/:post_num", showBoard.showMyBoard);
 app.post("/MyBoard/:post_num", showBoard.showMyBoard);
+app.get("/MyBoard/:post_num/delete", deleteBoard.showDeleteBoard);
+app.post("/MyBoard/:post_num/delete", deleteBoard.deleteBoard);
+
 app.get("/OtherBoardList", showBoard.showOtherBoardList);
 app.get("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/satisfaction", showBoard.addSatisfaction);
+app.get("/findThroughPlace", findBoard.findThroughPlace);
+app.post("/findThroughPlace", findBoard.showBoardsOfPlace);
 
 app.post("/subscribe", subscribeRouter);
 app.post("/scrap", scrapRouter);

@@ -5,6 +5,12 @@ const bcrypt = require("bcrypt");
 
 exports.showMyBoardList = async (req, res) => {
   const userid = req.session.user["userid"];
+  // let userid;
+  // if (req.session.user) {
+  //   userid = req.session.user["userid"];
+  // } else {
+  //   user_id = req.params.user_id;
+  // }
   const connection = await pool.getConnection(async (conn) => conn);
   const result = await connection.query(
     `SELECT * FROM post as po JOIN place as pl ON po.place_num = pl.place_num 
@@ -127,16 +133,27 @@ exports.showMyBoard = async (req, res) => {
 };
 
 exports.showOtherBoardList = async (req, res) => {
-  const userid = req.session.user["userid"];
+  // const userid = req.session.user["userid"];
+  let userid; //로그인 안했을 때 보이게 하기 위해서
+  if (req.session.user) {
+    userid = req.session.user["userid"];
+  } else {
+    userid = req.params.user_id;
+  }
   const connection = await pool.getConnection(async (conn) => conn);
   const result = await connection.query(
     `SELECT * FROM post as po JOIN place as pl ON po.place_num = pl.place_num`
   );
 
-  const nickName = await connection.query(
-    `SELECT nickname FROM user WHERE user_id = ?`,
-    userid
-  );
+  let nickName;
+  if (req.session.user) {
+    nickName = await connection.query(
+      `SELECT nickname FROM user WHERE user_id = ?`,
+      [userid]
+    );
+  } else {
+    nickName = "로그인 전입니다.";
+  }
 
   var postNum = [];
   var placePhoto = [];
@@ -150,8 +167,6 @@ exports.showOtherBoardList = async (req, res) => {
     postUser.push(data.user_id);
   }
 
-  // console.log(postNum);
-
   res.render("board/showOtherBoardList", {
     title: "모든 게시글 목록",
     userid: userid,
@@ -160,12 +175,19 @@ exports.showOtherBoardList = async (req, res) => {
     placePhoto: placePhoto,
     placeName: placeName,
     post_userid: postUser,
+    requestUser: req.session.user,
   });
 };
 
 exports.showOtherBoard = async (req, res, next) => {
   // try {
-  let userid = req.session.user["userid"];
+  let userid;
+  if (req.session.user) {
+    userid = req.session.user["userid"];
+  } else {
+    userid = req.params.user_id;
+  }
+  // let userid = req.session.user["userid"];
   // console.log(req.session.user["userid"]);
 
   //const post_userid = req.body.post_userid;
@@ -184,10 +206,17 @@ WHERE po.post_num = ?`,
   );
 
   const post_userid = result[0][0].user_id;
-  const mynickName = await connection.query(
-    `SELECT nickname FROM user WHERE user_id = ?`,
-    [userid]
-  );
+
+  let mynickName;
+  if (req.session.user) {
+    mynickName = await connection.query(
+      `SELECT nickname FROM user WHERE user_id = ?`,
+      [userid]
+    );
+  } else {
+    mynickName = "로그인 전입니다.";
+    // console.log(mynickName);
+  }
   const post_user_nickName = await connection.query(
     `SELECT nickname FROM user WHERE user_id = ?`,
     [post_userid]
@@ -197,8 +226,8 @@ WHERE po.post_num = ?`,
 
   const result2 = await connection.query(
     `SELECT * FROM shortReview as sr 
-JOIN satisfy as st ON sr.review_num = st.review_num
-WHERE sr.post_num = ?`,
+    JOIN satisfy as st ON sr.review_num = st.review_num
+    WHERE sr.post_num = ?`,
     [post_num]
   );
 
@@ -237,10 +266,16 @@ WHERE sr.post_num = ?`,
   if (post_userid == userid) {
     //login 전 화면에서 session 접근 시 undefined 오류
 
-    const mynickName = await connection.query(
-      `SELECT nickname FROM user WHERE user_id = ?`,
-      [userid]
-    );
+    let mynickName;
+    if (req.session.user) {
+      mynickName = await connection.query(
+        `SELECT nickname FROM user WHERE user_id = ?`,
+        [userid]
+      );
+    } else {
+      mynickName = "로그인하기 전입니다.";
+      // console.log(mynickName);
+    }
 
     var numList = [];
     var contList = [];
@@ -278,6 +313,12 @@ WHERE sr.post_num = ?`,
     var ansList = [];
     var userList = [];
 
+    //본인 게시글 아닐 때에만 조회했을 때 view_count 증가되도록
+    let inq = await connection.query(
+      `UPDATE post SET view_count=? WHERE post_num =?`,
+      [++result[0][0].view_count, post_num]
+    ); //조회
+
     let scrap = await connection.query(
       "SELECT * FROM Scrap WHERE user_id = ? AND post_num = ?",
       [userid, post_num]
@@ -289,7 +330,7 @@ WHERE sr.post_num = ?`,
     }
 
     for (var data of result3[0]) {
-      if (data.user_id == req.session.user["userid"]) {
+      if (data.user_id == /*req.session.user["userid"]*/ userid) {
         mynumList.push(data.qna_num);
         mycontList.push(data.qna_cont);
         myansList.push(data.qna_ans);
@@ -320,6 +361,7 @@ WHERE sr.post_num = ?`,
       myqna_ans: myansList,
       pu_nickname: post_user_nickName[0][0].nickname,
       scrap: scrap,
+      requestUser: req.session.user,
     });
   }
   connection.release();
@@ -334,41 +376,38 @@ exports.addSatisfaction = async (req, res) => {
   const review_num = req.body.review_num;
   const post_num = req.body.post_num;
   var pct = [];
-  pct.push(req.body.mys_pct1)
-  pct.push(req.body.mys_pct2)
-  pct.push(req.body.mys_pct3)
-  
+  pct.push(req.body.mys_pct1);
+  pct.push(req.body.mys_pct2);
+  pct.push(req.body.mys_pct3);
+
   const connection = await pool.getConnection(async (conn) => conn);
   const check = await connection.query(
     `SELECT s_num, user_id, s_pct1, s_pct2, s_pct3 FROM satisfy WHERE post_num = ? and review_num = ? and user_id = ?`,
     [post_num, review_num, user_id]
   );
 
-
-  var get_pct = []; 
+  var get_pct = [];
 
   if (check[0].length > 0) {
     get_pct.push(check[0][0].s_pct1);
     get_pct.push(check[0][0].s_pct2);
     get_pct.push(check[0][0].s_pct3);
 
-    for(var i = 0; i < 3; i++){
-      if(pct[i] > 0){
-        if(get_pct[i] <= 0){
-          if(i == 0){
-          var change = await connection.query(
-            `UPDATE satisfy SET s_pct1 = ? where s_num = ?`,
-            [pct[0], check[0][0].s_num]
-          );
-          }
-          else if(i == 1){
-          var change =  await connection.query(
+    for (var i = 0; i < 3; i++) {
+      if (pct[i] > 0) {
+        if (get_pct[i] <= 0) {
+          if (i == 0) {
+            var change = await connection.query(
+              `UPDATE satisfy SET s_pct1 = ? where s_num = ?`,
+              [pct[0], check[0][0].s_num]
+            );
+          } else if (i == 1) {
+            var change = await connection.query(
               `UPDATE satisfy SET s_pct2 = ? where s_num = ?`,
               [pct[1], check[0][0].s_num]
             );
-          }
-          else {
-          var change = await connection.query(
+          } else {
+            var change = await connection.query(
               `UPDATE satisfy SET s_pct3 = ? where s_num = ?`,
               [pct[2], check[0][0].s_num]
             );
@@ -377,29 +416,30 @@ exports.addSatisfaction = async (req, res) => {
             res.write(
               `<script type="text/javascript">alert('Complete to add satisfaction!')</script>`
             );
-            res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
+            res.write(
+              `<script>location.href = '/OtherBoard/${post_num}'</script>`
+            );
           }
-        } 
-        else {
+        } else {
           res.write(
             `<script type="text/javascript">alert('Already add satisfaction!')</script>`
           );
-          res.write(`<script>location.href = '/OtherBoard/${post_num}'</script>`);
-          }
+          res.write(
+            `<script>location.href = '/OtherBoard/${post_num}'</script>`
+          );
+        }
       }
     }
-
-
   } else {
-    for(var i = 0; i < 3; i++){
-      if(pct[i] == ''){
+    for (var i = 0; i < 3; i++) {
+      if (pct[i] == "") {
         pct[i] = null;
       }
     }
     const result = await connection.query(
       `INSERT INTO satisfy(s_pct1, s_pct2, s_pct3, user_id, post_num, review_num)
       VALUES(?, ?, ?, ?, ?, ?)`,
-      [pct[0],pct[1], pct[2], user_id, post_num, review_num]
+      [pct[0], pct[1], pct[2], user_id, post_num, review_num]
     );
 
     if (result[0].affectedRows == 1) {
