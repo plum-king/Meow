@@ -4,11 +4,22 @@ const router = express.Router();
 const pool = require("../db.js");
 
 router.get("/profile/:userid", async (req, res, next) => {
-  const nickname = req.session.user["nickname"];
-  const myid = req.session.user["userid"];
+  let nickname;
+  // const myid = req.session.user["userid"];
+  let notUser = false; //로그인 되어있는 경우
+  let myid;
+  //로그인 안했을 때 보이게 하기 위해서
+  if (req.session.user) {
+    myid = req.session.user["userid"];
+    nickname = req.session.user["nickname"];
+  } else {
+    myid = "null";
+    nickname = req.params.nickname;
+    notUser = true; //로그인 되어있지 않은 경우
+  } //else 지워도 되는지 확인해보기
   const userid = req.params.userid;
 
-  let isUser;
+  let isUser; //로그인한 유저 = 해당 프로필 유저?
   let canSubs = false;
   let myPost; //내가 작성한 게시글
   let subscribe; //내가 구독한 사람
@@ -29,7 +40,7 @@ router.get("/profile/:userid", async (req, res, next) => {
       userid,
     ]);
 
-    //my 게시물
+    //올린 게시물
     myPost = await pool.query(
       `SELECT post_num, place_photo FROM post WHERE user_id =?`,
       [userid]
@@ -37,7 +48,6 @@ router.get("/profile/:userid", async (req, res, next) => {
     if (myPost[0][0] == undefined) {
       myPost = "작성한 게시물이 없습니다.";
     }
-
     //구독
     subscribe = await pool.query(`SELECT * FROM subscribe WHERE user_id1 = ?`, [
       userid,
@@ -101,6 +111,8 @@ router.get("/profile/:userid", async (req, res, next) => {
       scrap: scrap,
       scrapPic: scrapPic1,
       userid: userid,
+      notUser: notUser,
+      requestUser: req.session.user,
     });
   } catch (err) {
     console.error(err);
