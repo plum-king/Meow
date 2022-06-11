@@ -55,7 +55,7 @@ router.post(
     const price = post.price;
 
     const place_satisfy = post.place_satisfy;
-    var tag_num = post.tag_num;
+    var tag_num = parseInt(post.tag_num[0]) + 1;
     const tag_cont = post.tag_cont;
     const review_cont1 = post.review_cont1;
     const review_cont2 = post.review_cont2;
@@ -130,9 +130,9 @@ router.post(
       let data3;
       let check3;
 
-      check3 = await pool.query(`SELECT * FROM tag WHERE tag_cont = ?`, [
-        tag_cont,
-      ]);
+      // check3 = await pool.query(`SELECT * FROM tag WHERE tag_cont = ?`, [
+      //   tag_cont,
+      // ]);
 
       // if (tag_cont.length > 0) {
       //   if (check3[0][0] == undefined) {
