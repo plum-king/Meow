@@ -1,50 +1,33 @@
 @charset "utf-8";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 /* CSS Document */
+.update_con {
+  color: #1D3557;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  width: 500px;
+  height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px solid #457B9D;
+  border-radius: 10px;
+  background-color: #F1FAEE;
+}
+
+.input {
+  text-align: left;
+  margin-top: 20px;
+}
 
 h1 {
-    font-family: "Noto Sans KR", sans-serif;
+    font-family: 'Kdam Thmor Pro', sans-serif;
     text-align: center;
     font-size: 1.2rem;
 } 
-
-body {
-    font-family: "Noto Sans KR", sans-serif;
-    margin: 20px; 
-    font-size: 1.2rem;
-    font-family: "Noto Sans KR", sans-serif;
-}
-
-
-  table {
-    font-family: "Noto Sans KR", sans-serif;
-    width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-  }
-
-  th {
-    padding: 10px;
-    font-family: "Noto Sans KR", sans-serif;
-    border-bottom: 1px solid #444444;
-    border-left: 1px solid #444444;
-  }
-  
-  .jb-th-1 {
-    width: 300px;
-    height: 100px;
-  }
-
-  td {
-    padding: 10px;
-    font-family: "Noto Sans KR", sans-serif;
-    border-bottom: 1px solid #444444;
-    border-left: 1px solid #444444;
-  }
-
-  th:first-child, td:first-child {
-    border-left: none;
-  }
 
 #button {
     -webkit-appearance: none;
@@ -53,18 +36,29 @@ body {
 }
 
 #button {
-  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 0.5rem 1rem;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Kdam Thmor Pro', sans-serif;
   font-size: 1rem;
   font-weight: 400;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   width: auto;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: #457B9D;
+  border-color: transparent;
+  border-radius : 5px;
+  color: white;
   cursor: pointer;
   transition: 0.5s;
+}
+
+#button:hover {
+  border : 2px solid #457B9D;
+  background-color: #F1FAEE;
+  color : #457B9D;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #457B9D;
+  transform : translateY(-0.25em);
 }

@@ -1,0 +1,195 @@
+header {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+    text-align: center;
+    color: #1D3557;
+  }
+  .top {
+    height: 160px;
+    margin: 10px 30px 10px 30px;
+  }
+  .profile {
+    background-color: #F1FAEE;
+    width: 160px;
+    height: 160px;
+    float: left;
+    margin-right : 0.5%;
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 160px;
+    padding: 10px 0 0 10px;
+  }
+  .info {
+    background-color: #F1FAEE;
+    width: 180px;
+    height: 160px;
+    float: left;
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+/*     margin: 15px 0 15px 30px; */
+    margin-left : 0.5%;
+    margin-right : 0.5%;
+    padding: 10px 0 0 10px;
+  }
+  .qna {
+    background-color: #F1FAEE;
+    overflow-y: scroll;
+    width: 280px;
+    height: 160px;
+    float: left;
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+    margin-left: 0.5%;
+    margin-right : 0.5%;
+    text-align: center;
+    padding: 10px 0 0 10px;
+  }
+  .intro {
+    height: 50px;
+    background-color: #F1FAEE;
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+    margin: 0px 30px -10px 30px;
+    padding: 5px 5px 5px 5px;
+  }
+  .edit > button {
+    width: 110px;
+    margin: 5px 5px 5px 5px;
+    display: block;
+    text-align: center;
+    background-color: #457B9D;
+    border-color: transparent;
+    border-radius : 5px;
+    color: white;
+    padding: 5px 5px 5px 5px;
+  }
+
+.edit > button:hover {
+  border : 2px solid #457B9D;
+  background-color: white;
+  color : #457B9D;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #457B9D;
+  transform : translateY(-0.25em);
+}
+
+.edit {
+    width: 180px;
+    height: 160px;
+    float: left;
+    margin-left : 0.5%;
+    margin-right : 0.5%;
+    padding: 10px 0 0 10px;
+}
+
+.goback {
+    width: 8%;
+    height: 20px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 150px;
+    padding: 5px 0 0 5px;
+}
+
+  .bottom {
+    margin: 10px 30px 10px 30px;
+  }
+  .post {
+    overflow-y: scroll;
+    width: 28%;
+    height: 200px;
+    float: left;
+    margin-right: 0.5%;
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+    background-color: #F1FAEE;
+    padding: 5px 0 0 5px;
+  }
+  .subscribe {
+    overflow-y: scroll;
+    width: 28%;
+    height: 200px;
+    float: left;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+    background-color: #F1FAEE;
+    padding: 5px 0 0 5px;
+  }
+  .scrap {
+    overflow-y: scroll;
+    width: 28%;
+    height: 200px;
+    float: left;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    border: 2px solid #457B9D;
+    border-radius: 10px;
+    background-color: #F1FAEE;
+    padding: 5px 0 0 5px;
+  }
+  .qna::-webkit-scrollbar {
+    display: none;
+  }
+  .post::-webkit-scrollbar {
+    display: none;
+  }
+  .subscribe::-webkit-scrollbar {
+    display: none;
+  }
+  .scrap::-webkit-scrollbar {
+    display: none;
+  }
+
+#subscribeBtn {
+    width: 100px;
+    margin: 5px 5px 5px 5px;
+    display: block;
+    text-align: center;
+    background-color: #457B9D;
+    border-color: transparent;
+    border-radius : 5px;
+    color: white;
+    padding: 5px 5px 5px 5px;
+}
+
+#subscribeBtn:hover {
+  border : 2px solid #457B9D;
+  background-color: #F1FAEE;
+  color : #457B9D;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #457B9D;
+  transform : translateY(-0.25em);
+}
+
+#subscribeCancelBtn {
+    width: 100px;
+    margin: 5px 5px 5px 5px;
+    display: block;
+    text-align: center;
+    background-color: #457B9D;
+    border-color: transparent;
+    border-radius : 5px;
+    color: white;
+    padding: 5px 5px 5px 5px;
+}
+
+#subscribeCancelBtn:hover {
+  border : 2px solid #457B9D;
+  background-color: #F1FAEE;
+  color : #457B9D;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #457B9D;
+  transform : translateY(-0.25em);
+}
+
+a {
+  text-decoration-line: none;
+  font-size: 11pt;
+  font-weight: bold;
+  text-align: right;
+  color: #457B9D;
+}

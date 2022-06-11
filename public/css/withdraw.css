@@ -1,40 +1,60 @@
 @charset "utf-8";
 /* CSS Document */
  
-body {
-    margin: 0px; 
-    font-size: 18px;
-    color: #FFF;
+h1 {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  text-align: center;
+  font-size: 1.2rem;
 }
-#box {
-    position: relative;
-    height: auto;
-    margin: auto; 
-    background-color: #F90;
+
+.delete_con {
+  color: #1D3557;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  width: 300px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px solid #457B9D;
+  border-radius: 10px;
+  background-color: #F1FAEE;
 }
-#top {
-    background-color: #333;
-    height: 100px;
-    position: relative;
+
+.button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0.5rem 1rem;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: auto;
+  background-color: #457B9D;
+  border-color: transparent;
+  border-radius : 5px;
+  color: white;
+  cursor: pointer;
+  transition: 0.5s;
 }
-#left {
-    background-color: #09C;
-    float: left;
-    height: 500px;
-    width: 15%;
-    position: relative;
+
+.button:hover {
+  border : 2px solid #457B9D;
+  background-color: #F1FAEE;
+  color : #457B9D;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #457B9D;
+  transform : translateY(-0.25em);
 }
-#main {
-    background-color: #3C0;
-    float: left;
-    height: 500px;
-    width: 85%;
-    position: relative;
-}
-#bottom {
-    background-color: #C0F;
-    height: 70px;
-    position: relative;
-    clear: both; 
-    float: left; 
+
+a {
+  text-decoration-line: none;
+  font-size: 11pt;
+  font-weight: bold;
+  color: #457B9D;
 }
