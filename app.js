@@ -7,32 +7,32 @@ const multer = require("multer");
 const upload = multer({dest: "./upload"});
 
 const port = 3000;
-const main = require("./routes/main");
-const login = require("./routes/login");
-const logout = require("./routes/logout");
-const signup = require("./routes/signup");
+const main = require("./controllers/main");
+const login = require("./controllers/login");
+const logout = require("./controllers/logout");
+const signup = require("./controllers/signup");
 
-const profile = require("./routes/profile");
-const addProfile = require("./routes/addProfile");
-const editProfile = require("./routes/editProfile");
-const allProfile = require("./routes/allProfile");
+const profile = require("./controllers/profile");
+const addProfile = require("./controllers/addProfile");
+const editProfile = require("./controllers/editProfile");
+const allProfile = require("./controllers/allProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
 
-const addBoard = require("./routes/addBoard");
+const addBoard = require("./controllers/addBoard");
 const editBoard = require("./controllers/editBoard");
 const showBoard = require("./controllers/showBoardController");
 const findBoard = require("./controllers/findBoardController");
-const deleteBoard = require("./routes/deleteBoard");
+const deleteBoard = require("./controllers/deleteBoard");
 const writeQnA = require("./controllers/qnaController");
 
-const addTag = require("./routes/tag");
+const addTag = require("./controllers/tag");
 
-const subscribeRouter = require("./routes/subscribe");
-const scrapRouter = require("./routes/scrap");
+const subscribeRouter = require("./controllers/subscribe");
+const scrapRouter = require("./controllers/scrap");
 
-const category1 = require("./routes/category1");
-const category2 = require("./routes/category2");
+const category1 = require("./controllers/category1");
+const category2 = require("./controllers/category2");
 // const category3 = require("./routes/category3");
 
 app.set("view engine", "ejs");
