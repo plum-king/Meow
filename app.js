@@ -28,8 +28,8 @@ const writeQnA = require("./controllers/qnaController");
 
 const addTag = require("./controllers/tag");
 
-const subscribeRouter = require("./controllers/subscribe");
-const scrapRouter = require("./controllers/scrap");
+const subscribe = require("./controllers/subscribe");
+const scrap = require("./controllers/scrap");
 
 const category1 = require("./controllers/category1");
 const category2 = require("./controllers/category2");
@@ -98,8 +98,8 @@ app.post("/satisfaction", showBoard.addSatisfaction);
 app.get("/findThroughPlace", findBoard.findThroughPlace);
 app.post("/findThroughPlace", findBoard.showBoardsOfPlace);
 
-app.post("/subscribe", subscribeRouter);
-app.post("/scrap", scrapRouter);
+app.post("/subscribe", subscribe);
+app.post("/scrap", scrap);
 
 app.get("/category1", category1);
 app.get("/category2", category2);
