@@ -2,22 +2,49 @@
 /* CSS Document */
 
 .signup_con {
-  text-align: center;
+  color: #1D3557;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: bold;
+  text-align: left;
   margin: auto;
   margin-top: 100px;
   width: 300px;
-  height: 700px;
+  height: 750px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 1px solid lightgrey;
+  border: 2px solid #457B9D;
   border-radius: 10px;
+  background-color: #F1FAEE;
 }
 
 #signupBtn {
-  width: 100%;
-  background-color: skyblue;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  background-color: #457B9D;
   border-color: transparent;
+  border-radius : 5px;
   color: white;
+}
+
+#signupBtn:hover {
+  border : 2px solid #457B9D;
+  background-color: #F1FAEE;
+  color : #457B9D;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #457B9D;
+  transform : translateY(-0.25em);
+}
+
+a {
+  text-decoration-line: none;
+  font-size: 11pt;
+  font-weight: bold;
+  color: #457B9D;
 }

@@ -3,99 +3,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <link href="/css/Profile.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <title><%= title %></title>
     <%- include('../partials/head') %>
-    <style>
-      header {
-        font-size: 32px;
-        text-align: center;
-      }
-      .top {
-        height: 160px;
-        margin: 10px 30px 10px 30px;
-      }
-      .profile {
-        width: 160px;
-        height: 160px;
-        float: left;
-        border: 1.5px solid;
-        border-radius: 1em;
-        text-align: center;
-        line-height: 160px;
-      }
-      .info {
-        width: 180px;
-        height: 130px;
-        float: left;
-        border: 1.5px solid;
-        border-radius: 2em;
-        margin: 15px 0 15px 30px;
-        padding: 15px 0 0 15px;
-      }
-      .qna {
-        overflow-y: scroll;
-        width: 280px;
-        height: 160px;
-        float: left;
-        border: 1.5px solid;
-        border-radius: 2em;
-        margin-left: 30px;
-        text-align: center;
-      }
-      .intro {
-        border: 1px solid;
-        border-radius: 10px;
-        margin: 0px 30px 0px 30px;
-        padding: 5px 5px 5px 5px;
-      }
-      .edit > button {
-        width: 100px;
-        margin: auto;
-        display: block;
-      }
-      .bottom {
-        margin: 10px 30px 10px 30px;
-      }
-      .post {
-        overflow-y: scroll;
-        width: 28%;
-        height: 200px;
-        float: left;
-        margin-right: 3%;
-        border: 1.5px solid;
-        border-radius: 1em;
-      }
-      .subscribe {
-        overflow-y: scroll;
-        width: 28%;
-        height: 200px;
-        float: left;
-        margin-right: 3%;
-        border: 1.5px solid;
-        border-radius: 1em;
-      }
-      .scrap {
-        overflow-y: scroll;
-        width: 28%;
-        height: 200px;
-        float: left;
-        margin-right: 3%;
-        border: 1.5px solid;
-        border-radius: 1em;
-      }
-      .qna::-webkit-scrollbar {
-        display: none;
-      }
-      .post::-webkit-scrollbar {
-        display: none;
-      }
-      .subscribe::-webkit-scrollbar {
-        display: none;
-      }
-      .scrap::-webkit-scrollbar {
-        display: none;
-      }
-    </style>
     <script>
       var divdiv = document.getElementById("qna");
       divdiv.scrollTop = divdiv.scrollHeight;
@@ -142,16 +54,16 @@
       <div class="edit">
         <% if (user) { %> <% if (row.home == null && row.introduction == null) {
         %>
-        <button onclick="location.href='/addProfile'">프로필 추가</button>
+        <button onclick="location.href='/addProfile'"><i class="bi bi-plus-square"> </i> 프로필 추가</button>
         <% } else { %>
-        <button onclick="location.href='/editProfile'">프로필 수정</button>
+        <button onclick="location.href='/editProfile'"><i class="bi bi-pencil-square"> </i> 프로필 수정</button>
         <% } %> <% } else { %>
         <form action="/subscribe" method="post">
           <input type="hidden" name="userid" value="<%=row.user_id%>" />
           <% if (canSubs) { %>
-          <button type="submit" id="subscribeBtn">구독취소</button>
+          <button type="submit" id="subscribeBtn"><i class="bi bi-x-square-fill"> </i> 구독취소</button>
           <% } else { %>
-          <button type="submit" id="subscribeCancelBtn">구독</button>
+          <button type="submit" id="subscribeCancelBtn"><i class="bi bi-heart-fill"> </i> 구독</button>
           <% } %>
         </form>
         <% } %>
@@ -217,6 +129,8 @@
       </div>
     </div>
     <br />
+    <div class="goback">
     <a href="/">뒤로가기</a>
+  </div>
   </body>
 </html>
