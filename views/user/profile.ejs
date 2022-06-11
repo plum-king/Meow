@@ -103,6 +103,8 @@
       divdiv2.scrollTop = divdiv2.scrollHeight;
       var divdiv3 = document.getElementById("subscribe");
       divdiv3.scrollTop = divdiv3.scrollHeight;
+      var divdiv4 = document.getElementById("scrap");
+      divdiv4.scrollTop = divdiv3.scrollHeight;
     </script>
   </head>
 
@@ -130,13 +132,13 @@
         <a href="/Otherboard/<%=qna.post_num%>">Q : <%=qna.qna_cont%></a><br />
         <% i++; %> <% }); %> <% } %>
       </div>
-      <div class="qna">
+      <!-- <div class="qna">
         &lt;답변내용&gt;<br />
         <% if(qnas[0].length > 0) { %> <% let j = 1; qnas[0].forEach( qna => {
         %>
         <a href="/Otherboard/<%=qna.post_num%>">A : <%=qna.qna_ans%></a><br />
         <% j++; %> <% }); %> <% } %>
-      </div>
+      </div> -->
       <div class="edit">
         <% if (user) { %> <% if (row.home == null && row.introduction == null) {
         %>
