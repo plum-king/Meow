@@ -32,7 +32,7 @@ router.get("/profile/:userid", async (req, res, next) => {
 
   try {
     const data = await pool.query(
-      "SELECT user_id, age, gender, job, home, introduction FROM User WHERE user_id = ?",
+      "SELECT user_id, nickname, age, gender, job, home, introduction FROM User WHERE user_id = ?",
       [userid]
     );
 

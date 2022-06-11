@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title><%= title %></title>
     <!--css 들어갈 부분-->
-    <link href="../public/css/Board.css" rel="stylesheet"/>
+    <link href="/css/Board.css" rel="stylesheet"/>
     <%- include('./partials/head') %>
   </head>
 
@@ -14,14 +14,13 @@
     <h1>Meow</h1>
     <p>
       <a href="/addTag" class="nav-link">태그 추가하기</a>
+     
       <br />
       <a href="/addBoard" class="nav-link">게시글 작성</a>
+     
       <br />
-      <!-- <a href="/editBoard" class="nav-link">게시글 수정</a> -->
-      <!-- <br /> -->
-      <a href="/allProfile" class="nav-link">전체 프로필</a>
-      <br /><br />
       <a href="/myBoardList">나의 게시글 목록</a>
+     
       <br />
       <a href="/otherBoardList">모든 게시글 목록</a>
 
@@ -31,6 +30,7 @@
       <br>
       <a href="/findThroughPlace">장소로 찾는 게시글 목록</a>
       <br />
+    </p>
       <div class="wrap" style="text-align: center">
         <h4 style="font-weight: 600; text-align: center">인기 프로필 랭킹</h4>
         <br />
@@ -52,26 +52,21 @@
         ></a>
         &emsp;&emsp; <% } %>
       </div>
-      
-      <br>
       <div class = "wrap">
       <p style ="font-weight: 600; text-align:center;">인기 게시글 랭킹</p>
       <% for (let i = 0; i < rank5.length; i++) { %>
         <% if (userid != rank5[i].user_id) { %>
-        <article>#<%= i+1 %>&emsp;&emsp;<a href="/Otherboard/<%=rank5[i].post_num%>/"
+        <article>#<%= i+1 %><br><a href="/Otherboard/<%=rank5[i].post_num%>/"
           ><img
-            src="..<%=rank5[i].place_photo%>" width="100" height="100" 
-        /></a></article>
+            src="..<%=rank5[i].place_photo%>" width="150" height="150" 
+        /></a></article>&emsp;&emsp;
         <% } else { %>
-          <article>#<%= i+1 %>&emsp;&emsp;<a href="/Myboard/<%=rank5[i].post_num%>/"
+          <article>#<%= i+1 %><br><a href="/Myboard/<%=rank5[i].post_num%>/"
             ><img
               src="../..<%=rank5[i].place_photo%>"
-              width="100" height="100"
-          /></a></article>
-          <!-- </article> -->
-          <% } %> <br /><% } %>
+              width="150" height="150"
+          /></a></article>&emsp;&emsp;
+          <% } %><% } %>
       </div>
-
-    </p>
   </body>
 </html>

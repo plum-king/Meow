@@ -3,6 +3,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <link href="/css/Board.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
     <title><%= title %></title>
     <!--css 들어갈 부분-->
     <%- include('./partials/head') %>
@@ -45,14 +47,19 @@
       <h4 style="font-weight: 600; text-align: center">인기 게시글 랭킹</h4>
       <br />
       <% for (let i = 0; i < rank5.length; i++) { %>
-      <input type="hidden" name="userid" value="<%=rank5[i].user_id%>" />
-      <article>
-        #<%= i+1 %>&emsp;&emsp;<a href="/Otherboard/<%=rank5[i].post_num%>/"
-          ><img src="..<%=rank5[i].place_photo%>" width="100" height="100"
-        /></a>
-      </article>
-      <br /><% } %>
-    </div>
+        <% if (userid != rank5[i].user_id) { %>
+        <article>#<%= i+1 %><br><a href="/Otherboard/<%=rank5[i].post_num%>/"
+          ><img
+            src="..<%=rank5[i].place_photo%>" width="150" height="150" 
+        /></a></article>&emsp;&emsp;
+        <% } else { %>
+          <article>#<%= i+1 %><br><a href="/Myboard/<%=rank5[i].post_num%>/"
+            ><img
+              src="../..<%=rank5[i].place_photo%>"
+              width="150" height="150"
+          /></a></article>&emsp;&emsp;
+          <% } %><% } %>
+      </div>
     <a href="/otherBoardList">모든 게시글 목록</a>
   </body>
 </html>

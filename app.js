@@ -15,7 +15,6 @@ const signup = require("./controllers/signup");
 const profile = require("./controllers/profile");
 const addProfile = require("./controllers/addProfile");
 const editProfile = require("./controllers/editProfile");
-const allProfile = require("./controllers/allProfile");
 const editUser = require("./controllers/editController");
 const deleteUser = require("./controllers/deleteController");
 
@@ -83,7 +82,6 @@ app.get("/addProfile", addProfile);
 app.post("/addProfile", addProfile);
 app.get("/editProfile", editProfile);
 app.post("/editProfile", editProfile);
-app.get("/allProfile", allProfile);
 
 app.get("/MyBoardList", showBoard.showMyBoardList);
 app.get("/MyBoard/:post_num", showBoard.showMyBoard);

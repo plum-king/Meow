@@ -53,7 +53,9 @@ h3 {
     float:left; 
     margin: 10px 20px;
 }
+
 .list .cont{
+    overflow-y: scroll;
     display:none; 
     position:absolute; 
     width: 680px; 
@@ -63,6 +65,10 @@ h3 {
     top: 70px; 
     left: 40px;
 }
+.list .cont::-webkit-scrollbar {
+    display: none;
+  }
+
 li.is_on .btn{
     font-weight:bold; 
     color: black;

@@ -22,13 +22,20 @@ exports.showBoardsOfPlace = async (req, res) => {
 
     try{
         let result;
+        let check; 
+
         result = await pool.query(
             `SELECT place_num FROM place WHERE place_name = ? and place_loc=?`, 
             [place_name, place_loc]
           );
         console.log(result[0][0]);
 
-        if(result[0][0]!=undefined){
+        check =  await pool.query(
+          `SELECT post_num FROM post WHERE place_num = ?`, 
+          [result[0][0].place_num]
+        );
+
+        if(check[0][0]!=undefined){
             let result2;
             result2 = await pool.query(
                 `SELECT post_num, place_photo FROM post WHERE place_num = ?`, 
@@ -48,7 +55,9 @@ exports.showBoardsOfPlace = async (req, res) => {
                 userid : userid,
                 nickname : nickname,
                 postNum : postNum,
-                placePhoto : placePhoto
+                placePhoto : placePhoto, 
+                place_name : place_name,
+                place_loc : place_loc
               });   
                
         } else {
