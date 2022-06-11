@@ -167,8 +167,6 @@ exports.showOtherBoardList = async (req, res) => {
     postUser.push(data.user_id);
   }
 
-  // console.log(postNum);
-
   res.render("board/showOtherBoardList", {
     title: "모든 게시글 목록",
     userid: userid,

@@ -22,6 +22,7 @@ const deleteUser = require("./controllers/deleteController");
 const addBoard = require("./routes/addBoard");
 const editBoard = require("./controllers/editBoard");
 const showBoard = require("./controllers/showBoardController");
+const findBoard = require("./controllers/findBoardController");
 const deleteBoard = require("./routes/deleteBoard");
 const writeQnA = require("./controllers/qnaController");
 
@@ -90,6 +91,8 @@ app.get("/OtherBoardList", showBoard.showOtherBoardList);
 app.get("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/OtherBoard/:post_num", showBoard.showOtherBoard);
 app.post("/satisfaction", showBoard.addSatisfaction);
+app.get("/findThroughPlace", findBoard.findThroughPlace);
+app.post("/findThroughPlace", findBoard.showBoardsOfPlace);
 
 app.post("/subscribe", subscribeRouter);
 app.post("/scrap", scrapRouter);

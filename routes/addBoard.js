@@ -6,19 +6,19 @@ const session = require("express-session");
 //bcrypt 추가로 비밀번호 암호화하기
 
 router.get("/addBoard", async (req, res, next) => {
+  const userid = req.session.user["userid"];
+  const nickname = req.session.user["nickname"];
   const data = await pool.query(`SELECT * from tag ORDER BY tag_cont`);
-  // const data2 = await pool.query(`SELECT DISTINCT place_name from place ORDER BY place_name`);
-  // const data3 = await pool.query(`SELECT DISTINCT place_loc from place ORDER BY place_loc`);
-  const data4 = await pool.query(
-    `SELECT DISTINCT menu_name from menu ORDER BY menu_name`
-  );
+  const data4 = await pool.query(`SELECT DISTINCT menu_name from menu ORDER BY menu_name`);
 
-  res.render("board/addBoard", {
-    title: "게시글 작성",
-    tags: data[0],
-    menus: data4[0],
-  });
+  res.render("board/addBoard", {title: "게시글 작성", 
+  userid : userid, 
+  nickname : nickname,
+  tags: data[0], 
+  menus : data4[0]});
+
 });
+
 //이미지 업로드
 const multer = require("multer");
 const path = require("path");
