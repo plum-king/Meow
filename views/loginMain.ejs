@@ -43,22 +43,49 @@
       &emsp;&emsp; <% } %>
     </div>
     <br />
-    <div class="wrap" style="text-align: center">
+    <div class="wrap">
+      <div id="card">
       <h4 style="font-weight: 600; text-align: center">인기 게시글 랭킹</h4>
       <br />
       <% for (let i = 0; i < rank5.length; i++) { %>
         <% if (userid != rank5[i].user_id) { %>
-        <article>#<%= i+1 %><br><a href="/Otherboard/<%=rank5[i].post_num%>/"
-          ><img
-            src="..<%=rank5[i].place_photo%>" width="150" height="150" 
-        /></a></article>&emsp;&emsp;
+        <article>#<%= i+1 %> <br /> 
+          <div id="li">
+          <img
+            src="..<%=rank5[i].place_photo%>" style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            <br />
+            <%=rank5[i].place_name%> <br /><br />
+            <a
+              href="/Otherboard/<%=rank5[i].post_num%>/"
+              style="text-decoration: none; color: white"
+              >구경하러가기</a
+            >
+          </p>
+          <br /><br />
+        </div></div></article>&emsp;&emsp;
         <% } else { %>
-          <article>#<%= i+1 %><br><a href="/Myboard/<%=rank5[i].post_num%>/"
-            ><img
+          <article>#<%= i+1 %><br /><div id="li"><img
               src="../..<%=rank5[i].place_photo%>"
-              width="150" height="150"
-          /></a></article>&emsp;&emsp;
+              style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"
+          />
+          <div class="card-body">
+            <p class="card-text">
+              <br />
+              <%=rank5[i].place_name%> <br /><br />
+              <a
+                href="/Myboard/<%=rank5[i].post_num%>/"
+                style="text-decoration: none; color: white"
+                >구경하러가기</a
+              >
+            </p>
+            <br /><br />
+          </div>
+        </div></article>&emsp;&emsp;
           <% } %><% } %>
+        </div>
       </div>
     <a href="/otherBoardList">모든 게시글 목록</a>
   </body>

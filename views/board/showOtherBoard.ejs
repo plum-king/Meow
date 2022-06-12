@@ -44,8 +44,8 @@
             <span id="place"><i class="bi bi-shop-window"></i> <%=result.place_name%> / <%=result.place_loc%></span>
             <div class="leftbottom">
                 <br><br>
-                <span id="photo"><img src="<%= result.receipt_photo%> " width="200" height = "200"/> 
-                <img src="<%= result.place_photo%> " width="200" height = "200"/></span>
+                <span id="photo"><img src="<%= result.receipt_photo%> " style="width:200px; height:200px; object-fit: cover; border-radius: 10%;"/> 
+                <img src="<%= result.place_photo%> " style="width:200px; height:200px; object-fit: cover; border-radius: 10%;"/></span>
                 <br><br>
                 <span id="tagCont">#<%=result.tag_cont%></span>
                 <br><br>
