@@ -33,7 +33,7 @@ const search = require("./controllers/search");
 
 const category1 = require("./controllers/category1");
 const category2 = require("./controllers/category2");
-// const category3 = require("./routes/category3");
+const category3 = require("./controllers/category3");
 
 app.set("view engine", "ejs");
 
@@ -103,7 +103,7 @@ app.get("/search", search);
 
 app.get("/category1", category1);
 app.get("/category2", category2);
-// app.get("/category3", category3);
+app.get("/category3", category3);
 
 app.use("/image", express.static("./upload"));
 

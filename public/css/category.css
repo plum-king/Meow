@@ -54,16 +54,16 @@ h3 {
   margin: 10px 20px;
 }
 
-.list .cont {
-  overflow-y: scroll;
-  display: none;
-  position: absolute;
-  width: 680px;
-  height: 350px;
-  border: 1.5px solid;
-  border-radius: 1em;
-  top: 70px;
-  left: 40px;
+.list .cont{
+    overflow-y: scroll;
+    display:none; 
+    position:absolute; 
+    width: 750px; 
+    height:350px; 
+    border: 1.5px solid; 
+    border-radius: 1em;
+    top: 70px; 
+    left: 30px;
 }
 .list .cont::-webkit-scrollbar {
   display: none;
@@ -73,9 +73,10 @@ li.is_on .btn {
   font-weight: bold;
   color: black;
 }
-li.is_on .cont {
-  display: block;
-  padding: 20px;
+
+li.is_on .cont{
+    display:block;
+    padding: 25px;
 }
 li {
   list-style: none;
@@ -83,7 +84,7 @@ li {
 img {
   width: 150px;
   height: 100px;
-  margin: 10px 20px;
+  margin: 10px 10px;
 }
 
 #card #li {
