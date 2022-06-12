@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   // console.log(rank3);
 
   const postRank = await pool.query(
-    `SELECT post_num, place_photo, view_count, user_id FROM post`
+    `SELECT post_num, place_photo, view_count, user_id, place_name FROM post as po JOIN place as pl ON po.place_num = pl.place_num`
   );
   let rank5 = new Array(); //상위 5개 게시글 랭킹 보이기
   arrPost = postRank[0]; //view_count만으로 정렬하기 위한 배열
