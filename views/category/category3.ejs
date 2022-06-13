@@ -7,7 +7,21 @@
     <title><%= title %></title>
     <%- include('../partials/head') %>
     <style>
-       
+        .tab .list {
+        overflow-y: scroll;
+        height: 60px; 
+        }
+        .tab .list::-webkit-scrollbar {
+        width: 10px;
+        }
+        .tab .list::-webkit-scrollbar-track {
+        background-color: #e4e4e4;
+        border-radius: 100px;
+        }
+        .tab .list::-webkit-scrollbar-thumb {
+        background-color: blue;
+        border-radius: 100px;
+        }
     </style>
   </head>
 
