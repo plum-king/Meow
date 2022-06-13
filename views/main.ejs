@@ -4,56 +4,37 @@
   <head>
     <meta charset="utf-8" />
     <title><%= title %></title>
-    <link href="/css/Board.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
     <%- include('./partials/head') %>
   </head>
 
   <body>
     <%- include('./partials/nav') %>
     <h1>Meow</h1>
-    <p>
-      <a href="/addTag" class="nav-link" style="color:black; text-decoration: none; ">태그 추가하기</a>
-
-      <br />
-      <a href="/addBoard" class="nav-link" style="color:black; text-decoration: none; ">게시글 작성</a>
-
-      <br />
-      <a href="/myBoardList" style="color:black; text-decoration: none; ">나의 게시글 목록</a>
-
-      <br />
-      <a href="/otherBoardList" style="color:black; text-decoration: none; ">모든 게시글 목록</a>
-
-      <br />
-      <a href="/category1" style="color:black; text-decoration: none; ">카테고리</a>
-
-      <br />
-      <a href="/findThroughPlace" style="color:black; text-decoration: none; ">장소로 찾는 게시글 목록</a>
-      <br />
-    </p>
-    <div class="wrap" style="text-align: center">
-      <h4 style="font-weight: 600; text-align: center">인기 프로필 랭킹</h4>
-      <br />
-      <% for (let i = 0; i < rank3.length; i++) { %>
-      <a
-        href="/profile/<%= rank3[i].user_id%>"
-        style="text-decoration: none; color: black"
-        ><div
-          class="top_profile"
-          style="padding: 10px; display: inline-block; border: 2px solid #92B4EC;border-radius: 10px;"
-        >
-          #<%= i+1 %><br /><br />
-          <!--img 기본 경로가 public이라서 /images로 들어가야돼-->
-          <img src="../images/user.png" width="100" height="100" /><br /><br />
-          <b>닉네임:</b> <%= rank3[i].nickname %> <br />
-          <b>이름:</b> <%= rank3[i].name %> <br />
-          <b>나이:</b> <%= rank3[i].age %>대 <br />
-          <b>직업:</b> <%= rank3[i].job %> <br /></div
-      ></a>
-      &emsp;&emsp; <% } %>
+    <br>
+    <div class="top">
+      <hr class="line">
+      <ul class="mainBar">
+        <li><a href="/category1"><i class="bi bi-list"></i>카테고리</a></li>
+        <li><a href="/myBoardList">나의 게시글 목록</a></li>
+        <li><a href="/otherBoardList">모든 게시글 목록</a></li>
+        <li><a href="/findThroughPlace">장소로 찾는 게시글 목록</a></li>
+        <li><a href="/addTag" class="nav-link">태그 추가하기</a></li>
+        <li><a href="/addBoard" class="nav-link">게시글 작성</a></li>
+        <!-- <li><a href="/category1"><i class="bi bi-list"></i>카테고리</a></li> -->
+      </ul>
+      <hr class="line">
     </div>
-    <div class="wrap">
+
+    <!-- <br> -->
+   
+    <div class="wrap" id="left">
       <div id="card">
-        <h4 style="font-weight: 600; text-align: center">인기 게시글 랭킹</h4>
+        <br>
+        <h4>인기 게시글 랭킹</h4>
+        <br>
         <% for (let i = 0; i < rank5.length; i++) { %> <% if (userid !=
         rank5[i].user_id) { %>
         <article>
@@ -82,7 +63,8 @@
             </div>
           </div>
         </article>
-        &emsp;&emsp; <% } else { %>
+        <!-- &emsp;  -->
+        <% } else { %>
         <article>
           #<%= i+1 %><br />
           <div id="li">
@@ -105,12 +87,39 @@
                   >구경하러가기</a
                 >
               </p>
-              <br /><br />
+              <!-- <br /><br /> -->
             </div>
           </div>
         </article>
-        &emsp;&emsp;<% } %> <% } %>
+        <!-- &emsp;&emsp; -->
+        <% } %> <% } %>
+        &emsp;&emsp;
       </div>
+    </div>
+
+    <div class="wrap" id="right">
+      <h4>인기 프로필 랭킹</h4>
+      <br /><br>
+      <% for (let i = 0; i < rank3.length; i++) { %>
+      <a
+        href="/profile/<%= rank3[i].user_id%>"
+        style="text-decoration: none; color: black"
+        >
+        <div 
+          class="top_profile"
+          style="padding: 10px; display: inline-block; border: 2px solid #92B4EC; border-radius: 10px;"
+          >
+          #<%= i+1 %><br /><br />
+          <!--img 기본 경로가 public이라서 /images로 들어가야돼-->
+          <img src="../images/user.png" width="100" height="100" /><br /><br />
+          <b>닉네임:</b> <%= rank3[i].nickname %> <br />
+          <b>이름:</b> <%= rank3[i].name %> <br />
+          <b>나이:</b> <%= rank3[i].age %>대 <br />
+          <b>직업:</b> <%= rank3[i].job %> <br />
+        </div>
+      </a>
+      <!-- &emsp;&emsp; -->
+       <% } %>
     </div>
   </body>
 </html>
