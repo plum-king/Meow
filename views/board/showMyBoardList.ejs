@@ -13,11 +13,22 @@
         <title><%= title %></title>
         <%- include('../partials/nav') %>
         <div class="wrap">
+            <div id="card">
             <% for(var i = 0; i<postNum.length; i++) { %>
                 <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
                 <!-- <span id="placeName"><%=placeName[i]%></span><br> -->
-                    <article><a href = "/Myboard/<%=postNum[i]%>" ><img src="<%=placePhoto[i]%>" width='150' height="150"/></a></article>
-            <% } %>
+                    <article>
+                        <div id="li">
+                        <img src="<%=placePhoto[i]%>" style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"/>
+                        <div class="card-body" >
+                            <p class="card-text"> <br> <%=placeName[i]%> <br><br>
+                            <a href = "/Myboard/<%=postNum[i]%>/" style="text-decoration:none; color:white">구경하러가기</a></p>
+                              <br><br>
+                          </div>
+                        </div>
+                    </article>
+                <% } %>
+            </div>
         </div>
         <a href="/">뒤로가기</a>
     </body>

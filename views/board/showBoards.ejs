@@ -17,9 +17,13 @@
         </span><br><br>
         <div class="wrap">
             <% for(var i = 0; i<postNum.length; i++) { %>
+                <% if (userid == userID[i]) { %>
                 <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
-                    <article><a href = "/Myboard/<%=postNum[i]%>" ><img src="<%=placePhoto[i]%>" width='150' height="150"/></a></article>
-            <% } %>
+                    <article><a href = "/Myboard/<%=postNum[i]%>" ><img src="<%=placePhoto[i]%>" style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"/></a></article>
+                    <% } else { %>
+                        <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
+                    <article><a href = "/Otherboard/<%=postNum[i]%>" ><img src="<%=placePhoto[i]%>" style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"/></a></article>
+                    <% } %><% } %>
         </div>
         <a href="/">뒤로가기</a>
     </body>

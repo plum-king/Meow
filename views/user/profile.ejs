@@ -97,7 +97,7 @@
     <div class="bottom">
       <div class="post">
         <!-- 프로필에 해당하는 사용자가 올린 게시글 -->
-        <p><%= row.nickname%>가 올린 게시물</p>
+        <p><%= row.nickname%>님이 올린 게시물</p>
         <% if (myPost[0][0].place_photo == null) { %>
         <p><%=myPost%></p>
         <% } else { %> <% for (var i = 0; i < myPost[0].length; i++) { %>
@@ -106,16 +106,24 @@
         <a href="/Myboard/<%=myPost[0][i].post_num%>/"
           ><img
             src="../..<%=myPost[0][i].place_photo%>"
-            width="100"
-            height="100"
+            style="
+              width: 100px;
+              height: 100px;
+              object-fit: cover;
+              border-radius: 10%;
+            "
         /></a>
         <!-- </article> -->
         <% } else { %>
         <a href="/Otherboard/<%=myPost[0][i].post_num%>/"
           ><img
             src="../..<%=myPost[0][i].place_photo%>"
-            width="100"
-            height="100"
+            style="
+              width: 100px;
+              height: 100px;
+              object-fit: cover;
+              border-radius: 10%;
+            "
         /></a>
         <!-- </article> -->
         <% } %><% } %> <br /><% } %>
@@ -137,7 +145,14 @@
         <% } else { %> <% for (var i = 0; i < scrap[0].length; i++) { %>
         <!-- <article> -->
         <a href="/Otherboard/<%=scrap[0][i].post_num%>/"
-          ><img src="../..<%=scrapPic[i]%>" width="100" height="100"
+          ><img
+            src="../..<%=scrapPic[i]%>"
+            style="
+              width: 100px;
+              height: 100px;
+              object-fit: cover;
+              border-radius: 10%;
+            "
         /></a>
         <!-- </article> -->
         <% } %>

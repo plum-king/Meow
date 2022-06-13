@@ -29,10 +29,11 @@ const addTag = require("./controllers/tag");
 
 const subscribe = require("./controllers/subscribe");
 const scrap = require("./controllers/scrap");
+const search = require("./controllers/search");
 
 const category1 = require("./controllers/category1");
 const category2 = require("./controllers/category2");
-// const category3 = require("./routes/category3");
+const category3 = require("./controllers/category3");
 
 app.set("view engine", "ejs");
 
@@ -98,10 +99,11 @@ app.post("/findThroughPlace", findBoard.showBoardsOfPlace);
 
 app.post("/subscribe", subscribe);
 app.post("/scrap", scrap);
+app.get("/search", search);
 
 app.get("/category1", category1);
 app.get("/category2", category2);
-// app.get("/category3", category3);
+app.get("/category3", category3);
 
 app.use("/image", express.static("./upload"));
 
