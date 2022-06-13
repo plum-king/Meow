@@ -1,10 +1,17 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+  />
+</head>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <ul class="nav navbar-nav">
+    <!-- <ul class="nav navbar-nav">
       <li>
         <a href="/" class="nav-link">Meow</a>
       </li>
-    </ul>
+    </ul> -->
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <form
@@ -21,16 +28,28 @@
             name="search_word"
           />
         </div>
-        <button type="submit" class="btn btn-default">검색</button>
+        <button type="submit" class="btn btn-outline-secondary">
+          <i class="bi bi-search"></i>
+        </button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/logout" class="nav-link">로그아웃</a></li>
+        <li><a style="color: black"><%= nickname %>님</a></li>
         <li>
-          <a href="/withdraw" class="nav-link">회원정보 삭제하기</a>
+          <a href="/logout" class="nav-link"
+            ><i class="bi bi-box-arrow-right"></i>&nbsp;로그아웃</a
+          >
+        </li>
+        <li>
+          <a href="/withdraw" class="nav-link"
+            ><i class="bi bi-person-x-fill"></i>&nbsp;회원정보 삭제하기</a
+          >
           <!--dropdown으로 안돼-->
         </li>
-        <li><a href="/edit" class="nav-link">회원정보 수정하기</a></li>
-        <li><a style="color: black"><%= nickname %>님 환영합니다.</a></li>
+        <li>
+          <a href="/edit" class="nav-link"
+            ><i class="bi bi-person-lines-fill"></i>&nbsp;회원정보 수정하기</a
+          >
+        </li>
       </ul>
     </div>
     <!-- /.navbar-collapse -->

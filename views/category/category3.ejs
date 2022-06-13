@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
     <link href="/css/category.css" rel="stylesheet"/>
     <title><%= title %></title>
     <%- include('../partials/head') %>
@@ -44,9 +45,19 @@
                     <% for (var j=0; j<tag.length; j++) { %>
                         <li class="is_on">
                             <a href="#tab<%=j%>" class="btn"><%=tag[j].tag_cont%></a>
-                            <div id="tab<%=j%>" class="cont">
+                            <div id="card" class="cont">
                                 <% for (var i=0; i<row[j].length; i++) { %>
-                                    <a href="/Otherboard/<%=row[j][i].post_num%>"><img src="<%=row[j][i].place_photo%>"/></a>
+                                    <div id="li">
+                                        <!-- <a href="/Otherboard/<%=row[j][i].post_num%>"> -->
+                                            <img src="<%=row[j][i].place_photo%>" style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"/>
+                                        <!-- </a> -->
+                                            <div class="card-body" >
+                                                <p class="card-text"> <br> <%=row[j][i].place_name%> <br><br>
+                                                <a href = "/Otherboard/<%=row[j][i].post_num%>" style="text-decoration:none; color:white">구경하러가기</a></p>
+                                              <br><br>
+                                            </div>
+                                        </div>
+                                    <!-- <a href="/Otherboard/<%=row[j][i].post_num%>"><img src="<%=row[j][i].place_photo%>"/></a> -->
                                 <% } %>
                             </div>
                         </li>
