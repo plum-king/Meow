@@ -30,9 +30,14 @@
     <% if (requestUser == undefined) { %> <%- include('../partials/loginNav') %>
     <% } else { %> <%- include('../partials/navProfile') %> <% } %>
 
-    <header>Meow</header>
+    <header>
+      <a href="/" style="text-decoration: none; color: #92b4ec">Meow</a>
+    </header>
     <div class="top">
-      <div class="profile">프로필</div>
+      <div class="profile">
+        <img src="../images/user (2).png" width="100" height="100" />
+        <!-- user.png 로 바꿔보셔도 됩니다! 인기 프로필이랑 같은 이미지 -->
+      </div>
       <!--프로필 이미지 추가-->
       <div class="info">
         <span id="user_id">아이디 : <%=row.user_id%></span><br />
