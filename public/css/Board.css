@@ -17,26 +17,25 @@ body {
   margin: 20px;
   font-size: 1.5rem;
   font-family: "Noto Sans KR", sans-serif;
-  background-color: #a8dadc;
+  background-color: #FFF0C2 !important;
 }
 
 div.main {
   width: 900px;
   height: 550px;
-  border: 1px solid #457b9d;
+  border: 1px solid #92B4EC;
   border-radius: 2em;
   border-width: thick;
   padding: 40px;
   margin: auto;
   font-size: 1.5rem;
   font-family: "Noto Sans KR", sans-serif;
-  background-color: #f1faee;
 }
 
 div.lefttop {
   width: 420px;
   height: 50px;
-  border: 1px solid #457b9d;
+  border: 1px solid #92B4EC;
   border-radius: 1.5em;
   border-width: medium;
   text-align: center;
@@ -70,14 +69,13 @@ div.qna {
   overflow-y: scroll;
   width: 900px;
   height: 500px;
-  border: 1px solid #457b9d;
+  border: 1px solid #92B4EC;
   border-radius: 2em;
   border-width: thick;
   padding: 30px;
   margin: auto;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.5rem;
-  background-color: #f1faee;
 }
 .qna::-webkit-scrollbar {
   display: none;
@@ -86,14 +84,13 @@ div.qna {
 div.writeqna {
   width: 900px;
   height: 150px;
-  border: 1px solid #457b9d;
+  border: 1px solid #92B4EC;
   border-radius: 2em;
   border-width: thick;
   padding: 30px;
   margin: auto;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.5rem;
-  background-color: #f1faee;
 }
 
 div.wrap {
@@ -183,18 +180,18 @@ progress::-webkit-progress-value {
   transition: 0.5s;
 
   padding: 7px;
-  background-color: #457b9d;
+  background-color: #FFD24C;
   border-color: transparent;
   color: white;
 }
 
 #button:hover {
-  border: 2px solid #457b9d;
-  background-color: #f1faee;
-  color: #457b9d;
+  border : 2px solid #FFD24C;
+  background-color: white;
+  color : #FFD24C;
   font-weight: bold;
-  box-shadow: 0 0.5em -0.4em #457b9d;
-  transform: translateY(-0.25em);
+  box-shadow : 0 0.5em -0.4em #FFD24C;
+  transform : translateY(-0.25em);
 }
 
 #tagCont {
@@ -219,7 +216,7 @@ progress::-webkit-progress-value {
 .btn_open {
   text-decoration: none;
   color: black;
-  margin: 0;
+  margin: 10px 0px 0px 10px;
   padding: 0.5rem 1rem;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.4rem;
@@ -234,7 +231,7 @@ progress::-webkit-progress-value {
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   transition: 0.5s;
-  background-color: #f0f0f0;
+  background-color: #FFD24C;
 }
 a:hover {
   color: black;

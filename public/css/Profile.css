@@ -1,32 +1,35 @@
-header {
+body {
+  background-color: #FFF0C2 !important;
+}
+  header {
     font-family: 'Kdam Thmor Pro', sans-serif;
     font-weight: bold;
     font-size: 32px;
     text-align: center;
-    color: #1D3557;
+    color: #92B4EC;
   }
   .top {
     height: 160px;
     margin: 10px 30px 10px 30px;
   }
   .profile {
-    background-color: #F1FAEE;
+    background-color: white;
     width: 160px;
     height: 160px;
     float: left;
     margin-right : 0.5%;
-    border: 2px solid #457B9D;
+    border: 2px solid #92B4EC;
     border-radius: 10px;
     text-align: center;
     line-height: 160px;
     padding: 10px 0 0 10px;
   }
   .info {
-    background-color: #F1FAEE;
+    background-color: white;
     width: 180px;
     height: 160px;
     float: left;
-    border: 2px solid #457B9D;
+    border: 2px solid #92B4EC;
     border-radius: 10px;
 /*     margin: 15px 0 15px 30px; */
     margin-left : 0.5%;
@@ -34,12 +37,12 @@ header {
     padding: 10px 0 0 10px;
   }
   .qna {
-    background-color: #F1FAEE;
+    background-color: white;
     overflow-y: scroll;
     width: 280px;
     height: 160px;
     float: left;
-    border: 2px solid #457B9D;
+    border: 2px solid #92B4EC;
     border-radius: 10px;
     margin-left: 0.5%;
     margin-right : 0.5%;
@@ -48,8 +51,8 @@ header {
   }
   .intro {
     height: 50px;
-    background-color: #F1FAEE;
-    border: 2px solid #457B9D;
+    background-color: white;
+    border: 2px solid #92B4EC;
     border-radius: 10px;
     margin: 0px 30px -10px 30px;
     padding: 5px 5px 5px 5px;
@@ -59,7 +62,7 @@ header {
     margin: 5px 5px 5px 5px;
     display: block;
     text-align: center;
-    background-color: #457B9D;
+    background-color: #FFD24C;
     border-color: transparent;
     border-radius : 5px;
     color: white;
@@ -67,11 +70,11 @@ header {
   }
 
 .edit > button:hover {
-  border : 2px solid #457B9D;
-  background-color: white;
-  color : #457B9D;
+  border : 2px solid #FFD24C;
+  background-color: #FFF0C2;
+  color : #FFD24C;
   font-weight: bold;
-  box-shadow : 0 0.5em -0.4em #457B9D;
+  box-shadow : 0 0.5em -0.4em #FFD24C;
   transform : translateY(-0.25em);
 }
 
@@ -103,9 +106,9 @@ header {
     float: left;
     margin-right: 0.5%;
     margin-left: 0.5%;
-    border: 2px solid #457B9D;
+    border: 2px solid #92B4EC;
     border-radius: 10px;
-    background-color: #F1FAEE;
+    background-color: white;
     padding: 5px 0 0 5px;
   }
   .subscribe {
@@ -115,9 +118,9 @@ header {
     float: left;
     margin-right: 0.5%;
     margin-left: 0.5%;
-    border: 2px solid #457B9D;
+    border: 2px solid #92B4EC;
     border-radius: 10px;
-    background-color: #F1FAEE;
+    background-color: white;
     padding: 5px 0 0 5px;
   }
   .scrap {
@@ -127,9 +130,9 @@ header {
     float: left;
     margin-right: 0.5%;
     margin-left: 0.5%;
-    border: 2px solid #457B9D;
+    border: 2px solid #92B4EC;
     border-radius: 10px;
-    background-color: #F1FAEE;
+    background-color: white;
     padding: 5px 0 0 5px;
   }
   .qna::-webkit-scrollbar {
@@ -150,7 +153,7 @@ header {
     margin: 5px 5px 5px 5px;
     display: block;
     text-align: center;
-    background-color: #457B9D;
+    background-color: #FFD24C;
     border-color: transparent;
     border-radius : 5px;
     color: white;
@@ -158,11 +161,11 @@ header {
 }
 
 #subscribeBtn:hover {
-  border : 2px solid #457B9D;
-  background-color: #F1FAEE;
-  color : #457B9D;
+  border : 2px solid #FFD24C;
+  background-color: #FFF0C2;
+  color : #FFD24C;
   font-weight: bold;
-  box-shadow : 0 0.5em -0.4em #457B9D;
+  box-shadow : 0 0.5em -0.4em #FFD24C;
   transform : translateY(-0.25em);
 }
 
@@ -171,7 +174,7 @@ header {
     margin: 5px 5px 5px 5px;
     display: block;
     text-align: center;
-    background-color: #457B9D;
+    background-color: #FFD24C;
     border-color: transparent;
     border-radius : 5px;
     color: white;
@@ -179,11 +182,11 @@ header {
 }
 
 #subscribeCancelBtn:hover {
-  border : 2px solid #457B9D;
-  background-color: #F1FAEE;
-  color : #457B9D;
+  border : 2px solid #FFD24C;
+  background-color: #FFF0C2;
+  color : #FFD24C;
   font-weight: bold;
-  box-shadow : 0 0.5em -0.4em #457B9D;
+  box-shadow : 0 0.5em -0.4em #FFD24C;
   transform : translateY(-0.25em);
 }
 
@@ -192,5 +195,5 @@ a {
   font-size: 11pt;
   font-weight: bold;
   text-align: right;
-  color: #457B9D;
+  color: #92B4EC;
 }

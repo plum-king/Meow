@@ -1,5 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
+body {
+  background-color: #FFF0C2;
+}
 
 .login_con {
   text-align: center;
@@ -11,14 +14,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 2px solid #457B9D;
+  border: 2px solid #92B4EC;
   border-radius: 10px;
-  background-color: #F1FAEE;
+  background-color: white;
 }
 
 .logo {
   font-family: 'Kdam Thmor Pro', sans-serif;
-  color: #1D3557;
+  color: #92B4EC;
   text-transform : uppercase;
   letter-spacing :10px;
   font-size : 40px;
@@ -32,7 +35,7 @@
 .input-box > input {
   background: transparent;
   border: none;
-  border-bottom: solid 2px #457B9D;
+  border-bottom: solid 2px #92B4EC;
   padding: 20px 0px 5px 0px;
   font-size: 14pt;
   width: 100%;
@@ -53,7 +56,7 @@ input:placeholder-shown + label {
   padding : 5px;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #457B9D;
+  background-color: #FFD24C;
   border-color: transparent;
   border-radius : 5px;
   color: white;
@@ -61,11 +64,11 @@ input:placeholder-shown + label {
 }
 
 #loginBtn:hover {
-  border : 2px solid #457B9D;
-  background-color: #F1FAEE;
-  color : #457B9D;
+  border : 2px solid #FFD24C;
+  background-color:white;
+  color : #FFD24C;
   font-weight: bold;
-  box-shadow : 0 0.5em -0.4em #457B9D;
+  box-shadow : 0 0.5em -0.4em #FFD24C;
   transform : translateY(-0.25em);
 }
 
@@ -93,5 +96,5 @@ a {
   text-decoration-line: none;
   font-size: 11pt;
   font-weight: bold;
-  color: #457B9D;
+  color: #92B4EC;
 }

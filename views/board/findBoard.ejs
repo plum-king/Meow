@@ -7,12 +7,15 @@
     <title><%= title %></title>
     <%- include('../partials/head') %>
   </head>
-  <body>
+  <body style="background-color: #FFF0C2;">
     <title><%= title %></title>
     <%- include('../partials/nav') %>
       <form action="/findThroughPlace" method="post">
-        <p id="place_input">Place</p>     
-        <div class="map_wrap">
+        <p id="place_input" style="color: #92B4EC;
+        font-family: 'Kdam Thmor Pro', sans-serif;
+        display:flex;justify-content:center;align-items:center;font-weight: bold;">Place</p>     
+        <div class="map_wrap" style="display:flex;justify-content:center;align-items:center;margin: auto;
+        margin-top: 10px;">
             <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
             <div id="menu_wrap" class="bg_white">
                 <div class="option">
@@ -26,7 +29,19 @@
                 <div id="pagination"></div>
             </div>
         </div>
-
+        <div id="board_con" style="color: #92B4EC;
+        font-family: 'Kdam Thmor Pro', sans-serif;border: 2px solid #92B4EC;
+  border-radius: 10px;
+  background-color: white;font-weight: bold;
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+  width: 500px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;">
         <p id="placeName_input">Place Name</p>
         <input type="text" id ="placeName" name="placeName">
         <br />
@@ -36,6 +51,7 @@
         <br /><br />
 
         <button type="submit" id="boardSubBtn">해당 장소의 게시글 보기</button>
+    </div>
     </form>
     
       <!-- 지도 관련 코드-->
