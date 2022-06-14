@@ -33,7 +33,7 @@ exports.showMyBoardList = async (req, res) => {
     placeName.push(data.place_name);
   }
 
-  // console.log(postNum);
+  console.log(postNum);
 
   res.render("board/showMyBoardList", {
     title: "나의 게시글 목록",
