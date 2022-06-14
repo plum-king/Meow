@@ -215,9 +215,10 @@ progress::-webkit-progress-value {
 }
 .btn_open {
   text-decoration: none;
-  color: black;
-  margin: 10px 0px 0px 10px;
-  padding: 0.5rem 1rem;
+  color: white;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 7px;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.4rem;
   font-weight: 400;
@@ -226,13 +227,55 @@ progress::-webkit-progress-value {
   display: inline-block;
   width: auto;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   transition: 0.5s;
   background-color: #FFD24C;
 }
+.btn_open:hover {
+  border : 2px solid #FFD24C;
+  background-color: white;
+  color : #FFD24C;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #FFD24C;
+  transform : translateY(-0.25em);
+}
+
+.btn_close {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-right: 5px;
+  margin-left: 5px;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: 0.5s;
+
+  padding: 7px;
+  background-color: #FFD24C;
+  border-color: transparent;
+  color: white;
+}
+
+.btn_close:hover {
+  border : 2px solid #FFD24C;
+  background-color: white;
+  color : #FFD24C;
+  font-weight: bold;
+  box-shadow : 0 0.5em -0.4em #FFD24C;
+  transform : translateY(-0.25em);
+}
+
 a:hover {
   color: black;
 }

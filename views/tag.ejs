@@ -10,18 +10,27 @@
     <%- include('./partials/head') %>
   </head>
 
-  <body>
+  <body style="background-color: #FFF0C2 !important;">
     <%- include('./partials/nav') %>
-    <h1>Add Tag</h1>
-    <div class="tag_box">
-      <div class="left">
+    <h1 style="text-align: center;color: #92B4EC;font-family: 'Kdam Thmor Pro', sans-serif; margin-bottom: 2%;">Add Tag</h1>
+    <div class="tag_box" style="width: 100%;height: 500px;">
+      <div class="left" style="height: 500px;width: 40%;float: left;margin-left: 7%;margin-bottom: 10%;padding: 10px 20px 10px 20px;box-sizing: padding-box;border: 2px solid #92B4EC;border-radius: 10px;background-color: white;">
         <h3 class="tag_list">태그 목록</h3>
         <br />
         <p style="text-align: center"><%= tag_list %></p>
         <!--여기서 for문으로 가운데 정렬해서 돌리기-->
       </div>
-      <div class="right">
-        <h3 class="tag_add">태그 추가</h3>
+      <div class="right" style="height: 500px;
+      width: 40%;
+      float: right;
+      margin-right: 7%;
+      margin-bottom: 10%;
+      box-sizing: padding-box;
+      border: 2px solid #92B4EC;
+      padding: 10px 20px 10px 20px;
+      border-radius: 10px;
+      background-color: white;">
+        <h3 class="tag_add" style="text-align: center;">태그 추가</h3>
         <br />
         <form action="/addTag" method="post" className="tagInput">
           <input
@@ -29,11 +38,28 @@
             name="tag"
             placeholder="TAG"
             class="tag_input"
+            style="margin-left: 33%;
+            width: 30%;
+            padding: 8px 8px 8px 8px;
+            border-radius: 7px;"
           /><br /><br />
-          <button type="submit" id="tagAddBtn"><i class="bi bi-plus-square"> </i> 태그 추가</button>
+          <button type="submit" id="tagAddBtn" style="font-family: 'Kdam Thmor Pro', sans-serif;
+          width: 30%;
+          padding: 5px;
+          text-align: center;
+          margin-top: 5px;
+          margin-left: 35%;
+          background-color: #FFD24C;
+          border-color: transparent;
+          border-radius : 5px;
+          color: white;"><i class="bi bi-plus-square"> </i> 태그 추가</button>
         </form>
         <br />
-        <a href="/">뒤로가기</a>
+        <a href="/" style="text-decoration-line: none;
+        font-size: 11pt;
+        font-weight: bold;
+        color: #92B4EC;
+        margin-left: 80%;">뒤로가기</a>
       </div>
     </div>
   </body>
