@@ -11,7 +11,6 @@
     <title><%= title %></title>
     <%- include('../partials/nav') %>
     <!-- <h1><a href="/" style="text-decoration: none; color: black">MEOW</a></h1> -->
-
     <form action="/findThroughPlace" method="post">
       <h1
         id="place_input"
@@ -26,7 +25,6 @@
       >
         <a href="/" style="text-decoration: none; color: #92b4ec">MEOW</a>
       </h1>
-      <br />
       <div
         class="map_wrap"
         style="
@@ -64,6 +62,8 @@
         </div>
 
       </div>
+      <br>
+
       <div
         id="board_con"
         style="
@@ -85,11 +85,11 @@
         "
       >
 
-        <p id="placeName_input">Place Name</p>
+        <p id="placeName_input" style="font-size: 25px;">Place Name</p>
         <input type="text" id="placeName" name="placeName" />
         <br />
 
-        <p id="placeLoc_input">Place Location</p>
+        <p id="placeLoc_input" style="font-size: 25px;">Place Location</p>
         <input type="text" id="placeLoc" name="placeLoc" />
         <br /><br />
 
@@ -359,6 +359,8 @@
       font-size: 11pt;
       font-weight: bold;
       color: #92B4EC; margin-top: 20px !important;">뒤로가기</a>
+      
     </div>
+    <br><br>
   </body>
 </html>
