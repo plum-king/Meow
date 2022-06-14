@@ -9,22 +9,22 @@ router.get("/category1", async (req, res, next) => {
 
   try {
     const data1 = await pool.query(
-      "SELECT * FROM Post WHERE user_id IN (SELECT user_id From User WHERE age = 10)"
+      "SELECT post_num, place_photo, place_name FROM Post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From User WHERE age = 10)"
     );
     const data2 = await pool.query(
       "SELECT post_num, place_photo, place_name FROM Post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From User WHERE age = 20)"
     );
     const data3 = await pool.query(
-      "SELECT * FROM Post WHERE user_id IN (SELECT user_id From User WHERE age = 30)"
+      "SELECT post_num, place_photo, place_name FROM Post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From User WHERE age = 30)"
     );
     const data4 = await pool.query(
-      "SELECT * FROM Post WHERE user_id IN (SELECT user_id From User WHERE age = 40)"
+      "SELECT post_num, place_photo, place_name FROM Post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From User WHERE age = 40)"
     );
     const data5 = await pool.query(
-      "SELECT * FROM Post WHERE user_id IN (SELECT user_id From User WHERE age = 50)"
+      "SELECT post_num, place_photo, place_name FROM Post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From User WHERE age = 50)"
     );
     const data6 = await pool.query(
-      "SELECT * FROM Post WHERE user_id IN (SELECT user_id From User WHERE age = 60)"
+      "SELECT post_num, place_photo, place_name FROM Post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From User WHERE age = 60)"
     );
 
     res.render("category/category1", {
