@@ -51,7 +51,7 @@ exports.showBoardsOfPlace = async (req, res) => {
         userID.push(data.user_id);
       }
 
-      res.render("board/showBoards", {
+      res.render("board/searchLocBoards", {
         title: "장소로 찾는 게시글",
         userid: userid,
         nickname: nickname,

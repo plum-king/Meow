@@ -21,9 +21,6 @@
       <br />
       <% if (rank5.length == 0) { %>
         게시글이 존재하지 않습니다.
-        <br>
-        <br>
-        <a href="/addBoard" class="nav-link" style="color:black; text-decoration: none; ">게시글 작성하러하기</a>
         <% } else { %>
       <% for (let i = 0; i < rank5.length; i++) { %>
         <% if (userid != rank5[i].user_id) { %>
