@@ -100,105 +100,46 @@ header {
     padding: 5px 5px 5px 5px;
   }
 
-.edit > button:hover {
-  border : 2px solid #FFD24C;
-  background-color: #FFF0C2;
-  color : #FFD24C;
-  font-weight: bold;
-  box-shadow : 0 0.5em -0.4em #FFD24C;
-  transform : translateY(-0.25em);
-}
-
-.edit {
-  display: inline-block;
-  text-align: right;
-  margin-left: 77%;
-}
-
-.bottom {
-  margin: 10px 22px 10px 22px;
-}
-
-.post {
-  overflow-y: scroll;
-  width: 48%;
-  height: 300px;
-  float: left;
-  margin-right: 0.5%;
-  margin-left: 0.5%;
-  margin-bottom: 10%;
-  border: 4px solid #92B4EC;
-  border-radius: 10px;
-  background-color: #FFF0C2;
-  padding: 10px 0 0 10px;
-  }
-
-  .scrap {
-    overflow-y: scroll;
-    width: 48%;
-    height: 300px;
-    float: left;
-    margin-right: 0.5%;
-    margin-left: 0.5%;
-    border: 4px solid #92B4EC;
-    border-radius: 10px;
-    background-color: #FFF0C2;
-    padding: 10px 0 0 10px;
-  }
-
-  .qna::-webkit-scrollbar {
-    display: none;
-  }
-  .post::-webkit-scrollbar {
-    display: none;
-  }
-  .subscribe::-webkit-scrollbar {
-    display: none;
-  }
-  .scrap::-webkit-scrollbar {
-    display: none;
-  }
-
 #subscribeBtn {
-    width: 100px;
-    margin: 5px 5px 5px 5px;
-    display: block;
-    text-align: center;
-    background-color: #FFD24C;
-    border-color: transparent;
-    border-radius : 5px;
-    color: white;
-    padding: 5px 5px 5px 5px;
+  width: 100px;
+  margin: 5px 5px 5px 5px;
+  display: block;
+  text-align: center;
+  background-color: #ffd24c;
+  border-color: transparent;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 5px 5px 5px;
 }
 
 #subscribeBtn:hover {
-  border : 2px solid #FFD24C;
-  background-color: #FFF0C2;
-  color : #FFD24C;
+  border: 2px solid #ffd24c;
+  background-color: #fff0c2;
+  color: #ffd24c;
   font-weight: bold;
-  box-shadow : 0 0.5em -0.4em #FFD24C;
-  transform : translateY(-0.25em);
+  box-shadow: 0 0.5em -0.4em #ffd24c;
+  transform: translateY(-0.25em);
 }
 
 #subscribeCancelBtn {
-    width: 100px;
-    margin: 5px 5px 5px 5px;
-    display: block;
-    text-align: center;
-    background-color: #FFD24C;
-    border-color: transparent;
-    border-radius : 5px;
-    color: white;
-    padding: 5px 5px 5px 5px;
+  width: 100px;
+  margin: 5px 5px 5px 5px;
+  display: block;
+  text-align: center;
+  background-color: #ffd24c;
+  border-color: transparent;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 5px 5px 5px;
 }
 
 #subscribeCancelBtn:hover {
-  border : 2px solid #FFD24C;
-  background-color: #FFF0C2;
-  color : #FFD24C;
+  border: 2px solid #ffd24c;
+  background-color: #fff0c2;
+  color: #ffd24c;
   font-weight: bold;
-  box-shadow : 0 0.5em -0.4em #FFD24C;
-  transform : translateY(-0.25em);
+  box-shadow: 0 0.5em -0.4em #ffd24c;
+  transform: translateY(-0.25em);
 }
 
 a {
@@ -206,5 +147,5 @@ a {
   font-size: 11pt;
   font-weight: bold;
   text-align: right;
-  color: #92B4EC;
+  color: #92b4ec;
 }
