@@ -17,8 +17,9 @@
       <div class="left">
         <h3 class="tag_list">태그 목록</h3>
         <br />
-        <p style="text-align: center"><%= tag_list %></p>
-        <!--여기서 for문으로 가운데 정렬해서 돌리기-->
+        <%tag_list.forEach(tag => { %>
+          <p style="text-align: center"><%= tag %></p><br>
+        <%}); %>
       </div>
       <div class="right">
         <h3 class="tag_add">태그 추가</h3>

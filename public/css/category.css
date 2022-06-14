@@ -140,5 +140,7 @@ img {
 }
 
 a:link{
-  color:black; text-decoration: none;
+  color:black; 
+  text-decoration: none; 
+  font-weight: normal;
 }
