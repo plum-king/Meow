@@ -21,3 +21,7 @@
   box-shadow : 0 0.5em -0.4em #FFD24C !important;
   transform : translateY(-0.25em) !important;
 }
+
+div.left::-webkit-scrollbar {
+  display: none;
+}
