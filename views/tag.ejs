@@ -17,8 +17,9 @@
       <div class="left" style="height: 500px;width: 40%;float: left;margin-left: 7%;margin-bottom: 10%;padding: 10px 20px 10px 20px;box-sizing: padding-box;border: 2px solid #92B4EC;border-radius: 10px;background-color: white;">
         <h3 class="tag_list">태그 목록</h3>
         <br />
-        <p style="text-align: center"><%= tag_list %></p>
-        <!--여기서 for문으로 가운데 정렬해서 돌리기-->
+        <%tag_list.forEach(tag => { %>
+          <p style="text-align: center"><%= tag %></p><br>
+        <%}); %>
       </div>
       <div class="right" style="height: 500px;
       width: 40%;
