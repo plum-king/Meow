@@ -12,6 +12,8 @@
     <body>
         <title><%= title %></title>
         <%- include('../partials/nav') %>
+        <a href="/" style="text-decoration:none; color: black; float:right; margin-right:50px">뒤로가기</a>
+
         <span id="place" style="padding-left: 20px; font-weight: 600; font-size: 1.5rem;">
             <i class="bi bi-shop-window"></i> <%=place_name%> / <%=place_loc%>
         </span><br><br>
@@ -25,7 +27,7 @@
                     <article><a href = "/Otherboard/<%=postNum[i]%>" ><img src="<%=placePhoto[i]%>" style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"/></a></article>
                     <% } %><% } %>
         </div>
-        <a href="/">뒤로가기</a>
+        <!-- <a href="/">뒤로가기</a> -->
     </body>
 </html>
 
