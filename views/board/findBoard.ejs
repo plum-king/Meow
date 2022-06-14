@@ -62,6 +62,7 @@
           <ul id="placesList"></ul>
           <div id="pagination"></div>
         </div>
+
       </div>
       <div
         id="board_con"
@@ -83,6 +84,7 @@
           flex-direction: column;
         "
       >
+
         <p id="placeName_input">Place Name</p>
         <input type="text" id="placeName" name="placeName" />
         <br />
@@ -92,7 +94,7 @@
         <br /><br />
 
         <button type="submit" id="boardSubBtn">해당 장소의 게시글 보기</button>
-      </div>
+        
     </form>
 
     <!-- 지도 관련 코드-->
@@ -350,8 +352,13 @@
           el.removeChild(el.lastChild);
         }
       }
-    </script>
 
-    <a href="/">뒤로가기</a>
+      </script>
+      
+      <a href="/" style="text-decoration-line: none;
+      font-size: 11pt;
+      font-weight: bold;
+      color: #92B4EC; margin-top: 20px !important;">뒤로가기</a>
+    </div>
   </body>
 </html>

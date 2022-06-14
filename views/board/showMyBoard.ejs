@@ -22,17 +22,18 @@
                 <input type="hidden" name="post_num" value="<%=post_num%>">
                      <button type="submit" class ="myBList" id="button"><i class="bi bi-sticky-fill"> </i> 내 다른 게시글 보기</button>
             </form>
-            <a href="#pop_info_1" style="text-decoration:none;" class="btn_open"><i class="bi bi-pencil-square"></i>게시글 수정</a>
+            <a href="#pop_info_1" style="text-decoration:none;" class="btn_open">
+               <i class="bi bi-pencil-square"></i>게시글 수정</a>
             <!-- 수정팝업 -->
             <div id="pop_info_1" class="pop_wrap" style="display:none;">
-                <div class="pop_inner">
+                <div class="pop_inner" style="border-radius: 5px;">
                     <p class="dsc">게시글을 수정하면 사진 파일을 다시 올려야합니다</p><br>
                     <p class="dsc">게시글을 수정하시겠습니까?</p>
                     <form action = "/editBoard" method = "get">
                         <input type="hidden" name="post_num" value="<%=post_num%>">
-                        <input type="submit" id="button" value="수정">
+                        <input type="submit" id="button" value="수정" style="float:right;">
                     </form>
-                    <button type="button" class="btn_close">닫기</button>
+                    <button type="button" class="btn_close" style="float:right;">닫기</button>
                     </div>
                 </div>
             <script>
