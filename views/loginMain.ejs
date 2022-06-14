@@ -19,6 +19,12 @@
       <br>
       <h4>인기 게시글 랭킹</h4>
       <br />
+      <% if (rank5.length == 0) { %>
+        게시글이 존재하지 않습니다.
+        <br>
+        <br>
+        <a href="/addBoard" class="nav-link" style="color:black; text-decoration: none; ">게시글 작성하러하기</a>
+        <% } else { %>
       <% for (let i = 0; i < rank5.length; i++) { %>
         <% if (userid != rank5[i].user_id) { %>
         <article>#<%= i+1 %> <br /> 
@@ -59,6 +65,7 @@
         </div></article>
         <!-- &emsp;&emsp; -->
           <% } %><% } %>
+          <% } %>
           <!-- &emsp;&emsp; -->
           <br>
           <p class="bottom">

@@ -50,8 +50,11 @@
         <br />
         <h4>인기 게시글 랭킹</h4>
         <br />
-        <% for (let i = 0; i < rank5.length; i++) { %> <% if (userid !=
-        rank5[i].user_id) { %>
+        <% if (rank5.length == 0) { %> 게시글이 존재하지 않습니다.
+        <br />
+        <br />
+        <% } else { %> <% for (let i = 0; i < rank5.length; i++) { %> <% if
+        (userid != rank5[i].user_id) { %>
         <article>
           #<%= i+1 %><br />
           <div id="li">
@@ -102,12 +105,10 @@
                   >구경하러가기</a
                 >
               </p>
-              <!-- <br /><br /> -->
             </div>
           </div>
         </article>
-        <!-- &emsp;&emsp; -->
-        <% } %> <% } %> &emsp;&emsp;
+        <% } %><% } %> <% } %> &emsp;&emsp;
       </div>
     </div>
 
