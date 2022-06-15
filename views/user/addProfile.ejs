@@ -2,54 +2,43 @@
 
 <html>
     <head>
-        <meta charset="utf-8">
-        <title><%= title %></title>
-        <%- include('../partials/head') %>
-        <style>
-          header {font-size: 32px; text-align: center;}
-          .top { height: 160px; margin: 10px 30px 10px 30px;}  
-          .profile {width: 160px; height: 160px; float: left; border: 1.5px solid; border-radius: 1em; text-align: center; line-height: 160px;}
-          .info {width: 420px; height: 130px; float: left; border: 1.5px solid; border-radius: 2em; margin: 15px 0 15px 30px; padding: 15px 0 0 15px;}
-          .question {width: 280px; height: 160px; float: left; border: 1.5px solid; border-radius: 2em; margin-left: 30px; text-align: center;}
-          .answer {width: 280px; height: 160px; float: left; border: 1.5px solid; border-radius: 2em; text-align: center;}
-          .intro {border: 1px solid; border-radius: 10px; margin: 0px 30px 0px 30px; padding: 5px 5px 5px 5px;}
-          .bottom {margin: 10px 30px 10px 30px;}
-          .post {width: 28%; height: 200px; float: left; margin-right: 3%; border: 1.5px solid; border-radius: 1em;}
-          .subscribe {width: 28%; height: 200px; float: left; margin-right: 3%; border: 1.5px solid; border-radius: 1em;}
-          .scrap {width: 28%; height: 200px; float: left; margin-right: 1%; border: 1.5px solid; border-radius: 1em;}
+      <meta charset="utf-8">
+      <link
+      href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap"
+      rel="stylesheet"
+      />
+      <link href="/css/editProfile.css" rel="stylesheet" />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+      />
+      <title><%= title %></title>
+      <%- include('../partials/head') %>
       </style>
     </head>
 
     <body>
       <%- include('../partials/navProfile') %>
-      <header><a href="/">Meow</a></header>
+      <header><a href="/" style="color:#92B4EC; text-decoration: none; font-weight: bold">Meow</a></header>
       <form action="/addProfile" method="post" className="inputField" id="searchForm">
         <div class="top">
-          <div class="profile">프로필</div>
-          <div class="info">
-            <span id="user_id">아이디 : <%=row.user_id%></span><br>
-            <span id="age">연령대 : <%=row.age%></span><br>
-            <span id="gender">성별 : <%=row.gender%></span><br>
-            <span id="job">직업 : <%=row.job%></span><br>
-            <span id="home_input">거주지 :
-              <input type="text" name="home" id="home" placeholder="거주지(시) 입력"> 
-            </span>
-          </div>
-          <div class="question">&lt;질문내용&gt;</div>
-          <div class="answer">&lt;답변내용&gt;</div>
+            <div class="info">
+              <span id="home_input" style="font-weight:bold;">[거주지]
+                <input type="text" style="width:300px;" name="home" id="home" value="<%=row.home%>" placeholder="거주지(시) 입력">&nbsp;&nbsp;
+              </span><br /><br />
+              <span id="intro" id="intro_input" style="font-weight:bold;">[자기소개]
+                <input type="text"style="width:700px;" name="introduction" id="introduction" value="<%=row.introduction%>" placeholder="소개 입력">&nbsp;&nbsp;
+              </span>
+            </div>
         </div>
         <br>
-        <p class="intro" id="intro_input">자기소개 :
-            <input type="text" name="introduction" id="introduction" placeholder="소개 입력">
-        </p>
         <br>
-        <div class="bottom">
-          <div class="post">My 게시물</div>
-          <div class="subscribe">구독 유저</div>
-          <div class="scrap">스크랩 게시물</div>
+        <div class="edit">
+          <a href="/" style="color:black; text-decoration: none; font-weight: bold"><i class="bi bi-backspace fs-100"></i></a>
+          &nbsp;&nbsp;
+          <button type="submit" id="addProfile" style="display: inline-block">완료</button>
+          <button type="reset" style="display: inline-block">초기화</button>
         </div>
-        <button type="submit" id="addProfile">완료</button>
-        <button type="reset">초기화</button>
       </form>
 
       <script>
@@ -58,14 +47,15 @@
         sf.addEventListener("submit", function(e) {
             let homeEle = document.getElementById("home");
             let introEle = document.getElementById("introduction");
-            if(homeEle.value.length==0 && introEle.value.length==0) {
-                alert('Please fill out the form!');
-                e.preventDefault();
+            if(homeEle.disabled==false && introEle.disabled==false) {
+                if(homeEle.value.length==0 && introEle.value.length==0) {
+                    alert('Please fill out the form!');
+                    e.preventDefault();
+                }
             }
         });
       </script>
       <br>
-      <a href="/profile/<%=row.user_id%>">뒤로가기</a>
     </body>
 </html>
 
