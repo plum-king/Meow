@@ -54,7 +54,7 @@ exports.updateEdit = async (req, res, next) => {
         res.write(
           `<script type="text/javascript">alert('Modify Success!')</script>`
         );
-        res.write('<script>window.location="/"</script>');
+        res.write(`<script>window.location="/profile/${userid}"</script>`);
       } else {
         res.write(
           `<script type="text/javascript">alert('Please rewrite the form!')</script>`

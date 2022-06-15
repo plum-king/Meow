@@ -31,12 +31,12 @@
       <input type="radio" name="age" id="age5" value="50" <%=(row.age == '50')? checked="checked" : ""%>>50대
       <input type="radio" name="age" id="age6" value="60" <%=(row.age == '60')? checked="checked" : ""%>>60대
       <p class="input">Job</p>
-      <input type="text" name="job" id="new_job" size="60" >
+      <input type="text" name="job" id="new_job" size="60" value="<%=row.job%>">
       <p class="input">Address</p>
       <input type="text" name="home" id="home" size="60" value="<%=row.home%>"  placeholder="시군구로 입력 (예) 파주시">
       <p class="input">Introduction</p>
 <!--       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
-      <textarea type="text" name="introduction" id="introduction" size="60" rows="3" value="<%=row.introduction%>"></textarea>
+      <input type="text" name="introduction" id="introduction" size="60" rows="3" value="<%=row.introduction%>"></input>
       <br />
       <input type="submit" id="button" value="Edit">
       <input type="reset" id="button" value="Cancel">
