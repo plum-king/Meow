@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// const template = require("../lib/template.js");
 
 router.get("/logout", async (req, res, next) => {
   if (req.session.user) {

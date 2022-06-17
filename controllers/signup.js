@@ -27,13 +27,12 @@ router.post("/signup", async (req, res, next) => {
         `INSERT INTO user(user_id, name, nickname, password, age, gender, job) VALUES (?, ?, ?, ?, ?, ?, ?)`, //동일하다면 제대로 된 입력이기 떄문에 db에 저장
         [user_id, name, nickname, encrypted_pw, age, gender, job]
       );
-      // console.log("성공");
       res.write(`<script>window.location="/login"</script>`);
       res.end();
     } catch (err) {
       console.error(err);
       res.write(
-        //db에 들어가는 과정에서 오류가 난다면 id가 이미 존재하는 것 -> 이 경우말고 다른 경우에도 오류가 발생할 수 있다면 오류 메세지를 바꿔야 함
+        //db에 들어가는 과정에서 오류가 난다면 id가 이미 존재하는 것
         `<script type="text/javascript">alert('This ID is already exist!')</script>`
       );
       res.write('<script>window.location="/signup"</script>');

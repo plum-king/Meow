@@ -5,7 +5,7 @@ exports.showDeleteBoard = async (req, res, next) => {
   const post_num = req.body;
   try {
     const data1 = await pool.query(
-      "SELECT place_num, menu_name, place_satisfy, tag_num, place_photo, receipt_photo FROM Post WHERE post_num = ?",
+      "SELECT place_num, menu_name, place_satisfy, tag_num, place_photo, receipt_photo FROM post WHERE post_num = ?",
       [post_num]
     );
   } catch (err) {
@@ -14,10 +14,8 @@ exports.showDeleteBoard = async (req, res, next) => {
 };
 
 exports.deleteBoard = async (req, res) => {
-  // const qna_num = req.body.qna_num;
   const post_num = req.body.post_num;
   const connection = await pool.getConnection(async (conn) => conn);
-  // console.log(qna_num);
   const result = await connection.query("DELETE FROM post WHERE post_num = ?", [
     post_num,
   ]);

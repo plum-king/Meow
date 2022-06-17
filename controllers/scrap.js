@@ -3,23 +3,22 @@ const router = express.Router();
 const pool = require("../db");
 
 router.post("/scrap", async (req, res, next) => {
-    // const nickname = req.session.user["nickname"];
     const userid = req.session.user["userid"];
     const post_num = req.body.post_num;
 
     try {
         const scrap = await pool.query(
-            "SELECT * FROM Scrap WHERE user_id = ? AND post_num = ?",
+            "SELECT * FROM scrap WHERE user_id = ? AND post_num = ?",
             [userid, post_num]
         );
         if (scrap[0][0] == undefined) {
             const data = await pool.query(
-                "INSERT INTO Scrap(user_id, post_num) VALUES(?,?)",
+                "INSERT INTO scrap(user_id, post_num) VALUES(?,?)",
                 [userid, post_num]
             );
         } else {
             const data = await pool.query(
-                "DELETE FROM Scrap WHERE user_id = ? AND post_num = ?",
+                "DELETE FROM scrap WHERE user_id = ? AND post_num = ?",
                 [userid, post_num]
             );
         }

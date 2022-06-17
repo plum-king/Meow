@@ -1,5 +1,4 @@
 const express = require("express");
-// const router = express.Router();
 const pool = require("../db.js");
 const bcrypt = require("bcrypt");
 
@@ -18,13 +17,11 @@ exports.updateDelete = async (req, res, next) => {
       "SELECT password FROM user WHERE user_id = ?",
       [userid]
     );
-    // console.log(pwd[0][0].password);
     if (bcrypt.compareSync(password, pwd[0][0].password)) {
       const result = await connection.query(
         "DELETE FROM user WHERE user_id = ?",
         [userid]
       );
-      // console.log(result[0].affectedRows);
       if (result[0].affectedRows == 1) {
         req.session.destroy((err) => {
           if (err) throw err;

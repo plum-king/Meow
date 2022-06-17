@@ -4,15 +4,13 @@ const pool = require("../db.js");
 const bcrypt = require("bcrypt");
 
 //게시글 작성 수정
-
 router.get("/editBoard", async (req, res, next) => {
   const userid = req.session.user["userid"];
   var postID = req.query.post_num; //선택 받은 게시글 번호 지정
 
-  // console.log(postID);
   try {
     const data = await pool.query(
-      `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
+      `SELECT * FROM post as po JOIN shortreview as sr ON po.post_num = sr.post_num 
         JOIN place as pl ON po.place_num = pl.place_num 
         JOIN tag as t ON po.tag_num = t.tag_num 
         JOIN menu as m ON pl.place_num = m.place_num and po.menu_name = m.menu_name
@@ -20,10 +18,7 @@ router.get("/editBoard", async (req, res, next) => {
       [postID]
     );
 
-    // console.log(data[0][0]);
-
     const data2 = await pool.query(`SELECT * from tag`);
-
     const data3 = await pool.query(
       `SELECT DISTINCT menu_name from menu WHERE place_num = ? ORDER BY menu_name`,
       [data[0][0].place_num]
@@ -66,7 +61,6 @@ router.post(
     const post = req.body;
     const postID = post.post_num;
     const place_name = post.placeName;
-    // console.log(place_name);
     let place_loc = post.placeLoc;
     const menuname_select = post.menuname_select;
     let menu_name = post.menu_name;
@@ -97,8 +91,6 @@ router.post(
         `SELECT * FROM place WHERE place_name = ? and place_loc=?`, //이미 저장된 장소인지 확인
         [place_name, place_loc]
       );
-      // console.log(check[0].place_name);
-      // console.log(place_name);
 
       if (check[0][0] == undefined) {
         data = await pool.query(
@@ -148,13 +140,9 @@ router.post(
           [post_tag_cont]
         );
         tag_num = existTag[0][0].tag_num;
-        // console.log(existTag[0]);
-        // console.log(tag_num);
       } else {
         tag_num = parseInt(post.tag_num[0]) + 1;
       }
-
-      // console.log(tag_num);
 
       const data3 = await pool.query(
         "UPDATE post SET receipt_photo=?, place_photo=?, place_satisfy=?, place_num=?, user_id=?, menu_name=?, tag_num=? WHERE post_num=?",
@@ -170,14 +158,11 @@ router.post(
         ]
       );
 
-      //resPostId = data3[0].insertId; //삽입한 데이터의 id 받아오기
-
       const data4 = await pool.query(
         "UPDATE shortreview SET review_cont1=?, review_cont2=?, review_cont3=? WHERE review_num=?",
         [review_cont1, review_cont2, review_cont3, review_num]
       );
 
-      // console.log("성공");
       res.write(`<script>location.href = '/MyBoard/${postID}'</script>`);
       res.end();
     } catch (err) {

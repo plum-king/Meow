@@ -23,7 +23,7 @@ router.post("/login", async (req, res, next) => {
     );
     res.write('<script>window.location="/login"</script>');
   } else if (bcrypt.compareSync(password, data[0][0].password)) {
-    // console.log("성공");
+
     //새로고침해도 로그아웃되지 않도록 세션 유지될 수 있게 nickname 저장하기
     req.session.user = {
       userid: data[0][0].user_id,

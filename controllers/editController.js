@@ -7,7 +7,7 @@ exports.showEdit = async (req, res, next) => {
   const userid = req.session.user["userid"];
   try {
     const data = await pool.query(
-      "SELECT user_id, name, nickname, password, age, gender, job, home, introduction FROM User WHERE user_id = ?",
+      "SELECT user_id, name, nickname, password, age, gender, job, home, introduction FROM user WHERE user_id = ?",
       [userid]
     );
     res.render("user/updateform", {title: "회원 정보 수정", row: data[0][0]});
@@ -29,7 +29,6 @@ exports.updateEdit = async (req, res, next) => {
     introduction,
   } = req.body;
   let password = req.body.password;
-  // console.log(userid, name, nickname, password, age, gender, job);
 
   if (!bcrypt.compareSync(confirm_pwd, password)) {
     res.write(
@@ -44,7 +43,7 @@ exports.updateEdit = async (req, res, next) => {
     }
     try {
       const data = await pool.query(
-        "UPDATE User SET name = ?, nickname = ?, password = ?, age = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?",
+        "UPDATE user SET name = ?, nickname = ?, password = ?, age = ?, job = ?, home = ?, introduction = ? WHERE user_id = ?",
         [name, nickname, password, age, job, home, introduction, userid]
       );
       if (data[0].affectedRows == 1) {

@@ -18,8 +18,6 @@ router.get("/", async (req, res) => {
     rank3 = arrProfile; //프로필이 3개 이하일 때
   }
 
-  // console.log(rank3);
-
   const postRank = await pool.query(
     `SELECT post_num, place_photo, view_count, user_id, place_name FROM post as po JOIN place as pl ON po.place_num = pl.place_num`
   );
@@ -33,13 +31,11 @@ router.get("/", async (req, res) => {
   } else {
     rank5 = arrPost; //게시글이 5개 이하일 때
   }
-  // console.log(rank5);
-  // console.log(arr[0]);
 
   if (req.session.user) {
     const nickname = req.session.user["nickname"];
     const userid = req.session.user["userid"];
-    // console.log(nickname);
+
     res.render("main", {
       title: title,
       nickname: nickname,

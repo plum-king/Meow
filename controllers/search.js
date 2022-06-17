@@ -16,14 +16,14 @@ router.get("/search", async (req, res, next) => {
     myid = undefined;
   }
   var search_word = url.parse(req.url, true).query.search_word;
-  console.log(search_word);
+  // console.log(search_word);
 
   try {
     const searchD = await pool.query(
       `SELECT post_num, place_photo, place_name, user_id FROM post as po JOIN place as pl ON po.place_num = pl.place_num WHERE menu_name LIKE ?; `,
       ["%" + search_word + "%"]
     );
-    // if(req.session.user)
+
     var postNum = [];
     var placePhoto = [];
     var usersId = [];
@@ -35,8 +35,6 @@ router.get("/search", async (req, res, next) => {
       usersId.push(data.user_id);
       placeName.push(data.place_name);
     }
-
-    // console.log(postNum);
 
     res.render("board/searchBoard", {
       title: title,

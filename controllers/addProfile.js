@@ -8,10 +8,9 @@ router.get("/addProfile", async (req, res, next) => {
   const nickname = req.session.user["nickname"];
   try {
     const data = await pool.query(
-      "SELECT user_id, age, gender, job, home, introduction FROM User WHERE user_id = ?",
+      "SELECT user_id, age, gender, job, home, introduction FROM user WHERE user_id = ?",
       [userid]
     );
-    // console.log(data[0][0]);
     res.render("user/addProfile", {
       title: "프로필 추가",
       nickname: nickname,

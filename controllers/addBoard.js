@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-//const template = require("../lib/template.js");
 const pool = require("../db.js");
 const session = require("express-session");
+
 //bcrypt 추가로 비밀번호 암호화하기
 
 router.get("/addBoard", async (req, res, next) => {
@@ -41,7 +41,6 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({storage: storage});
-
 //이미지 업로드 끝
 
 router.post(
@@ -67,12 +66,8 @@ router.post(
     const title = "Meow";
     const nickname = req.session.user["nickname"];
 
-    // console.log(place_loc);
-    // console.log(place_name);
-
     var resPostId;
     var resRevID;
-    // var resId;
     let placeId; //place_num
     try {
       let data;
@@ -82,7 +77,6 @@ router.post(
         `SELECT * FROM place WHERE place_name = ? and place_loc=?`, //이미 저장된 장소인지 확인
         [place_name, place_loc]
       );
-      // console.log(check[0]);
 
       if (check[0][0] == undefined) {
         data = await pool.query(
@@ -131,22 +125,6 @@ router.post(
       let data3;
       let check3;
 
-      // check3 = await pool.query(`SELECT * FROM tag WHERE tag_cont = ?`, [
-      //   tag_cont,
-      // ]);
-
-      // if (tag_cont.length > 0) {
-      //   if (check3[0][0] == undefined) {
-      //     data3 = await pool.query(`INSERT INTO tag(tag_cont) VALUES (?)`, [
-      //       tag_cont,
-      //     ]);
-      //     tag_num = data3[0].insertId;
-      //   } else {
-      //     tag_num = check3[0][0].tag_num;
-      //   }
-      // }
-
-      // console.log(tag_num);
       tag_num = parseInt(tag_num[0]) + 1;
 
       const data4 = await pool.query(
@@ -165,7 +143,7 @@ router.post(
       resPostId = data4[0].insertId; //삽입한 데이터의 id 받아오기
 
       const data5 = await pool.query(
-        `INSERT INTO shortReview(post_num, review_cont1, review_cont2, review_cont3) VALUES (?, ?, ?, ?)`,
+        `INSERT INTO shortreview(post_num, review_cont1, review_cont2, review_cont3) VALUES (?, ?, ?, ?)`,
         [resPostId, review_cont1, review_cont2, review_cont3]
       );
 

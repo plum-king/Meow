@@ -8,12 +8,12 @@ router.get("/category3", async (req, res, next) => {
   const nickname = req.session.user["nickname"];
 
   try {
-    const tag = await pool.query("SELECT * FROM Tag ORDER BY tag_cont");
+    const tag = await pool.query("SELECT * FROM tag ORDER BY tag_cont");
 
     var row = [];
     for (var i = 0; i < tag[0].length; i++) {
       var data = await pool.query(
-        "SELECT * FROM Post as po JOIN place as pl ON po.place_num = pl.place_num WHERE tag_num IN (SELECT tag_num From Tag WHERE tag_num = ? )",
+        "SELECT * FROM post as po JOIN place as pl ON po.place_num = pl.place_num WHERE tag_num IN (SELECT tag_num From tag WHERE tag_num = ? )",
         [tag[0][i].tag_num]
       );
       row[i] = data[0];

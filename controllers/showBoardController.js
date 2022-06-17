@@ -1,16 +1,9 @@
 const express = require("express");
-// const router = express.Router();
 const pool = require("../db.js");
 const bcrypt = require("bcrypt");
 
 exports.showMyBoardList = async (req, res) => {
   const userid = req.session.user["userid"];
-  // let userid;
-  // if (req.session.user) {
-  //   userid = req.session.user["userid"];
-  // } else {
-  //   user_id = req.params.user_id;
-  // }
   const connection = await pool.getConnection(async (conn) => conn);
   const result = await connection.query(
     `SELECT * FROM post as po JOIN place as pl ON po.place_num = pl.place_num 
@@ -22,7 +15,7 @@ exports.showMyBoardList = async (req, res) => {
     `SELECT nickname FROM user WHERE user_id = ?`,
     userid
   );
-  // console.log(nickName[0][0].nickName);
+
   var postNum = [];
   var placeName = [];
   var placePhoto = [];
@@ -51,7 +44,7 @@ exports.showMyBoard = async (req, res) => {
   // console.log(userid, post_num);
   const connection = await pool.getConnection(async (conn) => conn);
   const result = await connection.query(
-    `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
+    `SELECT * FROM post as po JOIN shortreview as sr ON po.post_num = sr.post_num 
   JOIN place as pl ON po.place_num = pl.place_num 
   JOIN tag as t ON po.tag_num = t.tag_num 
   JOIN menu as m ON pl.place_num = m.place_num and po.menu_name = m.menu_name
@@ -65,7 +58,7 @@ exports.showMyBoard = async (req, res) => {
   );
 
   const result2 = await connection.query(
-    `SELECT * FROM shortReview as sr 
+    `SELECT * FROM shortreview as sr 
   JOIN satisfy as st ON sr.review_num = st.review_num
   WHERE sr.post_num = ?`,
     [post_num]
@@ -111,7 +104,6 @@ exports.showMyBoard = async (req, res) => {
     ansList.push(data.qna_ans);
     userList.push(data.user_id);
   }
-  // console.log(result[0][0].receipt_photo);
 
   res.render("board/showMyBoard", {
     title: "나의 게시글",
@@ -187,17 +179,12 @@ exports.showOtherBoard = async (req, res, next) => {
   } else {
     userid = req.params.user_id;
   }
-  // let userid = req.session.user["userid"];
-  // console.log(req.session.user["userid"]);
-
-  //const post_userid = req.body.post_userid;
   const post_num = req.params.post_num;
-  // console.log(userid, post_num);
 
   const connection = await pool.getConnection(async (conn) => conn);
 
   const result = await connection.query(
-    `SELECT * FROM post as po JOIN shortReview as sr ON po.post_num = sr.post_num 
+    `SELECT * FROM post as po JOIN shortreview as sr ON po.post_num = sr.post_num 
 JOIN place as pl ON po.place_num = pl.place_num 
 JOIN tag as t ON po.tag_num = t.tag_num 
 JOIN menu as m ON pl.place_num = m.place_num and po.menu_name = m.menu_name
@@ -215,17 +202,14 @@ WHERE po.post_num = ?`,
     );
   } else {
     mynickName = "로그인 전입니다.";
-    // console.log(mynickName);
   }
   const post_user_nickName = await connection.query(
     `SELECT nickname FROM user WHERE user_id = ?`,
     [post_userid]
   );
 
-  // console.log(2, mynickName[0][0].nickname);
-
   const result2 = await connection.query(
-    `SELECT * FROM shortReview as sr 
+    `SELECT * FROM shortreview as sr 
     JOIN satisfy as st ON sr.review_num = st.review_num
     WHERE sr.post_num = ?`,
     [post_num]
@@ -251,13 +235,9 @@ WHERE po.post_num = ?`,
     sum3 += pct3s[i];
   }
 
-  // console.log(pct1s);
-
   const pct1 = sum1 / pct1s.length;
   const pct2 = sum2 / pct2s.length;
   const pct3 = sum3 / pct3s.length;
-
-  // console.log(pct1);
 
   const result3 = await connection.query(
     "SELECT qna_num, qna_cont, qna_ans, user_id FROM qna WHERE post_num = ?",
@@ -265,7 +245,6 @@ WHERE po.post_num = ?`,
   );
   if (post_userid == userid) {
     //login 전 화면에서 session 접근 시 undefined 오류
-
     let mynickName;
     if (req.session.user) {
       mynickName = await connection.query(
@@ -274,7 +253,6 @@ WHERE po.post_num = ?`,
       );
     } else {
       mynickName = "로그인하기 전입니다.";
-      // console.log(mynickName);
     }
 
     var numList = [];
@@ -320,7 +298,7 @@ WHERE po.post_num = ?`,
     ); //조회
 
     let scrap = await connection.query(
-      "SELECT * FROM Scrap WHERE user_id = ? AND post_num = ?",
+      "SELECT * FROM scrap WHERE user_id = ? AND post_num = ?",
       [userid, post_num]
     );
     if (scrap[0][0] == undefined) {
@@ -330,7 +308,7 @@ WHERE po.post_num = ?`,
     }
 
     for (var data of result3[0]) {
-      if (data.user_id == /*req.session.user["userid"]*/ userid) {
+      if (data.user_id == userid) {
         mynumList.push(data.qna_num);
         mycontList.push(data.qna_cont);
         myansList.push(data.qna_ans);
@@ -353,7 +331,7 @@ WHERE po.post_num = ?`,
       shortRSPct3: pct3.toFixed(1),
       userid: userid,
       users_id: userList,
-      post_userid : post_userid,
+      post_userid: post_userid,
       qna_num: numList,
       qna_cont: contList,
       qna_ans: ansList,
@@ -367,10 +345,6 @@ WHERE po.post_num = ?`,
   }
   connection.release();
 };
-//next()
-// } catch (err) {
-//   console.error(err);
-// }
 
 exports.addSatisfaction = async (req, res) => {
   const user_id = req.session.user["userid"];
