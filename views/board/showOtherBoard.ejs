@@ -19,7 +19,6 @@
         <% } %>
         <h1><a href="/" style="text-decoration: none; color: black">MEOW</a></h1>
         <div class="option">
-            <!--<a href="/" style="display: inline-block"><i class="bi bi-backspace fs-100"></i></a> &nbsp;&nbsp;-->
             <% if (requestUser != undefined) { %>
             <form action="/scrap" method="post" float="left" style="display: inline-block">
                 <input type="hidden" name="post_num"  value="<%=post_num%>">
@@ -35,7 +34,6 @@
                 <input type="hidden" name="post_num" value="<%=post_num%>">
                      <button type="submit" class ="otherBList" id="button"><i class="bi bi-grid-3x3-gap-fill"> </i> 다른 게시글 보기</button>
             </form>
-            <!--<a href="/otherBoardList" id="otherBList"><i class="bi bi-grid-3x3-gap-fill"> </i> 다른 게시글 보기</a>-->
         </div>
         <div class="main">
             <span id="post_user_nickName"><a href="/profile/<%=post_userid%>" style=" color:black; text-decoration: none; "><%=pu_nickname%> 님</a></span>

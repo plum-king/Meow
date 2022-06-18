@@ -50,16 +50,13 @@
                             <div id="card" class="cont">
                                 <% for (var i=0; i<row[j].length; i++) { %>
                                     <div id="li">
-                                        <!-- <a href="/Otherboard/<%=row[j][i].post_num%>"> -->
                                             <img src="<%=row[j][i].place_photo%>" style="width:150px; height:150px; object-fit: cover; border-radius: 10%;"/>
-                                        <!-- </a> -->
                                             <div class="card-body" >
                                                 <p class="card-text"> <br> <%=row[j][i].place_name%> <br><br>
                                                 <a href = "/Otherboard/<%=row[j][i].post_num%>" style="text-decoration:none; color:white">구경하러가기</a></p>
                                               <br><br>
                                             </div>
                                         </div>
-                                    <!-- <a href="/Otherboard/<%=row[j][i].post_num%>"><img src="<%=row[j][i].place_photo%>"/></a> -->
                                 <% } %>
                             </div>
                         </li>

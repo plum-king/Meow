@@ -149,10 +149,10 @@
       <% let i = 0;%>
       <select name="tag_num" id="">
         <option value="0">선택하세요</option>
-        <!-- <input type="hidden" name="opVal" value="0" /> -->
         <% tags.forEach( tag => { %>
         <option value="<%= tag.tag_num %>"><%= tag.tag_cont %></option>
         <% i++; %> <% }); %>
+        <input type="hidden" name="post_tag_cont" value ="<%= post.tag_cont%>">
       </select>
       <br /><br />
       <p id="reviewCont1_input">Short Review 1</p>
@@ -213,34 +213,12 @@
         type="hidden"
         name="review_num"
         value="<%= post.review_num%>"
-      />
-      <!-- <input type="hidden" name="tag_num" value="<%= post.tag_num%>" /> -->
-      
-    </br>
+      />      
+    <br>
     <button type="submit" id="boardSubBtn">수정</button>
       
     </form>
 
-    <!-- 메뉴 클릭 시 input 초기화 되게.. -->
-    <!-- <script>
-      //console.log(84);
-
-      // const showValue = (target) => {
-      // option의 text 값
-      //var menu_name_sel = document.getElementById("menuname_select");
-      //var selectedValue =
-      //   menu_name_sel.options[menu_name_sel.selectedIndex].value;
-      //  document.querySelector("input[type=text]").value = `${selecteV}`;
-      //};
-      $(function () {
-        var idval = $("#menuName");
-        $("#menuname_select").change(function () {
-          var element = $(this).find("option:selected");
-          var myMenu = element.attr("value");
-          idval.val(myMenu);
-        });
-      });
-    </script> -->
 
     <!-- 지도 관련 코드-->
     <script

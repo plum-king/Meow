@@ -28,7 +28,6 @@
             <% for(var i = 0; i<postNum.length; i++) { %>
                 <input type="hidden" name="post_num"  value="<%=postNum[i]%>">
                 <input type="hidden" name="post_userid"  value="<%=post_userid[i]%>">
-                <!-- <span id="placeName"><%=placeName[i]%></span> -->
                 <%if(post_userid[i]==userid){%>
                 <article>
                 <div id="li">
@@ -56,7 +55,6 @@
             <% } %>
         </div>
         </div>
-        <!-- <a href="/">뒤로가기</a> -->
     </body>
 </html>
 
