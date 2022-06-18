@@ -125,13 +125,14 @@ router.post(
       let data3;
       let check3;
 
+      console.log(tag_num);
       console.log(tag_cont);
       const tag_search = await pool.query(
-        `SELECT tag_num FROM tag WHERE tag_cont = ?`,
-        [tag_cont]
+        `SELECT tag_num FROM tag WHERE tag_num = ?`,
+        [tag_num]
       );
-      tag_num = tag_search[0][0].tag_num;
-      // console.log(tag_num);
+      var tag_num = tag_search[0][0].tag_num;
+      console.log(tag_num);
 
       // tag_num = parseInt(tag_num[0]) + 1;
 
