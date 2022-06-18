@@ -24,7 +24,6 @@ router.get("/addTag", async (req, res, next) => {
   } catch (err) {
     console.error(err);
   }
-  console.log(tag_list);
   res.render("tag", {
     title: "태그추가",
     nickname: nickname,
@@ -49,7 +48,6 @@ router.post("/addTag", async (req, res, next) => {
       );
       res.write('<script>window.location="/addTag"</script>');
     } else {
-      console.log("태그 추가");
       try {
         const tag_input = pool.query(`INSERT INTO tag(tag_cont) VALUES(?)`, [
           tag_cont,
