@@ -6,7 +6,7 @@ const ejs = require("ejs");
 const multer = require("multer");
 const upload = multer({dest: "./upload"});
 
-const port = 3000;
+const port = 80;
 const main = require("./controllers/main");
 const login = require("./controllers/login");
 const logout = require("./controllers/logout");
