@@ -68,8 +68,7 @@ cd Meow/
 npm install
 ```
 
-4️⃣ 데이터베이스 구축하기
-
+4️⃣ 데이터베이스 구축하기(mysql server)
 ```sql
 create database meow;
 use meow;
