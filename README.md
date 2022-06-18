@@ -68,8 +68,10 @@ cd Meow/
 npm install
 ```
 
-4️⃣ 데이터베이스 구축하기
-
+4️⃣ 데이터베이스 구축하기 (mysql server)
+```bash
+mysql -uroot -p
+```
 ```sql
 create database meow;
 use meow;
@@ -86,10 +88,10 @@ vi db.js
 const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
-  host: "ip",
+  host: "현재 사용하고 있는 인스턴스 ip",
   port: "3306",
-  user: "root",
-  password: "password",
+  user: "root가 아닌 유저",
+  password: "해당 유저 비밀번호",
   database: "meow",
   dateStrings: "date",
 });
@@ -107,9 +109,12 @@ sudo node app
 
 <br>
 
-## 이외의 자료 보러가기
+### 📖 발표자료
 ---
-
 [발표자료 보러가기](https://www.canva.com/design/DAFDqRWl4rI/view?utm_content=DAFDqRWl4rI&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 
+<br>
+
+### 🎞 데모영상
+---
 [데모영상 보러가기](https://drive.google.com/file/d/1enbgJmbLRfVr7QisZcTZz7ukfqYkfTpt/view?usp=sharing)
