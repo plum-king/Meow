@@ -157,7 +157,7 @@ INSERT INTO place VALUES (4, "라라면가", "서울 성북구 동소문로22길
 INSERT INTO place VALUES (5, "미가훠궈양고기", "경기 용인시 수지구 풍덕천로140번길 15");
 INSERT INTO place VALUES (6, "버거파크", "서울 성북구 동소문로22길 56");
 INSERT INTO place VALUES (7, "비와별닭갈비", "경기 용인시 수지구 성복2로 38");
-INSERT INTO place VALUES (8, "빠오즈푸",,  "서울 광진구 광나루로 373");
+INSERT INTO place VALUES (8, "빠오즈푸",  "서울 광진구 광나루로 373");
 INSERT INTO place VALUES (9, "수아당", "서울 성북구 동소문로20가길 33");
 INSERT INTO place VALUES (10, "요루히루", "경기 용인시 기흥구 죽전로15번길 15-6");
 INSERT INTO place VALUES (11, "이모네집", "강원 양양군 서면 약수길 35");
