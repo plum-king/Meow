@@ -114,20 +114,16 @@
         <br /><br />
 
         <p id="tagNum_input">Tag Selection</p>
-        <!-- <p id="tag_notice">원하는 태그가 옵션에 없을 시에만 새롭게 작성해주세요 ! 둘 다 작성할 경우 옵션에서 선택한 태그가 반영됩니다.</p> -->
         <% let i = 0; %>
         <% let tag_sel; %>
         <select name="tag_num" id="">
           <option value="0">선택하세요</option>
           <% tags.forEach( tag => { %>
-          <option value="<%= i %>"><%= tag.tag_cont %></option>
+          <option value="<%= tag.tag_num %>"><%= tag.tag_cont %></option>
           <% tag_sel = tag.tag_cont; %>
           <% i++; %> <% }); %>
-          <input type="hidden" name="tag_num" value="<%= i %>" />
-          <input type="hidden" name="tag_cont" value="<%= tag_sel %>" />
         </select>
         <br />
-        <!-- <input type="text" name="tag_cont" id="tagNum" placeholder="태그 추가" /> -->
         <br /><br />
 
         <p id="reviewCont1_input">Short Review 1</p>
@@ -193,105 +189,6 @@
       ">게시글 등록</button>
       </div>
       </form>
-
-      <!-- 지도 관련 코드
-      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7f2d2251aaf2d9c9004cdec4a4488ddc&libraries=services"></script>
-
-      <script>
-        function selectMenu(menu) {
-          var $menu = $(menu);
-          var $menuSel = $("input[name=menu_name]");
-
-          // 0인 경우 직접입력
-          if ($menu.val() == "0") {
-            $menuSel.attr("readonly", false);
-            $menuSel.val("");
-          } else {
-            $menuSel.attr("readonly", true);
-            $menuSel.val($menu.val());
-          }
-        }
-      </script>
-      <br />
-
-      <p id="price_input">Price</p>
-      <input
-        type="number"
-        name="price"
-        id="price"
-        placeholder="대표 메뉴 가격 (예)4000"
-      />
-      <br />
-
-      <p id="placeSatisfy_input">Place Satisfaction</p>
-      <input
-        type="number"
-        name="place_satisfy"
-        id="placeSatisfy"
-        placeholder="맛집 만족도"
-      />
-
-      <p id="tagNum_input">Tag Selection</p>
-      <select name="tag_num" id="">
-        <option value="0">선택하세요</option>
-        <% let q = 1; tags.forEach( tag => { %>
-        <option value="<%= q %>"><%= tag.tag_cont %></option>
-        <% q++; %> <% }); %>
-      </select>
-      <br />
-      <input type="text" name="tag_cont" id="tagNum" placeholder="태그 선택" />
-      <br />
-
-      <p id="reviewCont1_input">Short Review 1</p>
-      <input
-        type="text"
-        name="review_cont1"
-        id="shortReview1"
-        placeholder="짧은 글 후기 1"
-      />
-      <br />
-
-      <p id="reviewCont2_input">Short Review 2</p>
-      <input
-        type="text"
-        name="review_cont2"
-        id="shortReview2"
-        placeholder="짧은 글 후기 2"
-      />
-      <br />
-
-      <p id="reviewCont3_input">Short Review 3</p>
-      <input
-        type="text"
-        name="review_cont3"
-        id="shortReview3"
-        placeholder="짧은 글 후기 3"
-      />
-      <br />
-
-      <p id="placePhoto_input">Place Photo</p>
-      <input
-        type="file"
-        name="place_photo"
-        class="real-upload"
-        accept="images/*"
-        required
-        multiple
-      />
-      <br />
-
-      <p id="receiptPhoto_input">Receipt Photo</p>
-      <input
-        type="file"
-        name="receipt_photo"
-        class="real-upload"
-        accept="images/*"
-        required
-        multiple
-      />
-      <br />
-      <button type="submit" id="boardSubBtn">게시글 등록</button>
-    </form> -->
 
     <!-- 지도 관련 코드-->
     <script
@@ -550,7 +447,6 @@
       }
       </script>
       
-      <a href="/">뒤로가기</a>
     </div>
 
   </body>

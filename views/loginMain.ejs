@@ -6,7 +6,6 @@
     <link href="/css/main.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
     <title><%= title %></title>
-    <!--css 들어갈 부분-->
     <%- include('./partials/head') %>
   </head>
 
@@ -41,7 +40,6 @@
           </p>
           <br /><br />
         </div></div></article>
-        <!-- &emsp;&emsp;   -->
         <% } else { %>
           <article>#<%= i+1 %><br /><div id="li"><img
               src="../..<%=rank5[i].place_photo%>"
@@ -57,13 +55,10 @@
                 >구경하러가기</a
               >
             </p>
-            <!-- <br /><br /> -->
           </div>
         </div></article>
-        <!-- &emsp;&emsp; -->
           <% } %><% } %>
           <% } %>
-          <!-- &emsp;&emsp; -->
           <br>
           <p class="bottom">
             <br>
@@ -77,10 +72,6 @@
       <br /><br>
       <% for (let i = 0; i < rank3.length; i++) { %>
      
-      <!-- <a
-        href="/profile/<%= rank3[i].user_id%>"
-        style="text-decoration: none; color: black"
-        > -->
         <form action="/profile/<%= rank3[i].user_id%>" method="get" style="display: inline-block;">
           <input type="hidden" name="user_id" value="<%=rank3[i].user_id%>" />
           <input type="hidden" name="nickname" value="<%=rank3[i].nickname%>" />
@@ -98,8 +89,6 @@
         <input type="submit" id="button" value="프로필 보러가기" />
       </form>
       </div>
-      <!-- </a> -->
-      <!-- &emsp;&emsp;  -->
       <% } %>
     </div>
 
