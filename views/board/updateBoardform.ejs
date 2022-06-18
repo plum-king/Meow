@@ -151,11 +151,9 @@
         <option value="0">선택하세요</option>
         <!-- <input type="hidden" name="opVal" value="0" /> -->
         <% tags.forEach( tag => { %>
-        <option value="<%= i %>"><%= tag.tag_cont %></option>
+        <option value="<%= tag.tag_num %>"><%= tag.tag_cont %></option>
         <% i++; %> <% }); %>
       </select>
-      <input type="hidden" name="post_tag_cont" value="<%= post.tag_cont %>" />
-      <input type="hidden" name="tag_num" value="<%= i %>" />
       <br /><br />
       <p id="reviewCont1_input">Short Review 1</p>
       <input

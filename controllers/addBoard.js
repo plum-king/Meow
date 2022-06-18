@@ -122,19 +122,11 @@ router.post(
         menu_name = menuname_select;
       }
 
-      let data3;
-      let check3;
-
-      console.log(tag_num);
-      console.log(tag_cont);
       const tag_search = await pool.query(
         `SELECT tag_num FROM tag WHERE tag_num = ?`,
         [tag_num]
       );
       var tag_num = tag_search[0][0].tag_num;
-      console.log(tag_num);
-
-      // tag_num = parseInt(tag_num[0]) + 1;
 
       const data4 = await pool.query(
         `INSERT INTO post(receipt_photo, place_photo, place_satisfy, place_num, view_count, user_id, tag_num, menu_name) VALUES (?, ?, ?, ?, 0, ?, ?, ?)`,

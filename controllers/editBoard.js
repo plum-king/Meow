@@ -134,15 +134,20 @@ router.post(
         menu_name = menuname_select;
       }
 
-      if (tag_num[0] == 0) {
-        const existTag = await pool.query(
-          `SELECT tag_num FROM tag WHERE tag_cont = ?`,
-          [post_tag_cont]
-        );
-        tag_num = existTag[0][0].tag_num;
-      } else {
-        tag_num = parseInt(post.tag_num[0]) + 1;
-      }
+      // if (tag_num[0] == 0) {
+      //   const existTag = await pool.query(
+      //     `SELECT tag_num FROM tag WHERE tag_cont = ?`,
+      //     [post_tag_cont]
+      //   );
+      //   tag_num = existTag[0][0].tag_num;
+      // } else {
+      //   tag_num = parseInt(post.tag_num[0]) + 1;
+      // }
+      const tag_search = await pool.query(
+        `SELECT tag_num FROM tag WHERE tag_num = ?`,
+        [tag_num]
+      );
+      var tag_num = tag_search[0][0].tag_num;
 
       const data3 = await pool.query(
         "UPDATE post SET receipt_photo=?, place_photo=?, place_satisfy=?, place_num=?, user_id=?, menu_name=?, tag_num=? WHERE post_num=?",
