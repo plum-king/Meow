@@ -31,6 +31,7 @@ npm install
 ```bash
 vi db.js
 ```
+
 db.js는 메뉴얼을 참고해주세요!
 
 <br>
@@ -41,7 +42,7 @@ db.js는 메뉴얼을 참고해주세요!
 sudo node app
 ```
 
-6️⃣ ip주소로 MEOW 서비스 이용 가능
+6️⃣ ip주소로 MEOW 서비스 이용하기
 
 <br>
 
@@ -49,7 +50,65 @@ sudo node app
 
 <br>
 
+1️⃣ Git Clone하기
 
+```bash
+git clone https://github.com/plum-king/Meow.git
+```
+
+2️⃣ MEOW 프로젝트 폴더로 이동하기
+
+```bash
+cd Meow/
+```
+
+3️⃣ 필요한 모듈 설치하기
+
+```bash
+npm install
+```
+
+4️⃣ 데이터베이스 구축하기
+
+```sql
+create database meow;
+use meow;
+source meow.sql
+```
+
+5️⃣ 데이터베이스 관련 정보(db.js) app.js와 같은 위치에 저장하기
+
+```bash
+vi db.js
+```
+
+```js
+const mysql = require("mysql2/promise");
+
+const pool = mysql.createPool({
+  host: "ip",
+  port: "3306",
+  user: "root",
+  password: "password",
+  database: "meow",
+  dateStrings: "date",
+});
+
+module.exports = pool;
+```
+
+6️⃣ 서버를 키고 애플리케이션에 접근하기(80번 포트)
+
+```bash
+sudo node app
+```
+
+7️⃣ ip주소로 MEOW 서비스 이용하기
+
+<br>
+
+## 이외의 자료 보러가기
+---
 
 [발표자료 보러가기](https://www.canva.com/design/DAFDqRWl4rI/view?utm_content=DAFDqRWl4rI&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 
