@@ -9,7 +9,7 @@ router.get("/category1", async (req, res, next) => {
 
   try {
     const data1 = await pool.query(
-      "SELECT post_num, place_photo, place_name FROM post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From User WHERE age = 10)"
+      "SELECT post_num, place_photo, place_name FROM post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From user WHERE age = 10)"
     );
     const data2 = await pool.query(
       "SELECT post_num, place_photo, place_name FROM post as po JOIN place as pl ON po.place_num = pl.place_num WHERE user_id IN (SELECT user_id From user WHERE age = 20)"

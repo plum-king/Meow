@@ -48,10 +48,12 @@
       >
         <h3 class="tag_list" style="text-align: center">Tag List</h3>
         <br />
-        <%tag_list.forEach(tag => { %>
+        <% if(tag_list == "태그가 존재하지 않습니다.") { %>
+        <p style="text-align: center"><%=tag_list%></p>
+        <% } else { %> <% tag_list.forEach(tag => { %>
         <p style="text-align: center"><%= tag %></p>
         <br />
-        <%}); %>
+        <%}); %> <% } %>
       </div>
       <div
         class="right"
